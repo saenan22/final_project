@@ -161,3 +161,37 @@ st.write(df_filtered)
 # 선택된 필터 옵션과 관련된 다른 분석 추가 (예시)
 st.subheader("선택된 지역에 따른 사고 통계")
 st.bar_chart(df_filtered.set_index("지역")["사고 건수"])
+
+
+
+# 제목
+st.title("교통사고 데이터 분석")
+
+# 여러 지역 선택을 위한 멀티셀렉트
+st.subheader("지역 선택")
+selected_regions = st.multiselect(
+    "지역을 선택하세요",
+    ["서울", "경기", "부산"],
+    default=["서울"]  # 기본적으로 서울을 선택하도록 설정
+)
+
+# 데이터 예시
+data = {
+    "지역": ["서울", "경기", "부산", "서울", "경기", "부산"],
+    "사고 건수": [5, 8, 3, 2, 6, 1]
+}
+df = pd.DataFrame(data)
+
+# 선택된 지역에 맞춰 데이터 필터링
+if selected_regions:
+    df_filtered = df[df["지역"].isin(selected_regions)]
+else:
+    df_filtered = df  # 선택된 지역이 없으면 전체 데이터 출력
+
+# 필터링된 데이터 출력
+st.write("선택된 지역에 대한 교통사고 데이터:")
+st.write(df_filtered)
+
+# 필터링된 데이터에 대한 차트 출력
+st.subheader("선택된 지역에 따른 사고 통계")
+st.bar_chart(df_filtered.set_index("지역")["사고 건수"])
