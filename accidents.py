@@ -10,12 +10,16 @@ file_path = r"https://raw.githubusercontent.com/saenan22/final_project/main/Repo
 df = pd.read_csv(file_path, header=3)
 
 # 2. GeoJSON 파일 불러오기
-geojson_file = r"https://raw.githubusercontent.com/saenan22/final_project/main/BND_SIGUNGU_PG.json"
-with open(geojson_file, 'r', encoding='utf-8') as f:
-    geojson = json.load(f)
+import geopandas as gpd
+
+# GeoJSON 파일 URL
+geojson_url = "https://raw.githubusercontent.com/saenan22/final_project/main/BND_SIGUNGU_PG.json"
 
 # GeoJSON 읽기
-geojson_data = gpd.read_file(geojson_file)
+geojson_data = gpd.read_file(geojson_url)
+
+# geojson_data는 GeoDataFrame으로, 이후에 사용할 수 있습니다.
+
 
 # 데이터 처리
 # 1. NaN 값 제거 (시군구 열에서 NaN이 있는 행 삭제)
