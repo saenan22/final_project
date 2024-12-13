@@ -159,11 +159,7 @@ df = df.drop(df.index[-1])
 st.subheader("선택된 지역에 따른 사고 통계")
 
 
-
-# 필요한 열만 선택
-df_selected = df_filtered[["시군구", "사고[건]"]]
-
-st.bar_chart(df_selected.set_index("시군구")["사고[건]"])
+st.bar_chart(df)
 
 # 사이드바에 지역 선택 추가
 st.sidebar.subheader("지역 선택")
