@@ -6,11 +6,11 @@ import json
 from streamlit_folium import st_folium
 
 # 1. 교통사고 데이터 불러오기
-file_path = r"https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/Report.csv"
+file_path = r"https://raw.githubusercontent.com/saenan22/final_project/main/Report.csv"
 df = pd.read_csv(file_path, header=3)
 
 # 2. GeoJSON 파일 불러오기
-geojson_file = r"https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/BND_SIGUNGU_PG.json"
+geojson_file = r"https://raw.githubusercontent.com/saenan22/final_project/main/BND_SIGUNGU_PG.json"
 with open(geojson_file, 'r', encoding='utf-8') as f:
     geojson = json.load(f)
 
