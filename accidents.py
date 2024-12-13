@@ -113,5 +113,5 @@ folium.GeoJson(
 ).add_to(m)
 
 # 지도 출력 (Streamlit에서 folium 지도 출력)
-st.title("교통사고 지역 지도")
+st.title("대한민국 교통사고 지역 지도")
 st_folium(m, width=700, height=500)
