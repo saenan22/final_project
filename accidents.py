@@ -137,7 +137,7 @@ st.title("교통사고 데이터 분석")
 st.subheader("데이터 필터링")
 filter_option = st.selectbox(
     "지역 선택",
-     df['시도'].unique()
+     df['시군구'].unique()
 )
 
 # 필터 옵션에 따라 데이터 출력 (예시로만 출력)
@@ -147,7 +147,7 @@ st.write(f"선택된 지역: {filter_option}")
 
 # 선택된 지역에 따라 필터링된 데이터 보여주기
 if filter_option != "전체":
-    df_filtered = df[df["시도"] == filter_option]
+    df_filtered = df[df["시군구"] == filter_option]
 else:
     df_filtered = df
 
@@ -155,7 +155,7 @@ st.write(df_filtered)
 
 # 선택된 필터 옵션과 관련된 다른 분석 추가 (예시)
 st.subheader("선택된 지역에 따른 사고 통계")
-df_grouped = df_filtered.groupby("시도")["사고[건]"].sum()
+df_grouped = df_filtered.groupby("시군구")["사고[건]"]
 st.bar_chart(df_grouped)
 
 
@@ -163,7 +163,7 @@ st.bar_chart(df_grouped)
 st.sidebar.subheader("지역 선택")
 selected_regions = st.sidebar.multiselect(
     "지역을 선택하세요",
-    df['시도'].unique(),
+    df['시군구'].unique(),
     default=["서울"]  # 기본적으로 서울을 선택하도록 설정
 )
 
