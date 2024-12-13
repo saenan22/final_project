@@ -156,18 +156,14 @@ st.write(df_filtered)
 import altair as alt
 
 # 시도별 사고 건수 시각화
+# 그룹화된 데이터 생성
 df_grouped = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
 
-# Altair를 사용해 바차트 만들기
-chart = alt.Chart(df_grouped).mark_bar().encode(
-    x='시도:N',  # 시도 열을 x축에 사용
-    y='사고[건]:Q',  # 사고[건] 열을 y축에 사용
-    color='시도:N'  # 색상으로 시도를 구분
-)
+# '시도'를 x축 레이블로 설정
+df_grouped = df_grouped.set_index("시도")
 
-# 스트림릿에 차트 표시
-st.altair_chart(chart, use_container_width=True)
-
+# Bar Chart 출력
+st.bar_chart(df_grouped)
 
 
 # 사이드바에 지역 선택 추가
