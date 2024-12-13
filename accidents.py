@@ -157,9 +157,16 @@ st.write(df_filtered)
 # 마지막 행 삭제 (시도 열의 마지막 행)
 df = df.drop(df.index[-1])
 st.subheader("선택된 지역에 따른 사고 통계")
-df_grouped = df_filtered.groupby("시도")["사고[건]"].sum()
-st.bar_chart(df_grouped)
 
+
+# 시군구별 사고 수 합계 계산
+df_grouped = df_filtered.groupby("시군구")["사고[건]"].sum()
+
+st.write("시군구별 사고 통계:")
+st.write(df_grouped)
+
+# 바 차트로 시군구별 사고 수 시각화
+st.bar_chart(df_grouped)
 
 
 # 사이드바에 지역 선택 추가
