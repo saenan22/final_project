@@ -143,8 +143,6 @@ filter_option = st.selectbox(
 # 필터 옵션에 따라 데이터 출력 (예시로만 출력)
 st.write(f"선택된 지역: {filter_option}")
 
-# 데이터 프레임 예시
-
 # 선택된 지역에 따라 필터링된 데이터 보여주기
 if filter_option != "전체":
     df_filtered = df[df["시도"] == filter_option]
@@ -155,14 +153,10 @@ st.write(df_filtered)
 
 # 선택된 필터 옵션과 관련된 다른 분석 추가 (예시)
 # 마지막 행 삭제 (시도 열의 마지막 행)
-df = df.drop(df.index[-1])
+df_filtered = df_filtered.drop(df.index[-1])
 
-
-if not df_filtered.empty:
-    st.bar_chart(df_filtered.set_index("시군구")["사고[건]"])
-else:
-    st.write("선택된 데이터가 없습니다.")
-
+df_grouped = df_filtered.groupby("시도")["사고[건]"].sum()
+st.bar_chart(df_grouped)
 
 
 # 사이드바에 지역 선택 추가
