@@ -155,7 +155,7 @@ st.write(df_filtered)
 
 # 선택된 필터 옵션과 관련된 다른 분석 추가 (예시)
 st.subheader("선택된 지역에 따른 사고 통계")
-st.bar_chart(df_filtered.set_index("시군구")["사고[건]"])
+st.bar_chart(df_filtered.set_index(["시도", "시군구"])["사고[건]"])
 
 
 
@@ -181,5 +181,5 @@ st.write(df_filtered)
 
 # 필터링된 데이터에 대한 차트 출력
 st.subheader("선택된 지역에 따른 사고 통계")
-st.bar_chart(df_filtered.set_index("시군구")["사고[건]"])
+st.bar_chart(df_filtered.set_index(["시도", "시군구"])["사고[건]"])
 
