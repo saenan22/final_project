@@ -122,3 +122,9 @@ option = st.sidebar.selectbox(
     "분석 항목 선택",
     ["시간대별 교통사고", "부문별 교통사고", "요일별 교통사고","연령층별 교통사고","기상상태별 교통사고"]
 )
+# 또 다른 사이드바 섹션 추가 (예: 필터링 옵션)
+st.sidebar.subheader("데이터 필터링")
+filter_option = st.sidebar.selectbox(
+    "데이터 필터 선택",
+    ["전체", "서울", "경기", "부산"]
+)
