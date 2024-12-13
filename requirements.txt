@@ -1,1 +1,9 @@
-
+geopandas
+folium
+streamlit-folium
+pandas
+shapely
+pyproj
+streamlit
+requests
+gdown
