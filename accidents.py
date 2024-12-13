@@ -153,10 +153,9 @@ st.write(df_filtered)
 
 # 선택된 필터 옵션과 관련된 다른 분석 추가 (예시)
 # 마지막 행 삭제 (시도 열의 마지막 행)
-df_filtered = df_filtered.drop(df.index[-1])
-
-df_grouped = df_filtered.groupby("시도")["사고[건]"].sum()
+df_grouped = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
 st.bar_chart(df_grouped)
+
 
 
 # 사이드바에 지역 선택 추가
