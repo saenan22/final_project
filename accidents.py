@@ -128,3 +128,36 @@ filter_option = st.sidebar.selectbox(
     "데이터 필터 선택",
     ["전체", "서울", "경기", "부산"]
 )
+
+
+# 제목
+st.title("교통사고 데이터 분석")
+
+# 메인 화면에서 필터링 옵션 추가 (사이드바가 아닌 일반 화면)
+st.subheader("데이터 필터링")
+filter_option = st.selectbox(
+    "지역 선택",
+    ["전체", "서울", "경기", "부산"]
+)
+
+# 필터 옵션에 따라 데이터 출력 (예시로만 출력)
+st.write(f"선택된 지역: {filter_option}")
+
+# 데이터 프레임 예시
+data = {
+    "지역": ["서울", "경기", "부산", "서울", "경기"],
+    "사고 건수": [5, 8, 3, 2, 6]
+}
+df = pd.DataFrame(data)
+
+# 선택된 지역에 따라 필터링된 데이터 보여주기
+if filter_option != "전체":
+    df_filtered = df[df["지역"] == filter_option]
+else:
+    df_filtered = df
+
+st.write(df_filtered)
+
+# 선택된 필터 옵션과 관련된 다른 분석 추가 (예시)
+st.subheader("선택된 지역에 따른 사고 통계")
+st.bar_chart(df_filtered.set_index("지역")["사고 건수"])
