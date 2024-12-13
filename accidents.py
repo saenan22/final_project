@@ -115,3 +115,10 @@ folium.GeoJson(
 # 지도 출력 (Streamlit에서 folium 지도 출력)
 st.title("대한민국 교통사고 지역 지도")
 st_folium(m, width=700, height=500)
+
+# 사이드바 옵션 추가
+st.sidebar.title("교통사고 분석")
+option = st.sidebar.selectbox(
+    "분석 항목 선택",
+    ["교통사고 시간대별 빈도수", "교통사고 유형", "교통사고 요일대별 빈도수"]
+)
