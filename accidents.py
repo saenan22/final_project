@@ -126,7 +126,7 @@ option = st.sidebar.selectbox(
 st.sidebar.subheader("데이터 필터링")
 filter_option = st.sidebar.selectbox(
     "데이터 필터 선택",
-    ["전체", "서울", "경기", "부산"]
+     df['시도'].unique()
 )
 
 
@@ -137,7 +137,7 @@ st.title("교통사고 데이터 분석")
 st.subheader("데이터 필터링")
 filter_option = st.selectbox(
     "지역 선택",
-    ["전체", "서울", "경기", "부산"]
+     df['시도'].unique()
 )
 
 # 필터 옵션에 따라 데이터 출력 (예시로만 출력)
