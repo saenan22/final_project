@@ -159,15 +159,11 @@ df = df.drop(df.index[-1])
 st.subheader("선택된 지역에 따른 사고 통계")
 
 
-# 시군구별 사고 수 합계 계산
-df_grouped = df_filtered.groupby("시군구")["사고[건]"].sum()
 
-st.write("시군구별 사고 통계:")
-st.write(df_grouped)
+# 필요한 열만 선택
+df_selected = df_filtered[["시군구", "사고[건]"]]
 
-# 바 차트로 시군구별 사고 수 시각화
-st.bar_chart(df_grouped)
-
+st.bar_chart(df_selected.set_index("시군구")["사고[건]"])
 
 # 사이드바에 지역 선택 추가
 st.sidebar.subheader("지역 선택")
