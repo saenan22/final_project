@@ -168,20 +168,15 @@ st.bar_chart(df_filtered.set_index("지역")["사고 건수"])
 st.sidebar.subheader("지역 선택")
 selected_regions = st.sidebar.multiselect(
     "지역을 선택하세요",
-    ["서울", "경기", "부산"],
+    df['시도'].unique(),
     default=["서울"]  # 기본적으로 서울을 선택하도록 설정
 )
 
-# 데이터 예시
-data = {
-    "지역": ["서울", "경기", "부산", "서울", "경기", "부산"],
-    "사고 건수": [5, 8, 3, 2, 6, 1]
-}
-df = pd.DataFrame(data)
+
 
 # 선택된 지역에 맞춰 데이터 필터링
 if selected_regions:
-    df_filtered = df[df["지역"].isin(selected_regions)]
+    df_filtered = df[df["시도"].isin(selected_regions)]
 else:
     df_filtered = df  # 선택된 지역이 없으면 전체 데이터 출력
 
@@ -191,5 +186,5 @@ st.write(df_filtered)
 
 # 필터링된 데이터에 대한 차트 출력
 st.subheader("선택된 지역에 따른 사고 통계")
-st.bar_chart(df_filtered.set_index("지역")["사고 건수"])
+st.bar_chart(df_filtered.set_index("시도")["사고[건]"])
 
