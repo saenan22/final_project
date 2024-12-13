@@ -10,7 +10,7 @@ file_path = r"Report.csv"
 df = pd.read_csv(file_path, header=3)
 
 # 2. GeoJSON 파일 불러오기
-geojson_file = r"C:/Users/김새난/data/BND_SIGUNGU_PG.json"
+geojson_file = r"BND_SIGUNGU_PG.json"
 with open(geojson_file, 'r', encoding='utf-8') as f:
     geojson = json.load(f)
 
