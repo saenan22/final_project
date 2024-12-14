@@ -7,7 +7,18 @@ from streamlit_folium import st_folium
 
 st.sidebar.title("교통사고 대시보드🚗💥")
 # Sidebar 메뉴 생성
+# 페이지별 내용 출력
+if menu == "Page 1":
+    st.title("Welcome to Page 1")
+    st.write("This is Page 1 content.")
 
+elif menu == "Page 2":
+    st.title("Welcome to Page 2")
+    st.write("This is Page 2 content.")
+
+elif menu == "Page 3":
+    st.title("Welcome to Page 3")
+    st.write("This is Page 3 content.")
 # 사이드바 메뉴 구현
 with st.sidebar:
     # 확장 가능한 메뉴 만들기 (화살표처럼 보이게)
@@ -232,18 +243,7 @@ menu = st.sidebar.selectbox(
     ["Page 1", "Page 2", "Page 3"]
 )
 
-# 페이지별 내용 출력
-if menu == "Page 1":
-    st.title("Welcome to Page 1")
-    st.write("This is Page 1 content.")
 
-elif menu == "Page 2":
-    st.title("Welcome to Page 2")
-    st.write("This is Page 2 content.")
-
-elif menu == "Page 3":
-    st.title("Welcome to Page 3")
-    st.write("This is Page 3 content.")
 
 
 import streamlit as st
