@@ -77,13 +77,12 @@ fig.update_layout(showlegend=False)
 # 그래프 보여주기
 st.plotly_chart(fig)
 
-    
-    with st.expander("Page 2"):
-        st.write("대한민국 교통사고 분석")
+with st.expander("Page 2"):
+    st.write("대한민국 교통사고 분석")
         # Page 2 관련 코드 추가
 
-    with st.expander("Page 3"):
-        st.write("교통사고 예방 정보")
+ with st.expander("Page 3"):
+     st.write("교통사고 예방 정보")
         # Page 3 관련 코드 추가
 
 
