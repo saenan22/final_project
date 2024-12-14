@@ -30,6 +30,14 @@ with st.sidebar:
         st.write("교통사고 예방 정보")
         # Page 3 관련 코드 추가
 
+import pandas as pd
+
+# CSV 파일을 불러오기
+url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
+df0 = pd.read_csv(url)
+
+# 데이터 확인
+print(df0.head())
 
 
 # 1. 교통사고 데이터 불러오기
