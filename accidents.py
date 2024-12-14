@@ -11,7 +11,8 @@ st.sidebar.title("교통사고 대시보드🚗💥")
 
 # Sidebar 메뉴 생성
 menu = st.sidebar.selectbox(
-    "page를 선택하세요 그리고 하단의 화살표를 눌러 해당페이지의 내용을 확인해보세요.😊",
+    "page를 선택하세요 
+    그리고 하단의 화살표를 눌러 해당페이지의 내용을 확인해보세요.😊",
     ["Page 1", "Page 2", "Page 3"]
 )
 
