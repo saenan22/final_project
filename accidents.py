@@ -334,7 +334,8 @@ country_to_iso3 = {
 }
 
 # Streamlit 앱 제목
-st.title('OECD국가별 자동차1만대당 사망 현황')
+st.title('OECD국가별 교통사고 현황 지도시각화')
+st.subheader("OECD국가별 자동차1만대당 사망 현황")
 
 # CSV 파일 불러오기
 url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
@@ -345,7 +346,7 @@ df0['ISO3'] = df0['국가'].map(country_to_iso3)
 
 # '-' 값은 NaN으로 변환하고 NaN 값 제거
 df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
-df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
+df0_cleaned = df0.dropna(subset=['2021년 기준 '])
 
 # Plotly 지도 시각화 (Mapbox 스타일 사용)
 fig = px.choropleth(df0_cleaned,
