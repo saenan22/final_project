@@ -55,7 +55,7 @@ if page == "Page 1":
     top10_df = top10_df.sort_values(by='자동차1만대당 사망(명)', ascending=False)
 
     # Streamlit 앱 설정
-    st.title('###자동차 1만대당 사망(명) 상위 10개 국가')
+    st.subheader("자동차 1만대당 사망(명) TOP10 국가")
 
     # Plotly를 이용한 막대그래프 그리기
     fig = px.bar(top10_df, 
