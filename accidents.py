@@ -157,13 +157,15 @@ import altair as alt
 
 # 시도별 사고 건수 시각화
 # 그룹화된 데이터 생성
-df_grouped = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
+# 시도별 사고 건수 합산
+grouped_data = filtered_df.groupby("시도")["사고[건]"].sum().reset_index()
 
-# '시도'를 x축 레이블로 설정
-df_grouped = df_grouped.set_index("시도")
+# 막대그래프 생성
+fig = px.bar(grouped_data, x="시도", y="사고[건]", title="시도별 사고 건수", labels={"사고[건]": "사고 건수"})
 
-# Bar Chart 출력
-st.bar_chart(df_grouped)
+# 그래프 표시
+st.plotly_chart(fig)
+
 
 
 # 사이드바에 지역 선택 추가
