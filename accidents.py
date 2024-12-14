@@ -56,7 +56,7 @@ fig = px.bar(df0_cleaned,
 
 # 그래프 크기 조정
 fig.update_layout(width=1000, height=800)
-
+fig.update_layout(yaxis=dict(tickangle=90))
 # 그래프 보여주기
 st.plotly_chart(fig, use_container_width=False)
 
