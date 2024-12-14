@@ -5,7 +5,7 @@ import pandas as pd
 import json
 from streamlit_folium import st_folium
 
-
+col1, col2, col3 = st.columns(3)
 # Sidebar 메뉴 생성
 st.sidebar.title("교통사고 대시보드🚗💥")
 
