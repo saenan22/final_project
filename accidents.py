@@ -19,15 +19,15 @@ menu = st.sidebar.selectbox(
 with st.sidebar:
     # 확장 가능한 메뉴 만들기 (화살표처럼 보이게)
     with st.expander("Page 1"):
-        st.write("This is Page 1 content.")
+        st.write("OECD 국가 교통사고 건수 현황")
         # Page 1 관련 코드 추가
     
     with st.expander("Page 2"):
-        st.write("This is Page 2 content.")
+        st.write("대한민국 교통사고 분석")
         # Page 2 관련 코드 추가
 
     with st.expander("Page 3"):
-        st.write("This is Page 3 content.")
+        st.write("교통사고 예방 정보")
         # Page 3 관련 코드 추가
 
 
