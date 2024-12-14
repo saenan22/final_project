@@ -319,7 +319,8 @@ with col3:
 
 
 
-import folium
+import streamlit as st
+import plotly.express as px
 import pandas as pd
 
 # CSV 파일 불러오기
@@ -330,33 +331,31 @@ df0 = pd.read_csv(url)
 df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
 df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
 
-# 기본 지도 생성 (서울 중심, 줌 레벨 설정)
-m0 = folium.Map(location=[51.1657, 10.4515], zoom_start=4)  # 중앙 유럽 위치, 확대 레벨 4
+# 툴팁에 표시할 내용 추가
+df0_cleaned['툴팁'] = df0_cleaned.apply(
+    lambda row: f"<b>{row['국가']}</b><br>"
+                f"사고 건수: {row['사고(건)']}<br>"
+                f"사망자 수: {row['사망(명)']}<br>"
+                f"자동차 1만대당 사망: {row['자동차1만대당 사망(명)']}명<br>"
+                f"인구 10만명당 사망: {row['인구10만명당 사망(명)']}명",
+    axis=1
+)
 
-# 각 국가에 대해 마커 추가
-for _, row in df0_cleaned.iterrows():
-    country_name = row['국가']
-    deaths_per_10k = row['자동차1만대당 사망(명)']
-    accidents = row['사고(건)']
-    fatalities = row['사망(명)']
-    death_rate_100k = row['인구10만명당 사망(명)']
+# Plotly 지도 시각화 (Mapbox 스타일 사용)
+fig = px.scatter_geo(df0_cleaned,
+                     locations="국가",  # 국가 이름으로 위치 설정
+                     size="자동차1만대당 사망(명)",  # 마커 크기를 사고 건수나 다른 수치로 설정
+                     hover_name="국가",  # 툴팁에 표시할 항목
+                     hover_data=["사고(건)", "사망(명)", "자동차1만대당 사망(명)", "인구10만명당 사망(명)"],  # 툴팁에 추가할 데이터
+                     title="OECD 국가 교통사고 현황",
+                     template="plotly_dark")
 
-    # 툴팁에 표시할 내용
-    tooltip_content = f"<strong>{country_name}</strong><br>" \
-                      f"사고 건수: {accidents}<br>" \
-                      f"사망자 수: {fatalities}<br>" \
-                      f"자동차 1만대당 사망: {deaths_per_10k}명<br>" \
-                      f"인구 10만명당 사망: {death_rate_100k}명"
+# 지도 출력
+fig.update_geos(showcoastlines=True, coastlinecolor="Black", projection_type="natural earth")
 
-    # 마커 추가 (위도와 경도를 생략하고 국가 이름만 표시)
-    folium.Marker(
-        location=[0, 0],  # 위치값을 0, 0으로 설정 (위치 없이 국가 이름만 표시)
-        popup=tooltip_content,  # 마커 클릭 시 나타날 내용
-        tooltip=country_name  # 마우스를 올렸을 때 국가 이름만 표시
-    ).add_to(m0)
+# Streamlit에서 Plotly 차트 표시
+st.plotly_chart(fig)
 
-# 지도 보기
-st_folium(m0)
 
 
 
