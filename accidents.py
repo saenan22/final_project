@@ -24,11 +24,11 @@ with st.sidebar:
         # Page 1 관련 코드 추가
 
     with st.expander("Page 2"):
-    st.write("대한민국 교통사고 분석")
-
+        st.write("대한민국 교통사고 분석")
+        # Page 2 관련 코드 추가
 
     with st.expander("Page 3"):
-     st.write("교통사고 예방 정보")
+        st.write("교통사고 예방 정보")
         # Page 3 관련 코드 추가
 
 # CSV 파일을 불러오기
