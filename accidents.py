@@ -123,7 +123,20 @@ option = st.sidebar.selectbox(
     ["시간대별 교통사고", "부문별 교통사고", "요일별 교통사고","연령층별 교통사고","기상상태별 교통사고"]
 )
 
+# 또 다른 사이드바 섹션 추가 (예: 필터링 옵션)
+st.sidebar.subheader("데이터 필터링")
+filter_option = st.sidebar.selectbox(
+    "데이터 필터 선택",
+     df['시도'].unique()
+)
 
+grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
+
+# 막대그래프 생성
+fig = px.bar(grouped_data, x="시도", y="사고[건]", title="시도별 사고 건수", labels={"사고[건]": "사고 건수"})
+
+# 그래프 표시
+st.plotly_chart(fig) 
 
 
 
