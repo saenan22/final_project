@@ -28,7 +28,7 @@ if page == "Page 1":
     df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
 
     # Streamlit 앱 설정
-    st.title('OECD 국가🌍 교통사고 건수 현황🚨')
+    st.title('OECD 국가🌍 교통사고 현황🚨')
 
     # Plotly를 이용한 수평 막대그래프 그리기
     fig = px.bar(df0_cleaned, 
