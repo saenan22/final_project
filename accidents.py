@@ -128,6 +128,12 @@ filter_option = st.sidebar.selectbox(
     "데이터 필터 선택",
      df['시도'].unique()
 )
+# 데이터 필터링
+if selected_cities:
+    df_filtered = df[df["시도"].isin(selected_cities)]
+else:
+    df_filtered = df  # 선택된 도시가 없으면 전체 데이터 사용
+
 
 grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
 
