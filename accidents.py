@@ -78,7 +78,8 @@ fig = px.bar(top10_df,
              hover_data={'국가': True, '자동차1만대당 사망(명)': True},
              labels={'자동차1만대당 사망(명)': '자동차 1만대당 사망(명)', '국가': '국가'},
              title='상위 10개 국가의 자동차 1만대당 사망(명)')
-
+# 범례 숨기기
+fig.update_layout(showlegend=False)
 # 그래프 보여주기
 st.plotly_chart(fig)
 
