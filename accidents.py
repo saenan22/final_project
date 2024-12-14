@@ -37,13 +37,25 @@ import pandas as pd
 url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
 df0 = pd.read_csv(url)
 
-
-# 데이터 확인
-st.write(df0.head())
-
 # '-' 값은 NaN으로 변환하고 NaN 값 제거
 df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
 df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
+
+# Streamlit 앱 설정
+st.title('자동차 1만대당 사망(명) 국가별 비교')
+
+# Plotly를 이용한 막대그래프 그리기
+fig = px.bar(df0_cleaned, 
+             x='자동차1만대당 사망(명)', 
+             y='국가', 
+             hover_data={'국가': True, '자동차1만대당 사망(명)': True},
+             labels={'자동차1만대당 사망(명)': '자동차 1만대당 사망(명)', '국가': '국가'},
+             title='자동차 1만대당 사망(명) 국가별 비교')
+
+# 그래프 보여주기
+st.plotly_chart(fig)
+
+
 
 # '자동차1만대당 사망(명)' 기준으로 상위 10개 국가 추출
 top10_df = df0_cleaned.nlargest(10, '자동차1만대당 사망(명)')
