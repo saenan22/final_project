@@ -4,6 +4,7 @@ import geopandas as gpd
 import pandas as pd
 import json
 from streamlit_folium import st_folium
+import plotly.express as px
 
 col1, col2, col3 = st.columns(3)
 # Sidebar 메뉴 생성
