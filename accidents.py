@@ -130,6 +130,12 @@ filter_option = st.sidebar.selectbox(
      df['시도'].unique()
 )
 
+
+if filter_option != "전체":
+    df_filtered = df[df["시도"] == filter_option]
+else:
+    df_filtered = df
+
 grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
 
 # 막대그래프 생성
