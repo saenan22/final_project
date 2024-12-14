@@ -347,14 +347,14 @@ fig = px.scatter_geo(df0_cleaned,
                      size="자동차1만대당 사망(명)",  # 마커 크기를 사고 건수나 다른 수치로 설정
                      hover_name="국가",  # 툴팁에 표시할 항목
                      hover_data=["사고(건)", "사망(명)", "자동차1만대당 사망(명)", "인구10만명당 사망(명)"],  # 툴팁에 추가할 데이터
-                     title="OECD 국가 교통사고 현황",
-                     template="plotly_dark")
+                     title="OECD 국가 교통사고 현황")
 
 # 지도 출력
 fig.update_geos(showcoastlines=True, coastlinecolor="Black", projection_type="natural earth")
 
 # Streamlit에서 Plotly 차트 표시
 st.plotly_chart(fig)
+
 
 
 
