@@ -246,3 +246,23 @@ uploaded_file = st.file_uploader("Upload a file")
 if uploaded_file:
     st.write("File uploaded successfully!")
 
+
+import streamlit as st
+
+# 세 개의 컬럼 생성
+col1, col2, col3 = st.columns(3)
+
+# 각 컬럼에 다른 콘텐츠 추가
+with col1:
+    st.header("Column 1")
+    st.write("This is the content of column 1.")
+
+with col2:
+    st.header("Column 2")
+    st.write("This is the content of column 2.")
+
+with col3:
+    st.header("Column 3")
+    st.write("This is the content of column 3.")
+
+
