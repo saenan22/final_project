@@ -154,11 +154,13 @@ st.write(df_filtered)
 # 선택된 필터 옵션과 관련된 다른 분석 추가 (예시)
 # 마지막 행 삭제 (시도 열의 마지막 행)
 import altair as alt
-
+import streamlit as st
+import pandas as pd
+import plotly.express as px
 # 시도별 사고 건수 시각화
 # 그룹화된 데이터 생성
 # 시도별 사고 건수 합산
-grouped_data = filtered_df.groupby("시도")["사고[건]"].sum().reset_index()
+grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
 
 # 막대그래프 생성
 fig = px.bar(grouped_data, x="시도", y="사고[건]", title="시도별 사고 건수", labels={"사고[건]": "사고 건수"})
