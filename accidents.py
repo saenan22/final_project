@@ -9,14 +9,12 @@ from streamlit_folium import st_folium
 # Sidebar 메뉴 생성
 st.sidebar.title("교통사고 대시보드🚗💥")
 
-st.sidebar.markdown("### page를 선택하세요")
-st.sidebar.markdown("그리고 하단의 화살표를 눌러 해당 페이지의 내용을 확인해보세요.😊")
 # Sidebar 메뉴 생성
 menu = st.sidebar.selectbox(
     "page를 선택하세요",
     ["Page 1", "Page 2", "Page 3"]
 )
-
+st.sidebar.markdown("하단의 화살표를 눌러 해당 페이지의 내용을 확인해보세요.😊")
 # 사이드바 메뉴 구현
 with st.sidebar:
     # 확장 가능한 메뉴 만들기 (화살표처럼 보이게)
