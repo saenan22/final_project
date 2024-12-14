@@ -126,36 +126,6 @@ option = st.sidebar.selectbox(
 
 
 
-# 사이드바 - 데이터 필터링 섹션
-st.sidebar.subheader("데이터 필터링")
-filter_option = st.sidebar.selectbox(
-    "시도를 선택하세요", 
-    options=["전체"] + df["시도"].unique().tolist()  # "전체" 옵션 추가
-)
-
-# 데이터 필터링
-if filter_option == "전체":
-    df_filtered = df  # 전체 데이터 사용
-else:
-    df_filtered = df[df["시도"] == filter_option]  # 선택된 시도만 필터링
-
-# 시도별 사고 건수 합산
-grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
-
-# 막대그래프 생성
-fig = px.bar(
-    grouped_data,
-    x="시도",
-    y="사고[건]",
-    title="시도별 사고 건수",
-    labels={"사고[건]": "사고 건수"}
-)
-
-# 그래프 표시
-st.plotly_chart(fig, use_container_width=True)
-
-
-
 
 
 
