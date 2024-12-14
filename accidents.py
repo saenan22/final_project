@@ -55,7 +55,7 @@ if page == "Page 1":
     top10_df = top10_df.sort_values(by='자동차1만대당 사망(명)', ascending=False)
 
     # Streamlit 앱 설정
-    st.title('자동차 1만대당 사망(명) 상위 10개 국가')
+    st.title('## 자동차 1만대당 사망(명) 상위 10개 국가')
 
     # Plotly를 이용한 막대그래프 그리기
     fig = px.bar(top10_df, 
@@ -320,40 +320,12 @@ with col3:
 
 
 import streamlit as st
-import plotly.express as px
-import pandas as pd
 
-# CSV 파일 불러오기
-url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
-df0 = pd.read_csv(url)
+# 외부 웹사이트의 URL
+website_url = "https://taas.koroad.or.kr/ons/omp/mcm/initOecd.do?menuId=ONS_OMP"
 
-# '-' 값은 NaN으로 변환하고 NaN 값 제거
-df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
-df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
-
-# 툴팁에 표시할 내용 추가
-df0_cleaned['툴팁'] = df0_cleaned.apply(
-    lambda row: f"<b>{row['국가']}</b><br>"
-                f"사고 건수: {row['사고(건)']}<br>"
-                f"사망자 수: {row['사망(명)']}<br>"
-                f"자동차 1만대당 사망: {row['자동차1만대당 사망(명)']}명<br>"
-                f"인구 10만명당 사망: {row['인구10만명당 사망(명)']}명",
-    axis=1
-)
-
-# Plotly 지도 시각화 (Mapbox 스타일 사용)
-fig = px.scatter_geo(df0_cleaned,
-                     locations="국가",  # 국가 이름으로 위치 설정
-                     size="자동차1만대당 사망(명)",  # 마커 크기를 사고 건수나 다른 수치로 설정
-                     hover_name="국가",  # 툴팁에 표시할 항목
-                     hover_data=["사고(건)", "사망(명)", "자동차1만대당 사망(명)", "인구10만명당 사망(명)"],  # 툴팁에 추가할 데이터
-                     title="OECD 국가 교통사고 현황")
-
-# 지도 출력
-fig.update_geos(showcoastlines=True, coastlinecolor="Black", projection_type="natural earth")
-
-# Streamlit에서 Plotly 차트 표시
-st.plotly_chart(fig)
+# Streamlit을 사용하여 iframe으로 웹사이트 임베드
+st.markdown(f'<iframe src="{website_url}" width="100%" height="800"></iframe>', unsafe_allow_html=True)
 
 
 
