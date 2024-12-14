@@ -178,8 +178,6 @@ selected_regions = st.sidebar.multiselect(
     default=["서울"]  # 기본적으로 서울을 선택하도록 설정
 )
 
-
-
 # 선택된 지역에 맞춰 데이터 필터링
 if selected_regions:
     df_filtered = df[df["시도"].isin(selected_regions)]
@@ -189,6 +187,18 @@ else:
 # 필터링된 데이터 출력
 st.write("선택된 지역에 대한 교통사고 데이터:")
 st.write(df_filtered)
+
+
+grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
+
+# 막대그래프 생성
+fig = px.bar(grouped_data, x="시도", y="사고[건]", title="시도별 사고 건수", labels={"사고[건]": "사고 건수"})
+
+# 그래프 표시
+st.plotly_chart(fig)
+
+
+
 
 # 필터링된 데이터에 대한 차트 출력
 st.subheader("선택된 지역에 따른 사고 통계")
