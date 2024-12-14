@@ -212,3 +212,37 @@ elif menu == "Page 2":
 elif menu == "Page 3":
     st.title("Welcome to Page 3")
     st.write("This is Page 3 content.")
+
+
+import streamlit as st
+
+# 1. 버튼
+if st.button("Click Me"):
+    st.write("Button Clicked!")
+
+# 2. 체크박스
+checked = st.checkbox("I agree")
+if checked:
+    st.write("Checkbox is checked!")
+
+# 3. 라디오 버튼
+choice = st.radio("Choose an option:", ["Option 1", "Option 2", "Option 3"])
+st.write(f"You selected: {choice}")
+
+# 4. 슬라이더
+value = st.slider("Pick a number:", 0, 100, 50)
+st.write(f"Slider value is: {value}")
+
+# 5. 드롭다운 (selectbox)
+dropdown = st.selectbox("Select an item:", ["Item 1", "Item 2", "Item 3"])
+st.write(f"You selected: {dropdown}")
+
+# 6. 텍스트 입력
+text_input = st.text_input("Enter some text:")
+st.write(f"You entered: {text_input}")
+
+# 7. 파일 업로드
+uploaded_file = st.file_uploader("Upload a file")
+if uploaded_file:
+    st.write("File uploaded successfully!")
+
