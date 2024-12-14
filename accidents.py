@@ -199,7 +199,7 @@ elif page == "Page 2":
          df['시도'].unique()
     )
 
-    # 필터 옵션에 따라 데이터 출력 (예시로만 출력)
+    # 필터 옵션에 따라 데이터 출력 
     st.write(f"선택된 지역: {filter_option}")
 
     # 선택된 지역에 따라 필터링된 데이터 보여주기
@@ -210,7 +210,7 @@ elif page == "Page 2":
 
     st.write(df_filtered)
 
-    # 선택된 필터 옵션과 관련된 다른 분석 추가 (예시)
+    # 선택된 필터 옵션과 관련된 다른 분석 추가 
     # 마지막 행 삭제 (시도 열의 마지막 행)
     import altair as alt
     import streamlit as st
@@ -365,7 +365,6 @@ fig.update_geos(showcoastlines=True, coastlinecolor="Black", projection_type="na
 
 # Streamlit으로 지도 시각화 출력
 st.plotly_chart(fig)
-
 
 
 
