@@ -319,6 +319,9 @@ with col3:
 
 
 
+import folium
+import pandas as pd
+
 # CSV 파일 불러오기
 url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
 df0 = pd.read_csv(url)
@@ -345,16 +348,16 @@ for _, row in df0_cleaned.iterrows():
                       f"자동차 1만대당 사망: {deaths_per_10k}명<br>" \
                       f"인구 10만명당 사망: {death_rate_100k}명"
 
-    # 마커 추가
+    # 마커 추가 (위도와 경도를 생략하고 국가 이름만 표시)
     folium.Marker(
-        location=[row['위도'], row['경도']],  # 국가에 대한 위도, 경도를 데이터로 추가해야 합니다.
+        location=[0, 0],  # 위치값을 0, 0으로 설정 (위치 없이 국가 이름만 표시)
         popup=tooltip_content,  # 마커 클릭 시 나타날 내용
-        tooltip=tooltip_content  # 마우스를 올렸을 때 나타날 내용
+        tooltip=country_name  # 마우스를 올렸을 때 국가 이름만 표시
     ).add_to(m)
 
-# Streamlit에서 Folium 지도 표시
-st.title("OECD 국가별 교통사고 현황 지도")
-st_folium(m, width=725, height=500)  # Streamlit 페이지에 Folium 지도 추가
+# 지도 보기
+m
+
 
 
 
