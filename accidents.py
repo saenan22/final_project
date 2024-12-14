@@ -193,10 +193,13 @@ st.write(df_filtered)
 # 필터링된 데이터에 대한 차트 출력
 st.subheader("선택된 지역에 따른 사고 통계")
 
-df_grouped = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
-st.bar_chart(df_grouped)
+grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
 
-import streamlit as st
+# 막대그래프 생성
+fig = px.bar(grouped_data, x="시도", y="사고[건]", title="시도별 사고 건수", labels={"사고[건]": "사고 건수"})
+
+# 그래프 표시
+st.plotly_chart(fig)
 
 # Sidebar 메뉴 생성
 menu = st.sidebar.selectbox(
