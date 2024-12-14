@@ -334,7 +334,7 @@ country_to_iso3 = {
 }
 
 # Streamlit 앱 제목
-st.title('OECD국가별 교통사고 현황 지도시각화')
+st.title('OECD국가별 교통사고 현황')
 st.subheader("2021년도 기준 OECD국가별 자동차1만대당 사망 현황")
 
 # CSV 파일 불러오기
@@ -356,7 +356,7 @@ fig = px.choropleth(df0_cleaned,
                     hover_data=["자동차1만대당 사망(명)"],  # 툴팁에 자동차 1만대당 사망자 수 추가
                     color_continuous_scale=px.colors.sequential.Plasma,  # 색상 스케일
                     labels={"자동차1만대당 사망(명)": "자동차 1만대당 사망(명)"},  # 레이블 설정
-                    title="자동차 1만대당 사망(명) TOP 10 국가",  # 제목 설정
+                    title="2021년도 기준 OECD국가별 자동차1만대당 사망 현황",  # 제목 설정
                     template="plotly_dark"  # 다크 테마
 )
 
