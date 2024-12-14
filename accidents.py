@@ -204,66 +204,6 @@ option = st.sidebar.selectbox(
     ["연도별 교통사고 추이", "유형별 사고 비율", "특정 교통사고 유형 비교"]
 )
 
-# 연도별 교통사고 추이 분석
-def plot_yearly_trend(df1):
-    yearly_data = df1.drop("구분", axis=1).sum()
-    yearly_data = yearly_data.reset_index()
-    yearly_data.columns = ["연도", "사고 건수"]
-    fig = px.pie(
-        yearly_data,
-        names="연도",
-        values="사고 건수",
-        title="연도별 교통사고 추이 (도넛 차트)",
-        hole=0.5
-    )
-    st.plotly_chart(fig)
-
-# 유형별 사고, 사망, 부상 비율 시각화
-def plot_category_ratio(df1):
-    category_data = {
-        "유형": df1["구분"],
-        "사고 건수": df1["2023년"]
-    }
-    category_df = pd.DataFrame(category_data)
-    fig = px.pie(
-        category_df,
-        names="유형",
-        values="사고 건수",
-        title="2023년 유형별 사고 비율",
-        hole=0.4
-    )
-    st.plotly_chart(fig)
-
-# 특정 교통사고 유형 비교
-def plot_specific_category(df1):
-    selected_category = st.selectbox("비교할 교통사고 유형을 선택하세요", df1["구분"])
-    specific_data = df1[df1["구분"] == selected_category].drop("구분", axis=1).T
-    specific_data.columns = ["사고 건수"]
-    specific_data = specific_data.reset_index()
-    specific_data.columns = ["연도", "사고 건수"]
-    fig = px.bar(
-        specific_data,
-        x="연도",
-        y="사고 건수",
-        title=f"{selected_category} 연도별 사고 건수",
-        text_auto=True
-    )
-    st.plotly_chart(fig)
-
-# 선택된 옵션에 따라 시각화 실행
-if option == "연도별 교통사고 추이":
-    plot_yearly_trend(df1)
-elif option == "유형별 사고 비율":
-    plot_category_ratio(df1)
-elif option == "특정 교통사고 유형 비교":
-    plot_specific_category(df1)
-
-
-
-
-
-
-
 
 
 
