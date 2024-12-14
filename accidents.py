@@ -41,20 +41,24 @@ df0 = pd.read_csv(url)
 df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
 df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
 
+
+
 # Streamlit 앱 설정
 st.title('자동차 1만대당 사망(명) 국가별 비교')
 
-# Plotly를 이용한 막대그래프 그리기
+# Plotly를 이용한 수평 막대그래프 그리기
 fig = px.bar(df0_cleaned, 
-             x='자동차1만대당 사망(명)', 
-             y='국가', 
+             x='자동차1만대당 사망(명)',  # x축을 '자동차1만대당 사망(명)'으로 설정
+             y='국가',  # y축을 국가로 설정
              hover_data={'국가': True, '자동차1만대당 사망(명)': True},
              labels={'자동차1만대당 사망(명)': '자동차 1만대당 사망(명)', '국가': '국가'},
              title='자동차 1만대당 사망(명) 국가별 비교')
+
 # 그래프 크기 조정
-fig.update_layout(width=5000, height=5200)
+fig.update_layout(width=1000, height=800)
+
 # 그래프 보여주기
-st.plotly_chart(fig)
+st.plotly_chart(fig, use_container_width=False)
 
 
 
