@@ -5,6 +5,29 @@ import pandas as pd
 import json
 from streamlit_folium import st_folium
 
+
+# Sidebar 메뉴 생성
+menu = st.sidebar.selectbox(
+    "Select a Page",
+    ["Page 1", "Page 2", "Page 3"]
+)
+
+# 페이지별 내용 출력
+if menu == "Page 1":
+    st.title("Welcome to Page 1")
+    st.write("This is Page 1 content.")
+
+elif menu == "Page 2":
+    st.title("Welcome to Page 2")
+    st.write("This is Page 2 content.")
+
+elif menu == "Page 3":
+    st.title("Welcome to Page 3")
+    st.write("This is Page 3 content.")
+
+
+
+
 # 1. 교통사고 데이터 불러오기
 file_path = r"https://raw.githubusercontent.com/saenan22/final_project/main/Report.csv"
 df = pd.read_csv(file_path, header=3)
