@@ -52,7 +52,7 @@ fig = px.bar(df0_cleaned,
              labels={'자동차1만대당 사망(명)': '자동차 1만대당 사망(명)', '국가': '국가'},
              title='자동차 1만대당 사망(명) 국가별 비교')
 # 그래프 크기 조정
-fig.update_layout(width=1000, height=800)
+fig.update_layout(width=1000, height=1200)
 # 그래프 보여주기
 st.plotly_chart(fig)
 
