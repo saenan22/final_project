@@ -37,9 +37,34 @@ url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/
 df0 = pd.read_csv(url)
 
 # 데이터 확인
-st.write("데이터프레임의 처음 5개 행:")
 st.write(df0.head())
+# '-' 값은 NaN으로 변환하고 NaN 값 제거
+df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
+df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
 
+# '자동차1만대당 사망(명)' 기준으로 상위 10개 국가 추출
+top10_df = df0_cleaned.nlargest(10, '자동차1만대당 사망(명)')
+
+# '대한민국'을 red로 표시하고 나머지는 skyblue로 표시
+top10_df['색상'] = top10_df['국가'].apply(lambda x: 'red' if x == '대한민국' else 'skyblue')
+
+# '자동차1만대당 사망(명)'을 기준으로 내림차순 정렬
+top10_df = top10_df.sort_values(by='자동차1만대당 사망(명)', ascending=False)
+
+# Streamlit 앱 설정
+st.title('자동차 1만대당 사망(명) 상위 10개 국가')
+
+# Plotly를 이용한 막대그래프 그리기
+fig = px.bar(top10_df, 
+             x='자동차1만대당 사망(명)', 
+             y='국가', 
+             color='색상',  # 색상 열을 기준으로 색상 지정
+             hover_data={'국가': True, '자동차1만대당 사망(명)': True},
+             labels={'자동차1만대당 사망(명)': '자동차 1만대당 사망(명)', '국가': '국가'},
+             title='상위 10개 국가의 자동차 1만대당 사망(명)')
+
+# 그래프 보여주기
+st.plotly_chart(fig)
 
 # 1. 교통사고 데이터 불러오기
 file_path = r"https://raw.githubusercontent.com/saenan22/final_project/main/Report.csv"
