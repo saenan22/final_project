@@ -5,7 +5,7 @@ import pandas as pd
 import json
 from streamlit_folium import st_folium
 
-
+st.sidebar.subheader("교통사고 대시보드")
 # Sidebar 메뉴 생성
 menu = st.sidebar.selectbox(
     "Select a Page",
