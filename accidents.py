@@ -55,7 +55,7 @@ if page == "Page 1":
     top10_df = top10_df.sort_values(by='자동차1만대당 사망(명)', ascending=False)
 
     # Streamlit 앱 설정
-    st.title('## 자동차 1만대당 사망(명) 상위 10개 국가')
+    st.title('###자동차 1만대당 사망(명) 상위 10개 국가')
 
     # Plotly를 이용한 막대그래프 그리기
     fig = px.bar(top10_df, 
@@ -321,11 +321,7 @@ with col3:
 
 import streamlit as st
 
-# 외부 웹사이트의 URL
-website_url = "https://taas.koroad.or.kr/ons/omp/mcm/initOecd.do?menuId=ONS_OMP"
 
-# Streamlit을 사용하여 iframe으로 웹사이트 임베드
-st.markdown(f'<iframe src="{website_url}" width="100%" height="800"></iframe>', unsafe_allow_html=True)
 
 
 
