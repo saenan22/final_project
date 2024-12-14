@@ -192,3 +192,23 @@ st.subheader("선택된 지역에 따른 사고 통계")
 df_grouped = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
 st.bar_chart(df_grouped)
 
+import streamlit as st
+
+# Sidebar 메뉴 생성
+menu = st.sidebar.selectbox(
+    "Select a Page",
+    ["Page 1", "Page 2", "Page 3"]
+)
+
+# 페이지별 내용 출력
+if menu == "Page 1":
+    st.title("Welcome to Page 1")
+    st.write("This is Page 1 content.")
+
+elif menu == "Page 2":
+    st.title("Welcome to Page 2")
+    st.write("This is Page 2 content.")
+
+elif menu == "Page 3":
+    st.title("Welcome to Page 3")
+    st.write("This is Page 3 content.")
