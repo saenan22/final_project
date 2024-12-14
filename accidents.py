@@ -318,3 +318,43 @@ with col3:
     st.write("This is the content of column 3.")
 
 
+
+# CSV 파일 불러오기
+url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
+df0 = pd.read_csv(url)
+
+# '-' 값은 NaN으로 변환하고 NaN 값 제거
+df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
+df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
+
+# 기본 지도 생성 (서울 중심, 줌 레벨 설정)
+m = folium.Map(location=[51.1657, 10.4515], zoom_start=4)  # 중앙 유럽 위치, 확대 레벨 4
+
+# 각 국가에 대해 마커 추가
+for _, row in df0_cleaned.iterrows():
+    country_name = row['국가']
+    deaths_per_10k = row['자동차1만대당 사망(명)']
+    accidents = row['사고(건)']
+    fatalities = row['사망(명)']
+    death_rate_100k = row['인구10만명당 사망(명)']
+
+    # 툴팁에 표시할 내용
+    tooltip_content = f"<strong>{country_name}</strong><br>" \
+                      f"사고 건수: {accidents}<br>" \
+                      f"사망자 수: {fatalities}<br>" \
+                      f"자동차 1만대당 사망: {deaths_per_10k}명<br>" \
+                      f"인구 10만명당 사망: {death_rate_100k}명"
+
+    # 마커 추가
+    folium.Marker(
+        location=[row['위도'], row['경도']],  # 국가에 대한 위도, 경도를 데이터로 추가해야 합니다.
+        popup=tooltip_content,  # 마커 클릭 시 나타날 내용
+        tooltip=tooltip_content  # 마우스를 올렸을 때 나타날 내용
+    ).add_to(m)
+
+# Streamlit에서 Folium 지도 표시
+st.title("OECD 국가별 교통사고 현황 지도")
+st_folium(m, width=725, height=500)  # Streamlit 페이지에 Folium 지도 추가
+
+
+
