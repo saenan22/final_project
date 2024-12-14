@@ -22,6 +22,15 @@ with st.sidebar:
     with st.expander("Page 1"):
         st.write("OECD 국가 교통사고 건수 현황")
         # Page 1 관련 코드 추가
+
+    with st.expander("Page 2"):
+    st.write("대한민국 교통사고 분석")
+
+
+    with st.expander("Page 3"):
+     st.write("교통사고 예방 정보")
+        # Page 3 관련 코드 추가
+
 # CSV 파일을 불러오기
 url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
 df0 = pd.read_csv(url)
@@ -77,13 +86,6 @@ fig.update_layout(showlegend=False)
 # 그래프 보여주기
 st.plotly_chart(fig)
 
-with st.expander("Page 2"):
-    st.write("대한민국 교통사고 분석")
-        # Page 2 관련 코드 추가
-
- with st.expander("Page 3"):
-     st.write("교통사고 예방 정보")
-        # Page 3 관련 코드 추가
 
 
 
