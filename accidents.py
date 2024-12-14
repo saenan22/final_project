@@ -4,21 +4,26 @@ import geopandas as gpd
 import pandas as pd
 import json
 from streamlit_folium import st_folium
-
-st.sidebar.title("교통사고 대시보드🚗💥")
 # Sidebar 메뉴 생성
+st.sidebar.title("교통사고 대시보드🚗💥")
+menu = st.sidebar.selectbox(
+    "메뉴를 선택하세요",
+    ["OECD 국가 교통사고 현황", "대한민국 교통사고 분석", "교통사고 예방 정보"]
+)
+
 # 페이지별 내용 출력
-if menu == "Page 1":
-    st.title("OECE국가 교통사고 건수 현황")
-    st.write("This is Page 1 content.")
+if menu == "OECD 국가 교통사고 현황":
+    st.title("OECD 국가 교통사고 건수 현황")
+    st.write("여기에 OECD 국가들의 교통사고 통계 및 시각화를 추가하세요.")
 
-elif menu == "Page 2":
-    st.title("대한민국 교통사고 ")
-    st.write("This is Page 2 content.")
+elif menu == "대한민국 교통사고 분석":
+    st.title("대한민국 교통사고 분석")
+    st.write("대한민국의 교통사고 데이터 분석 결과를 여기에 표시하세요.")
 
-elif menu == "Page 3":
-    st.title("Welcome to Page 3")
-    st.write("This is Page 3 content.")
+elif menu == "교통사고 예방 정보":
+    st.title("교통사고 예방 정보")
+    st.write("교통사고 예방을 위한 팁과 정보를 이 섹션에 추가하세요.")
+
 
 
 # 1. 교통사고 데이터 불러오기
