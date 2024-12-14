@@ -9,30 +9,16 @@ st.sidebar.title("교통사고 대시보드🚗💥")
 # Sidebar 메뉴 생성
 # 페이지별 내용 출력
 if menu == "Page 1":
-    st.title("Welcome to Page 1")
+    st.title("OECE국가 교통사고 건수 현황")
     st.write("This is Page 1 content.")
 
 elif menu == "Page 2":
-    st.title("Welcome to Page 2")
+    st.title("대한민국 교통사고 ")
     st.write("This is Page 2 content.")
 
 elif menu == "Page 3":
     st.title("Welcome to Page 3")
     st.write("This is Page 3 content.")
-# 사이드바 메뉴 구현
-with st.sidebar:
-    # 확장 가능한 메뉴 만들기 (화살표처럼 보이게)
-    with st.expander("Page 1"):
-        st.write("OECE국가 교통사고 건수 현황")
-        # Page 1 관련 코드 추가
-    
-    with st.expander("Page 2"):
-        st.write("대한민국 교통사고 ")
-        # Page 2 관련 코드 추가
-
-    with st.expander("Page 3"):
-        st.write("This is Page 3 content.")
-        # Page 3 관련 코드 추가
 
 
 # 1. 교통사고 데이터 불러오기
