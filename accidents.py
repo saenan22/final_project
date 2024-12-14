@@ -334,7 +334,7 @@ country_to_iso3 = {
 }
 
 # Streamlit 앱 제목
-st.title('자동차 1만대당 사망(명) 지도 시각화')
+st.title('OECD국가별 자동차1만대당 사망 현황')
 
 # CSV 파일 불러오기
 url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
