@@ -5,7 +5,7 @@ import pandas as pd
 import json
 from streamlit_folium import st_folium
 
-st.sidebar.title("대한민국 교통사고 대시보드🚗💥")
+st.sidebar.title("교통사고 대시보드🚗💥")
 # Sidebar 메뉴 생성
 menu = st.sidebar.selectbox(
     "Select a Page",
@@ -139,7 +139,7 @@ folium.GeoJson(
 ).add_to(m)
 
 # 지도 출력 (Streamlit에서 folium 지도 출력)
-st.title("⚠️ 대한민국 교통사고 지역 지도⚠️ ")
+st.title("⚠️대한민국 교통사고지역 지도⚠️ ")
 st_folium(m, width=700, height=500)
 
 # 사이드바 옵션 추가
