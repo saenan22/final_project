@@ -16,12 +16,65 @@ menu = st.sidebar.selectbox(
     ["Page 1", "Page 2", "Page 3"]
 )
 st.sidebar.markdown("하단의 화살표를 눌러 해당 Page의 내용을 확인해보세요.😊")
+
 # 사이드바 메뉴 구현
 with st.sidebar:
     # 확장 가능한 메뉴 만들기 (화살표처럼 보이게)
     with st.expander("Page 1"):
         st.write("OECD 국가 교통사고 건수 현황")
-        # Page 1 관련 코드 추가
+        
+        # CSV 파일을 불러오기
+        url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
+        df0 = pd.read_csv(url)
+
+        # '-' 값은 NaN으로 변환하고 NaN 값 제거
+        df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
+        df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
+
+        # Streamlit 앱 설정
+        st.title('자동차 1만대당 사망(명) 국가별 비교')
+
+        # Plotly를 이용한 수평 막대그래프 그리기
+        fig = px.bar(df0_cleaned, 
+                     x='자동차1만대당 사망(명)',  # x축을 '자동차1만대당 사망(명)'으로 설정
+                     y='국가',  # y축을 국가로 설정
+                     hover_data={'국가': True, '자동차1만대당 사망(명)': True},
+                     labels={'자동차1만대당 사망(명)': '자동차 1만대당 사망(명)', '국가': '국가'},
+                     title='자동차 1만대당 사망(명) 국가별 비교')
+
+        # 그래프 크기 조정
+        fig.update_layout(width=1000, height=800)
+
+        # 그래프 보여주기
+        st.plotly_chart(fig, use_container_width=False)
+
+        # '자동차1만대당 사망(명)' 기준으로 상위 10개 국가 추출
+        top10_df = df0_cleaned.nlargest(10, '자동차1만대당 사망(명)')
+
+        # '대한민국'을 red로 표시하고 나머지는 skyblue로 표시
+        색상_dict = {'대한민국': 'red'}
+        top10_df['색상'] = top10_df['국가'].map(색상_dict).fillna('skyblue')
+
+        # '자동차1만대당 사망(명)'을 기준으로 내림차순 정렬
+        top10_df = top10_df.sort_values(by='자동차1만대당 사망(명)', ascending=False)
+
+        # Streamlit 앱 설정
+        st.title('자동차 1만대당 사망(명) 상위 10개 국가')
+
+        # Plotly를 이용한 막대그래프 그리기
+        fig = px.bar(top10_df, 
+                     x='자동차1만대당 사망(명)', 
+                     y='국가', 
+                     color='색상',  # 색상 열을 기준으로 색상 지정
+                     hover_data={'국가': True, '자동차1만대당 사망(명)': True},
+                     labels={'자동차1만대당 사망(명)': '자동차 1만대당 사망(명)', '국가': '국가'},
+                     title='상위 10개 국가의 자동차 1만대당 사망(명)')
+
+        # 범례 숨기기
+        fig.update_layout(showlegend=False)
+
+        # 그래프 보여주기
+        st.plotly_chart(fig)
 
     with st.expander("Page 2"):
         st.write("대한민국 교통사고 분석")
@@ -30,62 +83,6 @@ with st.sidebar:
     with st.expander("Page 3"):
         st.write("교통사고 예방 정보")
         # Page 3 관련 코드 추가
-
-# CSV 파일을 불러오기
-url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
-df0 = pd.read_csv(url)
-
-# '-' 값은 NaN으로 변환하고 NaN 값 제거
-df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
-df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
-
-
-
-# Streamlit 앱 설정
-st.title('자동차 1만대당 사망(명) 국가별 비교')
-
-# Plotly를 이용한 수평 막대그래프 그리기
-fig = px.bar(df0_cleaned, 
-             x='자동차1만대당 사망(명)',  # x축을 '자동차1만대당 사망(명)'으로 설정
-             y='국가',  # y축을 국가로 설정
-             hover_data={'국가': True, '자동차1만대당 사망(명)': True},
-             labels={'자동차1만대당 사망(명)': '자동차 1만대당 사망(명)', '국가': '국가'},
-             title='자동차 1만대당 사망(명) 국가별 비교')
-
-# 그래프 크기 조정
-fig.update_layout(width=1000, height=800)
-
-# 그래프 보여주기
-st.plotly_chart(fig, use_container_width=False)
-
-
-
-# '자동차1만대당 사망(명)' 기준으로 상위 10개 국가 추출
-top10_df = df0_cleaned.nlargest(10, '자동차1만대당 사망(명)')
-
-# '대한민국'을 red로 표시하고 나머지는 skyblue로 표시
-색상_dict = {'대한민국': 'red'}
-top10_df['색상'] = top10_df['국가'].map(색상_dict).fillna('skyblue')
-
-# '자동차1만대당 사망(명)'을 기준으로 내림차순 정렬
-top10_df = top10_df.sort_values(by='자동차1만대당 사망(명)', ascending=False)
-
-# Streamlit 앱 설정
-st.title('자동차 1만대당 사망(명) 상위 10개 국가')
-
-# Plotly를 이용한 막대그래프 그리기
-fig = px.bar(top10_df, 
-             x='자동차1만대당 사망(명)', 
-             y='국가', 
-             color='색상',  # 색상 열을 기준으로 색상 지정
-             hover_data={'국가': True, '자동차1만대당 사망(명)': True},
-             labels={'자동차1만대당 사망(명)': '자동차 1만대당 사망(명)', '국가': '국가'},
-             title='상위 10개 국가의 자동차 1만대당 사망(명)')
-# 범례 숨기기
-fig.update_layout(showlegend=False)
-# 그래프 보여주기
-st.plotly_chart(fig)
-
 
 
 
