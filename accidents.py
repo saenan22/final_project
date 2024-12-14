@@ -331,7 +331,7 @@ df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 
 df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
 
 # 기본 지도 생성 (서울 중심, 줌 레벨 설정)
-m = folium.Map(location=[51.1657, 10.4515], zoom_start=4)  # 중앙 유럽 위치, 확대 레벨 4
+m0 = folium.Map(location=[51.1657, 10.4515], zoom_start=4)  # 중앙 유럽 위치, 확대 레벨 4
 
 # 각 국가에 대해 마커 추가
 for _, row in df0_cleaned.iterrows():
@@ -353,10 +353,10 @@ for _, row in df0_cleaned.iterrows():
         location=[0, 0],  # 위치값을 0, 0으로 설정 (위치 없이 국가 이름만 표시)
         popup=tooltip_content,  # 마커 클릭 시 나타날 내용
         tooltip=country_name  # 마우스를 올렸을 때 국가 이름만 표시
-    ).add_to(m)
+    ).add_to(m0)
 
 # 지도 보기
-m
+st_folium(m0)
 
 
 
