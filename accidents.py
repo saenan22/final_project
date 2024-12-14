@@ -37,7 +37,8 @@ url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/
 df0 = pd.read_csv(url)
 
 # 데이터 확인
-print(df0.head())
+st.write("데이터프레임의 처음 5개 행:")
+st.write(df0.head())
 
 
 # 1. 교통사고 데이터 불러오기
