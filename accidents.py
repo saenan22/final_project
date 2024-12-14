@@ -36,8 +36,10 @@ import pandas as pd
 url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
 df0 = pd.read_csv(url)
 
+
 # 데이터 확인
 st.write(df0.head())
+
 # '-' 값은 NaN으로 변환하고 NaN 값 제거
 df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
 df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
@@ -46,7 +48,8 @@ df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
 top10_df = df0_cleaned.nlargest(10, '자동차1만대당 사망(명)')
 
 # '대한민국'을 red로 표시하고 나머지는 skyblue로 표시
-top10_df['색상'] = top10_df['국가'].apply(lambda x: 'red' if x == '대한민국' else 'skyblue')
+색상_dict = {'대한민국': 'red'}
+top10_df['색상'] = top10_df['국가'].map(색상_dict).fillna('skyblue')
 
 # '자동차1만대당 사망(명)'을 기준으로 내림차순 정렬
 top10_df = top10_df.sort_values(by='자동차1만대당 사망(명)', ascending=False)
