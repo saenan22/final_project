@@ -177,9 +177,36 @@ option = st.sidebar.selectbox(
     ["연도별 교통사고 추이", "유형별 사고 비율", "특정 교통사고 유형 비교"]
 )
 
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+
+# 데이터 준비
+data = {
+    "구분": ["전체 교통사고", "사망 교통사고", "어린이 교통사고", "노인 교통사고", "보행자 교통사고", "자전거 교통사고", "이륜차 교통사고", "사업용자동차 교통사고", "음주운전 교통사고"],
+    "2019년": [229600, 3233, 11054, 40645, 46682, 5633, 20898, 47179, 15708],
+    "2020년": [209654, 2983, 8400, 35312, 36601, 5667, 21258, 40108, 17247],
+    "2021년": [203130, 2816, 8889, 34907, 35665, 5509, 20598, 37801, 14894],
+    "2022년": [196836, 2658, 9163, 35914, 37611, 5393, 18295, 37788, 15059],
+    "2023년": [198296, 2468, 8753, 38960, 37324, 5146, 16567, 39346, 13042]
+}
+
+# 데이터프레임 생성
+df1 = pd.DataFrame(data)
+
+# Streamlit 앱 제목
+st.title("교통사고 분석 대시보드")
+
+# 사이드바 옵션 설정
+st.sidebar.title("교통사고 분석")
+option = st.sidebar.selectbox(
+    "분석 항목 선택",
+    ["연도별 교통사고 추이", "유형별 사고 비율", "특정 교통사고 유형 비교"]
+)
+
 # 연도별 교통사고 추이 분석
-def plot_yearly_trend(df):
-    yearly_data = df.drop("구분", axis=1).sum()
+def plot_yearly_trend(df1):
+    yearly_data = df1.drop("구분", axis=1).sum()
     yearly_data = yearly_data.reset_index()
     yearly_data.columns = ["연도", "사고 건수"]
     fig = px.pie(
@@ -192,10 +219,10 @@ def plot_yearly_trend(df):
     st.plotly_chart(fig)
 
 # 유형별 사고, 사망, 부상 비율 시각화
-def plot_category_ratio(df):
+def plot_category_ratio(df1):
     category_data = {
-        "유형": df["구분"],
-        "사고 건수": df["2023년"]
+        "유형": df1["구분"],
+        "사고 건수": df1["2023년"]
     }
     category_df = pd.DataFrame(category_data)
     fig = px.pie(
@@ -208,9 +235,9 @@ def plot_category_ratio(df):
     st.plotly_chart(fig)
 
 # 특정 교통사고 유형 비교
-def plot_specific_category(df):
-    selected_category = st.selectbox("비교할 교통사고 유형을 선택하세요", df["구분"])
-    specific_data = df[df["구분"] == selected_category].drop("구분", axis=1).T
+def plot_specific_category(df1):
+    selected_category = st.selectbox("비교할 교통사고 유형을 선택하세요", df1["구분"])
+    specific_data = df1[df1["구분"] == selected_category].drop("구분", axis=1).T
     specific_data.columns = ["사고 건수"]
     specific_data = specific_data.reset_index()
     specific_data.columns = ["연도", "사고 건수"]
@@ -225,11 +252,12 @@ def plot_specific_category(df):
 
 # 선택된 옵션에 따라 시각화 실행
 if option == "연도별 교통사고 추이":
-    plot_yearly_trend(df)
+    plot_yearly_trend(df1)
 elif option == "유형별 사고 비율":
-    plot_category_ratio(df)
+    plot_category_ratio(df1)
 elif option == "특정 교통사고 유형 비교":
-    plot_specific_category(df)
+    plot_specific_category(df1)
+
 
 
 
