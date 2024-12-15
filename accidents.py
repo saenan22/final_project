@@ -291,7 +291,7 @@ elif page == "Page 2":
     fig = px.bar(grouped_data, x="시도", y="사망[명]", title="2023년 기준 시도및 시군구별 사망 수", labels={"사망[명]": "명"})
 
     # 그래프 표시
-    st.plotly_chart(fig, key="unique_plot_key")
+    st.plotly_chart(fig, key="deaths_plot_key")
 
 
     st.write("선택된 지역에 대한 교통사고 사망 데이터:")
