@@ -124,9 +124,6 @@ if page == "Page 1":
     st.plotly_chart(fig, use_container_width=False,key="oecd_plot_key")
 
 
-    st.subheader("2023년도 기준 대한민국의 교통사고수,사망수,부상자수가 서울,경기도 쪽에서 현저히 높음을 확인할수있다.")
-
-
     
 
    # 사고 빈도가 높은 국가 Top 10 버튼
@@ -350,8 +347,11 @@ elif page == "Page 2":
     #데이터프레임형태로 나타냄 
         st.subheader("선택된 지역에 대한 교통사고 통계")
         st.write(df_filtered)
+        
+    #인사이트 도출
+        st.write("2023년도 기준 대한민국의 교통사고수,사망수,부상자수가 서울,경기도 쪽에서 현저히 높음을 확인할수있다.")
 
-    # 제목선정
+    # 다음 새로운 제목선정
         st.title("지역별 교통사고 빈도")
 
     # 두 개의 컬럼 생성
