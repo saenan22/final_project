@@ -422,10 +422,10 @@ elif page == "Page 2":
     
     if option == "부문별 교통사고(최근5년)":
         def load_data():
-        url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/%EB%B6%80%EB%AC%B8%EB%B3%84%EC%82%AC%EA%B3%A0%EC%9C%A0%ED%98%95.csv"
-        df_c = pd.read_csv(url, encoding="utf-8")
-        return df_c
-    df_c = load_data()                
+            url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/%EB%B6%80%EB%AC%B8%EB%B3%84%EC%82%AC%EA%B3%A0%EC%9C%A0%ED%98%95.csv"
+            df_c = pd.read_csv(url, encoding="utf-8")
+            return df_c
+        df_c = load_data()                
 
 
 
