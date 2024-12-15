@@ -219,9 +219,6 @@ elif page == "Page 2":
             # 필터링된 데이터 출력
         st.write("선택된 지역에 대한 교통사고 데이터:")
         st.write(df_filtered)
-            with col2:
-                st.header("Column 2")
-                st.write("This is the content of column 2.")
 
     
 
