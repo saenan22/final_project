@@ -418,7 +418,14 @@ elif page == "Page 2":
 - **교차로 밀집**: 많은 교차로와 신호등이 있는 지역은 사고가 자주 발생하는 경향이 있음.
 - **교통량이 많은 지역**: 많은 차량이 오가는 곳에서 사고 발생률이 높음.
 """)
-                
+
+    
+    if option == "부문별 교통사고(최근5년)":
+        def load_data():
+        url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/%EB%B6%80%EB%AC%B8%EB%B3%84%EC%82%AC%EA%B3%A0%EC%9C%A0%ED%98%95.csv"
+        df_c = pd.read_csv(url, encoding="utf-8")
+        return df_c
+    df_c = load_data()                
 
 
 
