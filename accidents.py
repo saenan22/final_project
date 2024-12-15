@@ -221,9 +221,9 @@ elif page == "Page 2":
         st.header('교통사고 빈도가 높은/낮은 지역 분석')
         st.write("This is the content of column 1.")
 
-
-
-
+    with col2:
+        st.header("교통사고 빈도가 높은/낮은 지역 시각화")
+        st.write("This is the content of column 2.")
 
     
 
