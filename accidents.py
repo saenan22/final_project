@@ -151,7 +151,11 @@ if page == "Page 1":
                      title="자동차1만대당 사망수가 낮은 국가 Top 10", 
                      labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"})
         # 범례 
-        fig_low.update_layout(showlegend=True)
+        fig_low.update_layout(
+        showlegend=True,  # 범례 표시
+        width=1000,       # 그래프 너비
+        height=600        # 그래프 높이
+    )
 
         st.plotly_chart(fig_low)
 
