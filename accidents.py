@@ -126,7 +126,7 @@ if page == "Page 1":
 
    # 사고 빈도가 높은 국가 Top 10 버튼
     if st.button("자동차1만대당 사망수가 높은 국가 Top 10"):
-        top_high_freq = df0_cleaned.nlargest(10, "사고 건수")
+        top_high_freq = df0_cleaned.nlargest(10, "자동차1만대당 사망(명)")
         st.subheader("자동차1만대당 사망수가 높은 국가 Top 10")
         st.write(top_high_freq)
         # 색상 설정: '대한민국'은 빨간색, 나머지는 기본 색상
