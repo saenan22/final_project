@@ -99,6 +99,51 @@ if page == "Page 1":
     # 그래프 보여주기
     st.plotly_chart(fig, use_container_width=False)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
     # '자동차1만대당 사망(명)' 기준으로 상위 10개 국가 추출
     top10_df = df0_cleaned.nlargest(10, '자동차1만대당 사망(명)')
 
@@ -492,6 +537,59 @@ fig.update_geos(showcoastlines=True, coastlinecolor="Black", projection_type="na
 
 # Streamlit으로 지도 시각화 출력
 st.plotly_chart(fig)
+
+
+import pandas as pd
+import streamlit as st
+import plotly.express as px
+
+# 데이터 로드 및 전처리
+url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
+df0 = pd.read_csv(url)
+
+# '-' 값은 NaN으로 변환하고 NaN 값 제거
+df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
+df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
+
+# Streamlit 앱 설정
+st.title('OECD 국가🌍 교통사고 현황🚨')
+
+# 사이드바에서 국가 선택
+countries = df0_cleaned['국가'].unique()
+selected_country = st.sidebar.selectbox("국가를 선택하세요:", countries)
+
+# 선택한 국가의 데이터 필터링
+selected_data = df0_cleaned[df0_cleaned['국가'] == selected_country]
+
+# Plotly를 이용한 수평 막대그래프 그리기
+fig = px.bar(df0_cleaned, 
+             x='자동차1만대당 사망(명)',  # x축을 '자동차1만대당 사망(명)'으로 설정
+             y='국가',  # y축을 국가로 설정
+             hover_data={'국가': True, '자동차1만대당 사망(명)': True},
+             labels={'자동차1만대당 사망(명)': '자동차 1만대당 사망(명)', '국가': '국가'},
+             title='자동차 1만대당 사망(명) 국가별 비교',
+             color='자동차1만대당 사망(명)')
+
+# 그래프 크기 조정
+fig.update_layout(width=1000, height=800)
+
+# 선택한 국가 강조 표시
+if not selected_data.empty:
+    fig.add_trace(
+        px.bar(selected_data, 
+               x='자동차1만대당 사망(명)', 
+               y='국가', 
+               text='자동차1만대당 사망(명)',
+               color_discrete_sequence=['red']).data[0]
+    )
+
+# 그래프 보여주기
+st.plotly_chart(fig, use_container_width=False)
+
+# 선택한 국가의 데이터 출력
+st.sidebar.markdown("### 선택한 국가의 교통사고 현황")
+st.sidebar.write(selected_data[['국가', '자동차1만대당 사망(명)']])
+
 
 
 
