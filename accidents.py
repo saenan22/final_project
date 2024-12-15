@@ -386,10 +386,12 @@ elif page == "Page 2":
 
     # CSV 데이터 불러오기 (URL에서 데이터 읽기)
     def load_data():
-    url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%8B%9C%EA%B0%84%EB%8C%80%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
-    df = pd.read_csv(url, encoding="utf-8")
-    return df
-    df = load_data()
+        url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%8B%9C%EA%B0%84%EB%8C%80%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
+        df = pd.read_csv(url, encoding="utf-8")
+        return df
+        df = load_data()
+        
+
     
     # 사이드바 옵션 추가
     st.sidebar.title("교통사고 분석")
