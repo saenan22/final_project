@@ -145,15 +145,18 @@ if page == "Page 1":
         top_low_freq = df0_cleaned.nsmallest(10, "자동차1만대당 사망(명)")
         st.subheader("사고 빈도가 낮은 국가 Top 10")
         st.write(top_low_freq)
-        color_map = {국가: '#FF5733' if 국가 == '대한민국' else '#1f77b4' for 국가 in top_high_freq['국가']}
 
         # 그래프 생성
         fig_low = px.bar(top_low_freq, x="국가", y="자동차1만대당 사망(명)", 
                      title="자동차1만대당 사망수가 낮은 국가 Top 10", 
-                     labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"},
-                        color='국가', color_discrete_map=color_map)
+                     labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"})
 
-
+        # 범례 
+        fig_low.update_layout(
+        showlegend=True,  # 범례 표시
+        width=1600,       # 그래프 너비
+        height=600        # 그래프 높이
+    )
         st.plotly_chart(fig_low)
 
 
