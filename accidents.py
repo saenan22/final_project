@@ -142,6 +142,9 @@ if page == "Page 1":
                          color='국가', color_discrete_map=color_map)
         
         st.plotly_chart(fig_high)
+        # 텍스트 입력
+        text_input = st.text_input("2021년기준 OECD국가중 자동차1만대당 사망수가 가장 높은국가는 콜롬비아로 확인핤우있다. ")
+        st.write(f"You entered: {text_input}")
 
     # 사고 빈도가 낮은 국가 Top 10 버튼
     if st.button("자동차1만대당 사망수가 낮은 국가 Top 10"):
