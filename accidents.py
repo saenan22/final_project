@@ -188,7 +188,7 @@ elif page == "Page 2":
     selected_regions = st.sidebar.multiselect(
         "지역을 선택하세요",
         df['시도'].unique(),
-        default=["서울"]  # 기본적으로 서울을 선택하도록 설정
+        default=[]  # 기본적으로 서울을 선택하도록 설정
     )
 
     # 선택된 지역에 맞춰 데이터 필터링
