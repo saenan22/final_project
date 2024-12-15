@@ -125,31 +125,31 @@ if page == "Page 1":
     st.sidebar.title("사고 통계 분석")
 
    # 사고 빈도가 높은 국가 Top 10 버튼
-    if st.sidebar.button("사고 빈도가 높은 국가 Top 5"):
+    if st.button("사고 빈도가 높은 국가 Top 5"):
         top_high_freq = df0_cleaned.nlargest(10, "사고 건수")
-        st.subheader("사고 빈도가 높은 국가 Top 10")
+        st.subheader("자동차1만대당 사망수가 높은 국가 Top 10")
         st.write(top_high_freq)
         # 색상 설정: '대한민국'은 빨간색, 나머지는 기본 색상
         colors = ["#FF0000" if country == "대한민국" else "#FF5733" for country in top_high_freq["국가"]]
 
         # 그래프 생성
-        fig_high = px.bar(top_high_freq, x="국가", y="사고 건수", 
-                      title="사고 빈도가 높은 국가 Top 5", 
-                      labels={"사고 건수": "사고 건수"}, 
+        fig_high = px.bar(top_high_freq, x="국가", y="자동차1만대당 사망(명)", 
+                      title="자동차1만대당 사망수가 높은 국가 Top 10", 
+                      labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"}, 
                       color_discrete_sequence=["#FF5733"])
         fig.update_layout(showlegend=False)
         st.plotly_chart(fig_high)
 
     # 사고 빈도가 낮은 국가 Top 10 버튼
-    if st.sidebar.button("사고 빈도가 낮은 국가 Top 10"):
-        top_low_freq = df0_cleaned.nsmallest(10, "사고 건수")
-        st.subheader("사고 빈도가 낮은 국가 Top 5")
+    if st.button("자동차1만대당 사망수가 낮은 국가 Top 10"):
+        top_low_freq = df0_cleaned.nsmallest(10, "자동차1만대당 사망(명)")
+        st.subheader("사고 빈도가 낮은 국가 Top 10")
         st.write(top_low_freq)
 
         # 그래프 생성
         fig_low = px.bar(top_low_freq, x="국가", y="사고 건수", 
-                     title="사고 빈도가 낮은 국가 Top 10", 
-                     labels={"사고 건수": "사고 건수"}, 
+                     title="자동차1만대당 사망수가 낮은 국가 Top 10", 
+                     labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"}, 
                      color_discrete_sequence=["#33FF57"])
         # 범례 숨기기
         fig.update_layout(showlegend=False)
