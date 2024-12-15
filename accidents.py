@@ -289,14 +289,14 @@ elif page == "Page 2":
             st.write("##### 사고[건]이 가장 높은 5개 지역")
             st.dataframe(top_5)# "교통사고 빈도가 낮은 지역 Top 5" 체크박스 추가
             with col2:
-                st.header("교통사고 빈도가 높은/낮은 지역 시각화")
-                st.write("This is the content of column 2.")
+                st.header("지역별 교통사고 빈도 시각화")
+                st.write("교통사고 빈도가 높은/낮은 지역 시각화")
 
          # 상위 5개 지역 막대그래프 시각화 (Plotly 사용)
                 fig_top = px.bar(top_5, 
-                     x='사고[건]', 
-                     y='시군구', 
-                     title='교통사고 빈도가 높은 지역',
+                     x='시군구', 
+                     y='사고[건]', 
+                     title='교통사고 빈도가 높은 TOP5 지역',
                      color='사고[건]',
                      labels={'사고[건]': '사고[건]', '시군구': '지역'},
                      hover_data=['시도','시군구', '사고[건]'])# Hover시 시도와 사고[건]을 표시
