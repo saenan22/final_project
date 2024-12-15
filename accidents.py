@@ -144,6 +144,12 @@ if page == "Page 1":
 # Page 2 내용
 elif page == "Page 2":
     st.title("대한민국 교통사고 분석")
+      # 사이드바 옵션 추가
+    st.sidebar.title("교통사고 분석")
+    option = st.sidebar.selectbox(
+        "분석 항목 선택",
+        ["","시간대별 교통사고", "부문별 교통사고", "요일별 교통사고","연령층별 교통사고","기상상태별 교통사고"]
+    )
     
     # 교통사고 데이터 불러오기
     file_path = r"https://raw.githubusercontent.com/saenan22/final_project/main/Report.csv"
@@ -386,13 +392,6 @@ elif page == "Page 2":
                 
 
 
-
-        # 사이드바 옵션 추가
-    st.sidebar.title("교통사고 분석")
-    option = st.sidebar.selectbox(
-        "분석 항목 선택",
-        ["","시간대별 교통사고", "부문별 교통사고", "요일별 교통사고","연령층별 교통사고","기상상태별 교통사고"]
-    )
 
 
     # CSV 데이터 불러오기 (URL에서 데이터 읽기)
