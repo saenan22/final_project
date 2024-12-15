@@ -236,6 +236,11 @@ elif page == "Page 2":
         if st.checkbox('교통사고 빈도가 높은 지역 Top 5'):
             st.write("##### 사고[건]이 가장 높은 5개 지역")
             st.dataframe(top_5)# "교통사고 빈도가 낮은 지역 Top 5" 체크박스 추가
+        if st.checkbox('교통사고 빈도가 낮은 지역 Top 5'):
+                st.write("### 사고[건]이 가장 낮은 5개 지역")
+                st.dataframe(bottom_5)
+
+            
             
         with col2:
             st.header("교통사고 빈도가 높은/낮은 지역 시각화")
@@ -253,9 +258,6 @@ elif page == "Page 2":
             fig_top.update_layout(coloraxis_colorbar=dict(title="사고[건]"))
             st.plotly_chart(fig_top)  # Plotly 차트를 Streamlit에 출력
 
-            if st.checkbox('교통사고 빈도가 낮은 지역 Top 5'):
-                st.write("### 사고[건]이 가장 낮은 5개 지역")
-                st.dataframe(bottom_5)
 
 
 
