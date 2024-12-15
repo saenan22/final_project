@@ -183,6 +183,41 @@ elif page == "Page 2":
     st_folium(m, width=700, height=500)
 
 
+        # 사이드바에 지역 선택 추가
+    st.sidebar.subheader("지역 선택")
+    selected_regions = st.sidebar.multiselect(
+        "지역을 선택하세요",
+        df['시도'].unique(),
+        default=["서울"]  # 기본적으로 서울을 선택하도록 설정
+    )
+
+    # 선택된 지역에 맞춰 데이터 필터링
+    if selected_regions:
+        df_filtered = df[df["시도"].isin(selected_regions)]
+    else:
+        df_filtered = df  # 선택된 지역이 없으면 전체 데이터 출력
+
+    # 필터링된 데이터 출력
+    st.write("선택된 지역에 대한 교통사고 데이터:")
+    st.write(df_filtered)
+
+    # 필터링된 데이터에 대한 차트 출력
+    st.subheader("선택된 지역에 따른 사고 통계")
+
+    grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
+
+    # 막대그래프 생성
+    fig = px.bar(grouped_data, x="시도", y="사고[건]", title="시도별 사고 건수", labels={"사고[건]": "사고 건수"})
+
+    # 그래프 표시
+    st.plotly_chart(fig, key="unique_plot_key")
+
+
+
+
+
+
+    
 
 
 
@@ -233,34 +268,10 @@ elif page == "Page 2":
     # 그래프 표시
     st.plotly_chart(fig)
 
-    # 사이드바에 지역 선택 추가
-    st.sidebar.subheader("지역 선택")
-    selected_regions = st.sidebar.multiselect(
-        "지역을 선택하세요",
-        df['시도'].unique(),
-        default=["서울"]  # 기본적으로 서울을 선택하도록 설정
-    )
 
-    # 선택된 지역에 맞춰 데이터 필터링
-    if selected_regions:
-        df_filtered = df[df["시도"].isin(selected_regions)]
-    else:
-        df_filtered = df  # 선택된 지역이 없으면 전체 데이터 출력
 
-    # 필터링된 데이터 출력
-    st.write("선택된 지역에 대한 교통사고 데이터:")
-    st.write(df_filtered)
 
-    # 필터링된 데이터에 대한 차트 출력
-    st.subheader("선택된 지역에 따른 사고 통계")
-
-    grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
-
-    # 막대그래프 생성
-    fig = px.bar(grouped_data, x="시도", y="사고[건]", title="시도별 사고 건수", labels={"사고[건]": "사고 건수"})
-
-    # 그래프 표시
-    st.plotly_chart(fig, key="unique_plot_key")
+    
 
 
 
