@@ -316,7 +316,7 @@ elif page == "Page 2":
                    
             fig_bottom.update_layout(coloraxis_colorbar=dict(title="사고[건]"),width=1000,height=500)
             st.plotly_chart(fig_bottom)  # Plotly 차트를 Streamlit에 출력
-            st.header('사고빈도가 낮은곳곳 특징')
+            st.header('지역적 특징')
             st.write("""교통사고 빈도가 낮은 지역은 주로 다음과 같은 특징을 가짐
 - **인구 밀도가 낮은 지역**: 인구가 적고 차량의 통행량이 적은 지역에서 사고 발생이 적음.
 - **교통량이 적은 시골 지역**: 차량의 통행량이 적고, 도로가 상대적으로 넓고 직선적인 시골 지역에서 사고 발생이 적음.
@@ -342,7 +342,7 @@ elif page == "Page 2":
             fig_top.update_layout(coloraxis_colorbar=dict(title="사고[건]"),width=1000,height=500)
             st.plotly_chart(fig_top)  # Plotly 차트를 Streamlit에 출력
 
-            st.header('사고빈도가 높은곳 특징')
+            st.header('지역적 특징')
             st.write("""교통사고 빈도가 높은 지역은 일반적으로 다음과 같은 특징을 가짐
 - **상업적 중심지**: 상업 활동이 활발한 도심 지역에서 교통사고가 많이 발생함.
 - **교차로 밀집**: 많은 교차로와 신호등이 있는 지역은 사고가 자주 발생하는 경향이 있음.
