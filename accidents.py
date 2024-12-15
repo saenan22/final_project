@@ -139,8 +139,7 @@ if page == "Page 1":
         # 그래프 생성
         fig_high = px.bar(top_high_freq, x="국가", y="자동차1만대당 사망(명)", 
                       title="자동차1만대당 사망수가 높은 국가 Top 10", 
-                      labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"}, 
-                      color_discrete_sequence=["#FF5733"])
+                      labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"})
         fig.update_layout(showlegend=False)
         st.plotly_chart(fig_high)
 
