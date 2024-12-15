@@ -122,10 +122,10 @@ if page == "Page 1":
     st.plotly_chart(fig, use_container_width=False,key="oecd_plot_key")
 
     # 사이드바 옵션 추가
-    st.sidebar.title("사고 통계 분석")
+    st.title("자동차1만대당 사망수 통계 분석")
 
    # 사고 빈도가 높은 국가 Top 10 버튼
-    if st.button("사고 빈도가 높은 국가 Top 5"):
+    if st.button("자동차1만대당 사망수가 높은 국가 Top 10"):
         top_high_freq = df0_cleaned.nlargest(10, "사고 건수")
         st.subheader("자동차1만대당 사망수가 높은 국가 Top 10")
         st.write(top_high_freq)
