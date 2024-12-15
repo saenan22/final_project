@@ -182,35 +182,7 @@ elif page == "Page 2":
     st.title("⚠️대한민국 교통사고지역 지도⚠️ ")
     st_folium(m, width=700, height=500)
 
-    # 사이드바 옵션 추가
-    st.sidebar.title("교통사고 분석")
-    option = st.sidebar.selectbox(
-        "분석 항목 선택",
-        ["시간대별 교통사고", "부문별 교통사고", "요일별 교통사고","연령층별 교통사고","기상상태별 교통사고"]
-    )
-
-    # 제목
-    st.title("교통사고 데이터 분석")
-
-    # 메인 화면에서 필터링 옵션 추가 (사이드바가 아닌 일반 화면)
-    st.subheader("데이터 필터링")
-    filter_option = st.selectbox(
-        "지역 선택",
-         df['시도'].unique()
-    )
-
-    # 필터 옵션에 따라 데이터 출력 
-    st.write(f"선택된 지역: {filter_option}")
-
-    # 선택된 지역에 따라 필터링된 데이터 보여주기
-    if filter_option != "전체":
-        df_filtered = df[df["시도"] == filter_option]
-    else:
-        df_filtered = df
-
-    st.write(df_filtered)
-
-    # 선택된 필터 옵션과 관련된 다른 분석 추가 
+     # 선택된 필터 옵션과 관련된 다른 분석 추가 
     # 마지막 행 삭제 (시도 열의 마지막 행)
     import altair as alt
     import streamlit as st
@@ -255,6 +227,38 @@ elif page == "Page 2":
 
     # 그래프 표시
     st.plotly_chart(fig, key="unique_plot_key")
+
+
+
+    # 제목
+    st.title("교통사고 데이터 분석")
+
+    # 메인 화면에서 필터링 옵션 추가 (사이드바가 아닌 일반 화면)
+    st.subheader("데이터 필터링")
+    filter_option = st.selectbox(
+        "지역 선택",
+         df['시도'].unique()
+    )
+
+    # 필터 옵션에 따라 데이터 출력 
+    st.write(f"선택된 지역: {filter_option}")
+
+    # 선택된 지역에 따라 필터링된 데이터 보여주기
+    if filter_option != "전체":
+        df_filtered = df[df["시도"] == filter_option]
+    else:
+        df_filtered = df
+
+    st.write(df_filtered)
+
+
+
+        # 사이드바 옵션 추가
+    st.sidebar.title("교통사고 분석")
+    option = st.sidebar.selectbox(
+        "분석 항목 선택",
+        ["시간대별 교통사고", "부문별 교통사고", "요일별 교통사고","연령층별 교통사고","기상상태별 교통사고"]
+    )
 
 
 
