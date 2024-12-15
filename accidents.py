@@ -185,7 +185,7 @@ elif page == "Page 2":
     st.sidebar.title("교통사고 분석")
     option = st.sidebar.selectbox(
         "분석 항목 선택",
-        ["시도및 시군구별 교통사고","부문별 교통사고(최근5년)","시간대별 교통사고", "요일별 교통사고","사고유형별 교통사고","월별 교통사고"]
+        ["시도및 시군구별 교통사고","부문별 교통사고(최근5년)","시간대별 교통사고", "요일별 교통사고","월별 교통사고","사고유형별 교통사고"]
     )
     if option == "시도및 시군구별 교통사고":
         # 교통사고 데이터 불러오기
@@ -422,7 +422,7 @@ elif page == "Page 2":
 
 
 
-
+    
     # 시간대별 교통사고 관련 CSV 데이터 불러오기 (URL에서 데이터 읽기)
     def load_data():
         url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%8B%9C%EA%B0%84%EB%8C%80%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
