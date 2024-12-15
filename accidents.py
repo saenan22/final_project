@@ -218,6 +218,7 @@ elif page == "Page 2":
     # 각 컬럼에 다른 콘텐츠 추가
 
     with col1:
+        st.header("지역별 교통사고 빈도")
         st.write("교통사고 빈도가 높은/낮은 지역 분석")
         
         top_5 = df.nlargest(5, '사고[건]')  # 사고[건]이 가장 높은 5개 지역
@@ -234,18 +235,14 @@ elif page == "Page 2":
 
         if st.checkbox('교통사고 빈도가 높은 지역 Top 5'):
             st.write("##### 사고[건]이 가장 높은 5개 지역")
-            st.dataframe(top_5)
-                        # "교통사고 빈도가 낮은 지역 Top 5" 체크박스 추가
-        if st.checkbox('교통사고 빈도가 낮은 지역 Top 5'):
-            st.write("### 사고[건]이 가장 낮은 5개 지역")
-            st.dataframe(bottom_5)
-
-    with col2:
-        st.header("교통사고 빈도가 높은/낮은 지역 시각화")
-        st.write("This is the content of column 2.")
+            st.dataframe(top_5)# "교통사고 빈도가 낮은 지역 Top 5" 체크박스 추가
+            
+        with col2:
+            st.header("교통사고 빈도가 높은/낮은 지역 시각화")
+            st.write("This is the content of column 2.")
 
          # 상위 5개 지역 막대그래프 시각화 (Plotly 사용)
-        fig_top = px.bar(top_5, 
+            fig_top = px.bar(top_5, 
                      x='사고[건]', 
                      y='시군구', 
                      title='교통사고 빈도가 높은 지역',
@@ -253,8 +250,13 @@ elif page == "Page 2":
                      labels={'사고[건]': '사고[건]', '시군구': '지역'},
                      hover_data=['시도','시군구', '사고[건]'])# Hover시 시도와 사고[건]을 표시
         
-        fig_top.update_layout(coloraxis_colorbar=dict(title="사고[건]"))
-        st.plotly_chart(fig_top)  # Plotly 차트를 Streamlit에 출력
+            fig_top.update_layout(coloraxis_colorbar=dict(title="사고[건]"))
+            st.plotly_chart(fig_top)  # Plotly 차트를 Streamlit에 출력
+
+            if st.checkbox('교통사고 빈도가 낮은 지역 Top 5'):
+                st.write("### 사고[건]이 가장 낮은 5개 지역")
+                st.dataframe(bottom_5)
+
 
 
 
