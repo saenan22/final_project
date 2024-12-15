@@ -387,9 +387,9 @@ elif page == "Page 2":
     # CSV 데이터 불러오기 (URL에서 데이터 읽기)
     def load_data():
         url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%8B%9C%EA%B0%84%EB%8C%80%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
-        df = pd.read_csv(url, encoding="utf-8")
-        return df
-        df = load_data()
+        df_t = pd.read_csv(url, encoding="utf-8")
+        return df_t
+        df_t = load_data()
         
 
     # 시간대별 교통사고 분석
@@ -403,7 +403,7 @@ elif page == "Page 2":
     )
 
         # 선택된 시간대 데이터 필터링
-        selected_data = df.iloc[start_hour // 2:end_hour // 2]
+        selected_data = df_t.iloc[start_hour // 2:end_hour // 2]
 
         # 세 개의 열 생성
         col1, col2, col3 = st.columns(3)
@@ -416,8 +416,7 @@ elif page == "Page 2":
             x="시간대",
             y="사고(건)",
             title="선택된 시간대 사고(건)",
-            labels={"사고(건)": "사고 건수"}
-        )
+            labels={"사고(건)": "사고 건수"})
             st.plotly_chart(fig_accidents, use_container_width=True)
 
     # 사망(명) 그래프
