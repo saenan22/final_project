@@ -124,6 +124,9 @@ if page == "Page 1":
     st.plotly_chart(fig, use_container_width=False,key="oecd_plot_key")
 
 
+    st.subheader("2023년도 기준 대한민국의 교통사고수,사망수,부상자수가 서울,경기도 쪽에서 현저히 높음을 확인할수있다.")
+
+
     
 
    # 사고 빈도가 높은 국가 Top 10 버튼
