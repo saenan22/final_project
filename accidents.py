@@ -279,7 +279,7 @@ elif page == "Page 2":
 
         # 사이드바에 지역 선택 추가
     st.subheader("지역 선택")
-    selected_regions = st.sidebar.multiselect(
+    selected_regions = st.multiselect(
         "원하는 지역들을 선택하실 수 있습니다.",
         df['시도'].unique(),
         default=[]  # 기본적으로 서울을 선택하도록 설정
