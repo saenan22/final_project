@@ -72,8 +72,8 @@ if page == "Page 1":
     col1, col2 = st.columns(2)
 
     with col1:
-         url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
-         df0 = pd.read_csv(url)
+        url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
+        df0 = pd.read_csv(url)
 
         # '-' 값은 NaN으로 변환하고 NaN 값 제거
         df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
@@ -87,7 +87,6 @@ if page == "Page 1":
         # Streamlit 앱 설정
         st.title('OECD 국가🌍 교통사고 현황🚨')
 
-    with col2:
         # Plotly를 이용한 수평 막대그래프 그리기
         fig = px.bar(df0_cleaned, 
                  x='자동차1만대당 사망(명)',  # x축을 '자동차1만대당 사망(명)'으로 설정
@@ -110,6 +109,9 @@ if page == "Page 1":
         top10_df['색상'] = top10_df['국가'].map(색상_dict).fillna('skyblue')
         # '자동차1만대당 사망(명)'을 기준으로 내림차순 정렬
         top10_df = top10_df.sort_values(by='자동차1만대당 사망(명)', ascending=False)
+        
+    with col2:
+        st.write("""우선 가장 높은 국가  """")
 
     # Streamlit 앱 설정
     st.subheader("자동차 1만대당 사망(명) TOP10 국가")
