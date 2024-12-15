@@ -296,8 +296,8 @@ elif page == "Page 2":
                      color='사고[건]',
                      labels={'사고[건]': '사고[건]', '시군구': '지역'},
                      hover_data=['시도','시군구', '사고[건]'])# Hover시 시도와 사고[건]을 표시
-                fig_bottom.update_layout(coloraxis_colorbar=dict(title="사고[건]"),width=1000,height=500)
-                st.plotly_chart(fig_bottom)  # Plotly 차트를 Streamlit에 출력
+                    fig_bottom.update_layout(coloraxis_colorbar=dict(title="사고[건]"),width=1000,height=500)
+                    st.plotly_chart(fig_bottom)  # Plotly 차트를 Streamlit에 출력
         
 
         if st.checkbox('교통사고 빈도가 높은 지역 Top 5'):
@@ -313,6 +313,7 @@ elif page == "Page 2":
                      color='사고[건]',
                      labels={'사고[건]': '사고[건]', '시군구': '지역'},
                      hover_data=['시도','시군구', '사고[건]'])# Hover시 시도와 사고[건]을 표시
+                
         
                 fig_top.update_layout(coloraxis_colorbar=dict(title="사고[건]"),width=1000,height=500)
                 st.plotly_chart(fig_top)  # Plotly 차트를 Streamlit에 출력
