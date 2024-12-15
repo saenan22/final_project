@@ -343,7 +343,7 @@ elif page == "Page 2":
         st.plotly_chart(fig, key="injuries_plot_key")
 
     #데이터프레임형태로 나타냄 
-        st.title("선택된 지역에 대한 교통사고 통계:")
+        st.subheader("선택된 지역에 대한 교통사고 통계")
         st.write(df_filtered)
 
     # 제목선정
