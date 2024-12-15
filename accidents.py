@@ -121,8 +121,8 @@ if page == "Page 1":
     # 그래프 보여주기
     st.plotly_chart(fig, use_container_width=False,key="oecd_plot_key")
 
-    # 사이드바 옵션 추가
-    st.title("자동차1만대당 사망수 통계 분석")
+    # 제목
+    st.title("OECD국가별 자동차1만대당 사망수 분석")
 
    # 사고 빈도가 높은 국가 Top 10 버튼
     if st.button("자동차1만대당 사망수가 높은 국가 Top 10"):
