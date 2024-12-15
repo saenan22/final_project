@@ -63,7 +63,8 @@ if page == "Page 1":
 
     # Streamlit으로 지도 시각화 출력
     st.plotly_chart(fig)
-
+    
+    st.write("""📌탐고" 가져온 데이터셋에서 OECD국가 중 "자동차1만대당 사망(명)" 열이 없는 국가는 모두 행 제거 처리를 했음으로 모든 OECD국가가 시각화되지 않을수 있음 """)
 
 
 
