@@ -91,27 +91,27 @@ if page == "Page 1":
     st.sidebar.subheader("국가 선택")
     selected_country = st.sidebar.multiselect("국가를 선택하세요:", countries,default=[])
 
-
-
-
+    st.subheader("선택된 국가에 따른 사고 통계")
+    st.write("k=1000단위로 해석하시면 됩니다.")
+    st.write("ex) 10k명=10000명")
     
 
     # Streamlit 앱 설정
     st.title('OECD 국가🌍 교통사고 현황🚨')
 
     # Plotly를 이용한 수평 막대그래프 그리기
-    fig = px.bar(df0_cleaned, 
+    fig = px.bar(grouped_data, 
                  x='자동차1만대당 사망(명)',  # x축을 '자동차1만대당 사망(명)'으로 설정
                  y='국가',  # y축을 국가로 설정
                  hover_data={'국가': True, '자동차1만대당 사망(명)': True},
-                 labels={'자동차1만대당 사망(명)': '자동차 1만대당 사망(명)', '국가': '국가'},
+                 labels={'자동차1만대당 사망(명)': '명', '국가': '국가'},
                  title='자동차 1만대당 사망(명) 국가별 비교')
 
     # 그래프 크기 조정
     fig.update_layout(width=1000, height=800)
 
     # 그래프 보여주기
-    st.plotly_chart(fig, use_container_width=False)
+    st.plotly_chart(fig, use_container_width=False,key="oecd_plot_key")
     
 
     # '자동차1만대당 사망(명)' 기준으로 상위 10개 국가 추출
@@ -282,7 +282,7 @@ elif page == "Page 2":
         st.subheader("선택된 지역에 따른 사고 통계")
         st.write("k=1000단위로 해석하시면 됩니다.")
         st.write("ex) 10k명=10000명")
-
+    #reset_index()를 통해 데이터프레임화시키기기
         grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
 
     # 막대그래프 생성
