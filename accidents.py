@@ -392,14 +392,6 @@ elif page == "Page 2":
         df = load_data()
         
 
-    
-    # 사이드바 옵션 추가
-    st.sidebar.title("교통사고 분석")
-    option = st.sidebar.selectbox(
-    "분석 항목 선택",
-    ["시간대별 교통사고", "부문별 교통사고", "요일별 교통사고", "연령층별 교통사고", "기상상태별 교통사고"]
-)
-
     # 시간대별 교통사고 분석
     if option == "시간대별 교통사고":
         st.header("시간대별 교통사고 현황")
