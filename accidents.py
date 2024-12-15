@@ -288,14 +288,15 @@ elif page == "Page 2":
         if st.checkbox('교통사고 빈도가 낮은 지역 Top 5'):
             st.write("### 사고[건]이 가장 낮은 5개 지역")
             st.dataframe(bottom_5)
-                with col2:
-                    fig_bottom = px.bar(bottom_5, 
+            with col2:
+                fig_bottom = px.bar(bottom_5, 
                      x='시군구', 
                      y='사고[건]', 
                      title='교통사고 빈도가 낮은 TOP5 지역',
                      color='사고[건]',
                      labels={'사고[건]': '사고[건]', '시군구': '지역'},
                      hover_data=['시도','시군구', '사고[건]'])# Hover시 시도와 사고[건]을 표시
+                   
                 fig_bottom.update_layout(coloraxis_colorbar=dict(title="사고[건]"),width=1000,height=500)
                 st.plotly_chart(fig_bottom)  # Plotly 차트를 Streamlit에 출력
         
