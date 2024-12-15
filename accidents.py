@@ -230,9 +230,6 @@ elif page == "Page 2":
         # 두 번째 컬럼에서 체크박스를 사용하여 지역 표시
         col1, col2 = st.columns([1, 1]) 
 
-    with col2:
-        st.header("Column 2")
-        st.write("This is the content of column 2.")
 
         if st.checkbox('교통사고 빈도가 높은 지역 Top 5'):
             st.write("### 사고[건]이 가장 높은 5개 지역")
@@ -243,7 +240,13 @@ elif page == "Page 2":
         if st.checkbox('교통사고 빈도가 낮은 지역 Top 5'):
             st.write("### 사고[건]이 가장 낮은 5개 지역")
             for i, row in bottom_5.iterrows():
-                st.write(f"{i+1}.{row['시도']} : 사고[건]: {row['사고[건]']}") 
+                st.write(f"{i+1}.{row['시도']} : 사고[건]: {row['사고[건]']}")
+
+    with col2:
+        st.header("Column 2")
+        st.write("This is the content of column 2.")
+
+ 
 
 
     
