@@ -218,8 +218,7 @@ elif page == "Page 2":
     # 각 컬럼에 다른 콘텐츠 추가
 
     with col1:
-        st.header('교통사고 빈도가 높은/낮은 지역 분석')
-        st.write("This is the content of column 1.")
+        st.write("교통사고 빈도가 높은/낮은 지역 분석")
         
         top_5 = df.nlargest(5, '사고[건]')  # 사고[건]이 가장 높은 5개 지역
         top_5['순위'] = range(1, len(top_5) + 1)
@@ -234,7 +233,7 @@ elif page == "Page 2":
 
 
         if st.checkbox('교통사고 빈도가 높은 지역 Top 5'):
-            st.write("### 사고[건]이 가장 높은 5개 지역")
+            st.write("##### 사고[건]이 가장 높은 5개 지역")
             st.dataframe(top_5)
                         # "교통사고 빈도가 낮은 지역 Top 5" 체크박스 추가
         if st.checkbox('교통사고 빈도가 낮은 지역 Top 5'):
