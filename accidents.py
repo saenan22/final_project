@@ -351,32 +351,6 @@ elif page == "Page 2":
 
 
 
-
-
-
-    # 제목
-    st.title("교통사고 데이터 분석")
-
-    # 메인 화면에서 필터링 옵션 추가 (사이드바가 아닌 일반 화면)
-    st.subheader("데이터 필터링")
-    filter_option = st.selectbox(
-        "지역 선택",
-         df['시도'].unique()
-    )
-
-    # 필터 옵션에 따라 데이터 출력 
-    st.write(f"선택된 지역: {filter_option}")
-
-    # 선택된 지역에 따라 필터링된 데이터 보여주기
-    if filter_option != "전체":
-        df_filtered = df[df["시도"] == filter_option]
-    else:
-        df_filtered = df
-
-    st.write(df_filtered)
-
-
-
         # 사이드바 옵션 추가
     st.sidebar.title("교통사고 분석")
     option = st.sidebar.selectbox(
