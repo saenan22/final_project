@@ -343,40 +343,6 @@ if uploaded_file:
 
 import streamlit as st
 
-# 세 개의 컬럼 생성
-col1, col2 = st.columns(2)
-
-# 각 컬럼에 다른 콘텐츠 추가
-with col1:
-    st.header("Column 1")
-    st.write("This is the content of column 1.")
-
-with col2:
-    st.header("Column 2")
-    st.write("This is the content of column 2.")
-
-
-    # 사고[건] 기준으로 상위 5개와 하위 5개 지역 추출
-    top_5 = df.nlargest(5, '사고[건]')  # 사고[건]이 가장 높은 5개 지역
-    bottom_5 = df.nsmallest(5, '사고[건]')  # 사고[건]이 가장 낮은 5개 지역
-
-    # Streamlit 화면 설정
-    st.title('교통사고 빈도가 높은/낮은 지역 분석')
-
-    # 두 번째 컬럼에서 체크박스를 사용하여 지역 표시
-    col1, col2 = st.columns([1, 2]) 
-
-   # "교통사고 빈도가 높은 지역 Top 5" 체크박스 추가
-    if st.checkbox('교통사고 빈도가 높은 지역 Top 5'):
-        st.write("### 사고[건]이 가장 높은 5개 지역")
-        for i, row in top_5.iterrows():
-            st.write(f"{row['시도']} - 사고[건]: {row['사고[건]']}")
-
-    # "교통사고 빈도가 낮은 지역 Top 5" 체크박스 추가
-    if st.checkbox('교통사고 빈도가 낮은 지역 Top 5'):
-        st.write("### 사고[건]이 가장 낮은 5개 지역")
-        for i, row in bottom_5.iterrows():
-            st.write(f"{row['시도']} - 사고[건]: {row['사고[건]']}")
 
 
 
