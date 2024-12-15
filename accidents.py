@@ -147,7 +147,7 @@ if page == "Page 1":
         st.write(top_low_freq)
 
         # 그래프 생성
-        fig_low = px.bar(top_low_freq, x="국가", y="사고 건수", 
+        fig_low = px.bar(top_low_freq, x="국가", y="자동차1만대당 사망(명)", 
                      title="자동차1만대당 사망수가 낮은 국가 Top 10", 
                      labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"}, 
                      color_discrete_sequence=["#33FF57"])
