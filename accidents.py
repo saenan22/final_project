@@ -69,49 +69,47 @@ if page == "Page 1":
 
 
 
-    col1, col2 = st.columns(2)
 
-    with col1:
-        url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
-        df0 = pd.read_csv(url)
+    url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
+    df0 = pd.read_csv(url)
 
-        # '-' 값은 NaN으로 변환하고 NaN 값 제거
-        df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
-        df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
+    # '-' 값은 NaN으로 변환하고 NaN 값 제거
+    df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
+    df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
 
 
-        # '-' 값은 NaN으로 변환하고 NaN 값 제거
-        df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
-        df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
+    # '-' 값은 NaN으로 변환하고 NaN 값 제거
+    df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
+    df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
 
-        # Streamlit 앱 설정
-        st.title('OECD 국가🌍 교통사고 현황🚨')
+    # Streamlit 앱 설정
+    st.title('OECD 국가🌍 교통사고 현황🚨')
 
-        # Plotly를 이용한 수평 막대그래프 그리기
-        fig = px.bar(df0_cleaned, 
+    # Plotly를 이용한 수평 막대그래프 그리기
+    fig = px.bar(df0_cleaned, 
                  x='자동차1만대당 사망(명)',  # x축을 '자동차1만대당 사망(명)'으로 설정
                  y='국가',  # y축을 국가로 설정
                  hover_data={'국가': True, '자동차1만대당 사망(명)': True},
                  labels={'자동차1만대당 사망(명)': '자동차 1만대당 사망(명)', '국가': '국가'},
                  title='자동차 1만대당 사망(명) 국가별 비교')
 
-        # 그래프 크기 조정
-        fig.update_layout(width=1000, height=800)
+    # 그래프 크기 조정
+    fig.update_layout(width=1000, height=800)
 
-        # 그래프 보여주기
-        st.plotly_chart(fig, use_container_width=False)
+    # 그래프 보여주기
+    st.plotly_chart(fig, use_container_width=False)
 
-        # '자동차1만대당 사망(명)' 기준으로 상위 10개 국가 추출
-        top10_df = df0_cleaned.nlargest(10, '자동차1만대당 사망(명)')
+    # '자동차1만대당 사망(명)' 기준으로 상위 10개 국가 추출
+    top10_df = df0_cleaned.nlargest(10, '자동차1만대당 사망(명)')
 
-        # '대한민국'을 red로 표시하고 나머지는 skyblue로 표시
-        색상_dict = {'대한민국': 'red'}
-        top10_df['색상'] = top10_df['국가'].map(색상_dict).fillna('skyblue')
-        # '자동차1만대당 사망(명)'을 기준으로 내림차순 정렬
-        top10_df = top10_df.sort_values(by='자동차1만대당 사망(명)', ascending=False)
+    # '대한민국'을 red로 표시하고 나머지는 skyblue로 표시
+    색상_dict = {'대한민국': 'red'}
+    top10_df['색상'] = top10_df['국가'].map(색상_dict).fillna('skyblue')
+    # '자동차1만대당 사망(명)'을 기준으로 내림차순 정렬
+    top10_df = top10_df.sort_values(by='자동차1만대당 사망(명)', ascending=False)
         
-    with col2:
-        st.write("""우선 가장 높은 국가 """)
+
+    st.write("""우선 가장 높은 국가 """)
 
     # Streamlit 앱 설정
     st.subheader("자동차 1만대당 사망(명) TOP10 국가")
