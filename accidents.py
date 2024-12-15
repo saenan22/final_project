@@ -228,7 +228,7 @@ elif page == "Page 2":
         # Streamlit 화면 설정
         st.title('교통사고 빈도가 높은/낮은 지역 분석')
         # 두 번째 컬럼에서 체크박스를 사용하여 지역 표시
-        col1, col2 = st.columns([1, 1]) 
+        col1, col2 = st.columns([1, 2]) 
 
 
         if st.checkbox('교통사고 빈도가 높은 지역 Top 5'):
