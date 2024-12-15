@@ -488,9 +488,27 @@ elif page == "Page 2":
             labels={"부상(명)": "부상자 수"}
         )
             st.plotly_chart(fig_injuries, use_container_width=True)
+
+
+
+    
     if option == "요일별 교통사고":
         def load_data():
             url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%9A%94%EC%9D%BC%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
+            df_c = pd.read_csv(url, encoding="utf-8")
+            return df_c
+        df_c = load_data()
+
+    if option == "월별 교통사고":
+        def load_data():
+            url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%9B%94%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
+            df_c = pd.read_csv(url, encoding="utf-8")
+            return df_c
+        df_c = load_data()
+
+    if option == "사고유형별 교통사고":
+        def load_data():
+            url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%82%AC%EA%B3%A0%EC%9C%A0%ED%98%95%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
             df_c = pd.read_csv(url, encoding="utf-8")
             return df_c
         df_c = load_data()
