@@ -271,13 +271,11 @@ elif page == "Page 2":
     st.title("지역별 교통사고 빈도")
 
     # 두 개의 컬럼 생성
-    col1, col2 = st.columns(2)
+    col1, col2,col3 = st.columns(3)
     # 각 컬럼에 다른 콘텐츠 추가
 
     
     with col1:
-        st.title("지역별 교통사고 빈도")
-        
         top_5 = df.nlargest(5, '사고[건]')  # 사고[건]이 가장 높은 5개 지역
         top_5['순위'] = range(1, len(top_5) + 1)
         bottom_5 = df.nsmallest(5, '사고[건]')  # 사고[건]이 가장 낮은 5개 지역
@@ -304,10 +302,12 @@ elif page == "Page 2":
                    
                 fig_bottom.update_layout(coloraxis_colorbar=dict(title="사고[건]"),width=1000,height=500)
                 st.plotly_chart(fig_bottom)  # Plotly 차트를 Streamlit에 출력
-                st.write("""교통사고 빈도가 낮은 지역은 주로 다음과 같은 특징을 가집니다:
+                with col3:
+                    st.write("""교통사고 빈도가 낮은 지역은 주로 다음과 같은 특징을 가집니다:
 - **인구 밀도가 낮은 지역**: 인구가 적고 차량의 통행량이 적은 지역에서 사고 발생이 적습니다.
 - **교통량이 적은 시골 지역**: 차량의 통행량이 적고, 도로가 상대적으로 넓고 직선적인 시골 지역에서 사고 발생이 적습니다.
 """)
+
         
 
         if st.checkbox('교통사고 빈도가 높은 지역 Top 5🚨🔺'):
@@ -328,14 +328,14 @@ elif page == "Page 2":
                 fig_top.update_layout(coloraxis_colorbar=dict(title="사고[건]"),width=1000,height=500)
                 st.plotly_chart(fig_top)  # Plotly 차트를 Streamlit에 출력
 
-            
-
                 st.header('교통사고 빈도가 높은 지역 특징')
-                st.write("""교통사고 빈도가 높은 지역은 일반적으로 다음과 같은 특징을 가지고 있습니다:
+                with col3:
+                    st.write("""교통사고 빈도가 높은 지역은 일반적으로 다음과 같은 특징을 가지고 있습니다:
 - **상업적 중심지**: 상업 활동이 활발한 도심 지역에서 교통사고가 많이 발생합니다.
 - **교차로 밀집**: 많은 교차로와 신호등이 있는 지역은 사고가 자주 발생하는 경향이 있습니다.
 - **교통량이 많은 지역**: 많은 차량이 오가는 곳에서 사고 발생률이 높습니다.
 """)
+                
 
 
 
