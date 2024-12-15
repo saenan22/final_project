@@ -130,7 +130,7 @@ if page == "Page 1":
         st.subheader("자동차1만대당 사망수가 높은 국가 Top 10")
         st.write(top_high_freq)
         # 색상 설정: '대한민국'은 빨간색, 나머지는 기본 색상
-        colors = ["#FF0000" if country == "대한민국" else "#FF5733" for country in top_high_freq["국가"]]
+        colors = ["#FF0000" if '국가' == "대한민국" else "#FF5733" for '국가' in top_high_freq["국가"]]
 
         # 그래프 생성
         fig_high = px.bar(top_high_freq, x="국가", y="자동차1만대당 사망(명)", 
