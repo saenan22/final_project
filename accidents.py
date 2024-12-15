@@ -231,7 +231,7 @@ elif page == "Page 2":
                         # "교통사고 빈도가 낮은 지역 Top 5" 체크박스 추가
         if st.checkbox('교통사고 빈도가 낮은 지역 Top 5'):
             st.write("### 사고[건]이 가장 낮은 5개 지역")
-             st.dataframe(bottom_5[['순위', '시도', '시군구', '사고[건]']])
+            st.dataframe(bottom_5[['순위', '시도', '시군구', '사고[건]']])
         
 
     with col2:
