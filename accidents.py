@@ -149,8 +149,7 @@ if page == "Page 1":
         # 그래프 생성
         fig_low = px.bar(top_low_freq, x="국가", y="자동차1만대당 사망(명)", 
                      title="자동차1만대당 사망수가 낮은 국가 Top 10", 
-                     labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"}, 
-                     color_discrete_sequence=["#33FF57"])
+                     labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"})
         # 범례 숨기기
         fig.update_layout(showlegend=False)
         st.plotly_chart(fig_low)
