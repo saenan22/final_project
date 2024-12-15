@@ -211,7 +211,7 @@ elif page == "Page 2":
 
 
     st.write("선택된 지역에 대한 교통사고 데이터:")
-        st.write(df_filtered)
+    st.write(df_filtered)
 
     # 두 개의 컬럼 생성
     col1, col2 = st.columns(2)
