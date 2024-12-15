@@ -382,24 +382,74 @@ elif page == "Page 2":
         "분석 항목 선택",
         ["시간대별 교통사고", "부문별 교통사고", "요일별 교통사고","연령층별 교통사고","기상상태별 교통사고"]
     )
+
+
+    # CSV 데이터 불러오기 (URL에서 데이터 읽기)
+    def load_data():
+    url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%8B%9C%EA%B0%84%EB%8C%80%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
+    df = pd.read_csv(url, encoding="utf-8")
+    return df
+    df = load_data()
     
+    # 사이드바 옵션 추가
+    st.sidebar.title("교통사고 분석")
+    option = st.sidebar.selectbox(
+    "분석 항목 선택",
+    ["시간대별 교통사고", "부문별 교통사고", "요일별 교통사고", "연령층별 교통사고", "기상상태별 교통사고"]
+)
 
-     # 선택된 필터 옵션과 관련된 다른 분석 추가 
-    # 마지막 행 삭제 (시도 열의 마지막 행)
-    import altair as alt
-    import streamlit as st
-    import pandas as pd
-    import plotly.express as px
-    # 시도별 사고 건수 시각화
-    # 그룹화된 데이터 생성
-    # 시도별 사고 건수 합산
-    grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
+    # 시간대별 교통사고 분석
+    if option == "시간대별 교통사고":
+        st.header("시간대별 교통사고 현황")
 
-    # 막대그래프 생성
-    fig = px.bar(grouped_data, x="시도", y="사고[건]", title="시도별 사고 건수", labels={"사고[건]": "사고 건수"})
+    # 시간대 선택 슬라이더 추가
+        start_hour, end_hour = st.slider(
+        "시간대를 선택하세요 (24시간 기준)",
+        min_value=0, max_value=24, value=(0, 24), step=2
+    )
 
-    # 그래프 표시
-    st.plotly_chart(fig)
+        # 선택된 시간대 데이터 필터링
+        selected_data = df.iloc[start_hour // 2:end_hour // 2]
+
+        # 세 개의 열 생성
+        col1, col2, col3 = st.columns(3)
+
+        # 사고(건) 그래프
+        with col1:
+            st.subheader("사고(건)")
+            fig_accidents = px.bar(
+            selected_data,
+            x="시간대",
+            y="사고(건)",
+            title="선택된 시간대 사고(건)",
+            labels={"사고(건)": "사고 건수"}
+        )
+            st.plotly_chart(fig_accidents, use_container_width=True)
+
+    # 사망(명) 그래프
+        with col2:
+            st.subheader("사망(명)")
+            fig_deaths = px.bar(
+            selected_data,
+            x="시간대",
+            y="사망(명)",
+            title="선택된 시간대 사망(명)",
+            labels={"사망(명)": "사망자 수"}
+        )
+            st.plotly_chart(fig_deaths, use_container_width=True)
+
+    # 부상(명) 그래프
+        with col3:
+            st.subheader("부상(명)")
+            fig_injuries = px.bar(
+            selected_data,
+            x="시간대",
+            y="부상(명)",
+            title="선택된 시간대 부상(명)",
+            labels={"부상(명)": "부상자 수"}
+        )
+            st.plotly_chart(fig_injuries, use_container_width=True)
+
 
 
 
