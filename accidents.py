@@ -118,40 +118,43 @@ if page == "Page 1":
 
     # 그래프 크기 조정
     fig.update_layout(width=1000, height=800)
-
     # 그래프 보여주기
     st.plotly_chart(fig, use_container_width=False,key="oecd_plot_key")
-    
 
-    # '자동차1만대당 사망(명)' 기준으로 상위 10개 국가 추출
-    top10_df = df0_cleaned.nlargest(10, '자동차1만대당 사망(명)')
+    # 사이드바 옵션 추가
+    st.sidebar.title("사고 통계 분석")
 
-    # '대한민국'을 red로 표시하고 나머지는 skyblue로 표시
-    색상_dict = {'대한민국': 'red'}
-    top10_df['색상'] = top10_df['국가'].map(색상_dict).fillna('skyblue')
-    # '자동차1만대당 사망(명)'을 기준으로 내림차순 정렬
-    top10_df = top10_df.sort_values(by='자동차1만대당 사망(명)', ascending=False)
-        
+   # 사고 빈도가 높은 국가 Top 10 버튼
+    if st.sidebar.button("사고 빈도가 높은 국가 Top 5"):
+        top_high_freq = df0_cleaned.nlargest(10, "사고 건수")
+        st.subheader("사고 빈도가 높은 국가 Top 10")
+        st.write(top_high_freq)
+        # 색상 설정: '대한민국'은 빨간색, 나머지는 기본 색상
+        colors = ["#FF0000" if country == "대한민국" else "#FF5733" for country in top_high_freq["국가"]]
 
-    st.write("""우선 가장 높은 국가 """)
+        # 그래프 생성
+        fig_high = px.bar(top_high_freq, x="국가", y="사고 건수", 
+                      title="사고 빈도가 높은 국가 Top 5", 
+                      labels={"사고 건수": "사고 건수"}, 
+                      color_discrete_sequence=["#FF5733"])
+        fig.update_layout(showlegend=False)
+        st.plotly_chart(fig_high)
 
-    # Streamlit 앱 설정
-    st.subheader("자동차 1만대당 사망(명) TOP10 국가")
+    # 사고 빈도가 낮은 국가 Top 10 버튼
+    if st.sidebar.button("사고 빈도가 낮은 국가 Top 10"):
+        top_low_freq = df0_cleaned.nsmallest(10, "사고 건수")
+        st.subheader("사고 빈도가 낮은 국가 Top 5")
+        st.write(top_low_freq)
 
-    # Plotly를 이용한 막대그래프 그리기
-    fig = px.bar(top10_df, 
-                 x='자동차1만대당 사망(명)', 
-                 y='국가', 
-                 color='색상',  # 색상 열을 기준으로 색상 지정
-                 hover_data={'국가': True, '자동차1만대당 사망(명)': True},
-                 labels={'자동차1만대당 사망(명)': '자동차 1만대당 사망(명)', '국가': '국가'},
-                 title='상위 10개 국가의 자동차 1만대당 사망(명)')
+        # 그래프 생성
+        fig_low = px.bar(top_low_freq, x="국가", y="사고 건수", 
+                     title="사고 빈도가 낮은 국가 Top 10", 
+                     labels={"사고 건수": "사고 건수"}, 
+                     color_discrete_sequence=["#33FF57"])
+        # 범례 숨기기
+        fig.update_layout(showlegend=False)
+        st.plotly_chart(fig_low)
 
-    # 범례 숨기기
-    fig.update_layout(showlegend=False)
-
-    # 그래프 보여주기
-    st.plotly_chart(fig)
 
 
 
