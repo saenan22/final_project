@@ -188,7 +188,7 @@ elif page == "Page 2":
         ["시도및 시군구별 교통사고","부문별 교통사고(최근5년)","시간대별 교통사고", "요일별 교통사고","월별 교통사고","사고유형별 교통사고"]
     )
     if option == "시도및 시군구별 교통사고":
-        # 교통사고 데이터 불러오기
+        # 시도및 시군구별 교통사고 관련 데이터 불러오기
         file_path = r"https://raw.githubusercontent.com/saenan22/final_project/main/Report.csv"
         df = pd.read_csv(file_path, header=3)
         # GeoJSON 파일 URL
@@ -488,6 +488,12 @@ elif page == "Page 2":
             labels={"부상(명)": "부상자 수"}
         )
             st.plotly_chart(fig_injuries, use_container_width=True)
+    if option == "요일별 교통사고":
+        def load_data():
+            url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%9A%94%EC%9D%BC%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
+            df_c = pd.read_csv(url, encoding="utf-8")
+            return df_c
+        df_c = load_data()
 
 
 
