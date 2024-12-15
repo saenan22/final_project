@@ -148,36 +148,32 @@ elif page == "Page 2":
     st.sidebar.title("교통사고 분석")
     option = st.sidebar.selectbox(
         "분석 항목 선택",
-        ["","시간대별 교통사고", "부문별 교통사고", "요일별 교통사고","연령층별 교통사고","기상상태별 교통사고"]
+        ["시도및 시군구별 교통사고","시간대별 교통사고", "부문별 교통사고", "요일별 교통사고","연령층별 교통사고","기상상태별 교통사고"]
     )
-    
-    # 교통사고 데이터 불러오기
-    file_path = r"https://raw.githubusercontent.com/saenan22/final_project/main/Report.csv"
-    df = pd.read_csv(file_path, header=3)
+    if option == "시도및 시군구별 교통사고":
+        # 교통사고 데이터 불러오기
+        file_path = r"https://raw.githubusercontent.com/saenan22/final_project/main/Report.csv"
+        df = pd.read_csv(file_path, header=3)
+        # GeoJSON 파일 URL
+        geojson_url = "https://raw.githubusercontent.com/saenan22/final_project/main/BND_SIGUNGU_PG.json"
 
-    # GeoJSON 파일 불러오기
-    import geopandas as gpd
+        # GeoJSON 읽기
+        geojson_data = gpd.read_file(geojson_url)
 
-    # GeoJSON 파일 URL
-    geojson_url = "https://raw.githubusercontent.com/saenan22/final_project/main/BND_SIGUNGU_PG.json"
-
-    # GeoJSON 읽기
-    geojson_data = gpd.read_file(geojson_url)
-
-    # 데이터 처리
+        # 데이터 처리
     # 1. NaN 값 제거 (시군구 열에서 NaN이 있는 행 삭제)
-    df = df.dropna(subset=['시군구'])
+        df = df.dropna(subset=['시군구'])
 
     # 2. 특정 시군구 값 변경
-    df['시군구'] = df['시군구'].replace({
+        df['시군구'] = df['시군구'].replace({
         '창원시(통합)': '창원시',
         '진구': '부산진구'
     })
 
     # 시군구를 시 단위로 변환하는 함수
-    def map_to_city(region):
-        if isinstance(region, str):  # Check if the value is a string
-            city_mapping = {
+        def map_to_city(region):
+            if isinstance(region, str):  # Check if the value is a string
+                city_mapping = {
                 '청주시 서원구': '청주시',
                 '청주시 상당구': '청주시',
                 '청주시 청원구': '청주시',
@@ -211,22 +207,22 @@ elif page == "Page 2":
                 '천안시 동남구': '천안시',
             }
             # If the region is not in the city_mapping, take the first part of the string (before the space)
-            return city_mapping.get(region, region.split()[0])
-        else:
-            return region  # Return the value as-is if it's not a string (e.g., NaN or float)
+                return city_mapping.get(region, region.split()[0])
+            else:
+                return region  # Return the value as-is if it's not a string (e.g., NaN or float)
 
     # 3. GeoJSON의 시군구를 시 단위로 변환
-    geojson_data['시군구_시단위'] = geojson_data['SIGUNGU_NM'].apply(map_to_city)
+        geojson_data['시군구_시단위'] = geojson_data['SIGUNGU_NM'].apply(map_to_city)
 
     # 4. 데이터프레임의 시군구도 시 단위로 변환
-    df['시군구_시단위'] = df['시군구'].apply(map_to_city)
+        df['시군구_시단위'] = df['시군구'].apply(map_to_city)
 
     # 5. Folium 지도 만들기
-    map_center = [36.5, 127.8]  # 대한민국 중심
-    m = folium.Map(location=map_center, zoom_start=7)
+        map_center = [36.5, 127.8]  # 대한민국 중심
+        m = folium.Map(location=map_center, zoom_start=7)
 
     # Choropleth 추가
-    folium.Choropleth(
+        folium.Choropleth(
         geo_data=geojson_data,
         name="choropleth",
         data=df,
@@ -239,7 +235,7 @@ elif page == "Page 2":
     ).add_to(m)
 
     # GeoJson 툴팁 추가
-    folium.GeoJson(
+        folium.GeoJson(
         geojson_data,
         name="지역 정보",
         tooltip=folium.GeoJsonTooltip(
@@ -254,62 +250,62 @@ elif page == "Page 2":
     ).add_to(m)
 
     # 지도 출력 (Streamlit에서 folium 지도 출력)
-    st.title("⚠️대한민국 교통사고지역 지도⚠️ ")
-    st_folium(m, width=700, height=500)
+        st.title("⚠️대한민국 교통사고지역 지도⚠️ ")
+        st_folium(m, width=700, height=500)
 
 
         # 사이드바에 지역 선택 추가
-    st.sidebar.subheader("지역 선택")
-    selected_regions = st.sidebar.multiselect(
+        st.sidebar.subheader("지역 선택")
+        selected_regions = st.sidebar.multiselect(
         "원하는 지역들을 선택하실 수 있습니다.",
         df['시도'].unique(),
         default=[]  # 기본적으로 서울을 선택하도록 설정
     )
 
     # 선택된 지역에 맞춰 데이터 필터링
-    if selected_regions:
-        df_filtered = df[df["시도"].isin(selected_regions)]
-    else:
-        df_filtered = df  # 선택된 지역이 없으면 전체 데이터 출력
+        if selected_regions:
+            df_filtered = df[df["시도"].isin(selected_regions)]
+        else:
+            df_filtered = df  # 선택된 지역이 없으면 전체 데이터 출력
 
 
     # 필터링된 데이터에 대한 차트 출력
-    st.subheader("선택된 지역에 따른 사고 통계")
-    st.write("k=1000단위로 해석하시면 됩니다.")
-    st.write("ex) 10k명=10000명")
+        st.subheader("선택된 지역에 따른 사고 통계")
+        st.write("k=1000단위로 해석하시면 됩니다.")
+        st.write("ex) 10k명=10000명")
 
-    grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
+        grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
 
     # 막대그래프 생성
-    fig = px.bar(grouped_data, x="시도", y="사고[건]", title="2023년 기준 시도및 시군구별 사고 건수", labels={"사고[건]": "사고 건수"})
+        fig = px.bar(grouped_data, x="시도", y="사고[건]", title="2023년 기준 시도및 시군구별 사고 건수", labels={"사고[건]": "사고 건수"})
 
     # 그래프 표시
-    st.plotly_chart(fig, key="unique_plot_key")
+        st.plotly_chart(fig, key="unique_plot_key")
 
 
 
     # 필터링된 데이터에 대한 차트 출력2
-    st.subheader("선택된 지역에 따른 사망 통계")
+        st.subheader("선택된 지역에 따른 사망 통계")
 
-    grouped_data = df_filtered.groupby("시도")["사망[명]"].sum().reset_index()
+        grouped_data = df_filtered.groupby("시도")["사망[명]"].sum().reset_index()
 
     # 막대그래프 생성
-    fig = px.bar(grouped_data, x="시도", y="사망[명]", title="2023년 기준 시도및 시군구별 사망 수", labels={"사망[명]": "명"},color_discrete_sequence=["#FFCDD2"])
+        fig = px.bar(grouped_data, x="시도", y="사망[명]", title="2023년 기준 시도및 시군구별 사망 수", labels={"사망[명]": "명"},color_discrete_sequence=["#FFCDD2"])
 
     # 그래프 표시
-    st.plotly_chart(fig, key="deaths_plot_key")
+        st.plotly_chart(fig, key="deaths_plot_key")
 
 
     # 필터링된 데이터에 대한 차트 출력3
-    st.subheader("선택된 지역에 따른 부상 통계")
+        st.subheader("선택된 지역에 따른 부상 통계")
 
-    grouped_data = df_filtered.groupby("시도")["부상[명]"].sum().reset_index()
+        grouped_data = df_filtered.groupby("시도")["부상[명]"].sum().reset_index()
 
     # 막대그래프 생성
-    fig = px.bar(grouped_data, x="시도", y="부상[명]", title="2023년 기준 시도및 시군구별 부상 수", labels={"부상[명]": "명"},color_discrete_sequence=["#81C784"])
+        fig = px.bar(grouped_data, x="시도", y="부상[명]", title="2023년 기준 시도및 시군구별 부상 수", labels={"부상[명]": "명"},color_discrete_sequence=["#81C784"])
 
     # 그래프 표시
-    st.plotly_chart(fig, key="injuries_plot_key")
+        st.plotly_chart(fig, key="injuries_plot_key")
 
 
 
@@ -317,36 +313,36 @@ elif page == "Page 2":
     
 
 
-    st.write("선택된 지역에 대한 교통사고 통계:")
-    st.write(df_filtered)
+        st.write("선택된 지역에 대한 교통사고 통계:")
+        st.write(df_filtered)
 
 
 
     
-    st.title("지역별 교통사고 빈도")
+        st.title("지역별 교통사고 빈도")
 
     # 두 개의 컬럼 생성
-    col1, col2 = st.columns(2)
+        col1, col2 = st.columns(2)
     # 각 컬럼에 다른 콘텐츠 추가
 
     
-    with col1:
-        top_5 = df.nlargest(5, '사고[건]')  # 사고[건]이 가장 높은 5개 지역
-        top_5['순위'] = range(1, len(top_5) + 1)
-        bottom_5 = df.nsmallest(5, '사고[건]')  # 사고[건]이 가장 낮은 5개 지역
-        bottom_5['순위'] = range(1, len(bottom_5) + 1) 
+        with col1:
+            top_5 = df.nlargest(5, '사고[건]')  # 사고[건]이 가장 높은 5개 지역
+            top_5['순위'] = range(1, len(top_5) + 1)
+            bottom_5 = df.nsmallest(5, '사고[건]')  # 사고[건]이 가장 낮은 5개 지역
+            bottom_5['순위'] = range(1, len(bottom_5) + 1) 
                 #index 삭제 
-        top_5 = top_5.reset_index(drop=True)
-        bottom_5 = bottom_5.reset_index(drop=True)
-        top_5 = top_5[['순위', '시도', '시군구', '사고[건]']]
-        bottom_5 = bottom_5[['순위', '시도', '시군구', '사고[건]']]
+            top_5 = top_5.reset_index(drop=True)
+            bottom_5 = bottom_5.reset_index(drop=True)
+            top_5 = top_5[['순위', '시도', '시군구', '사고[건]']]
+            bottom_5 = bottom_5[['순위', '시도', '시군구', '사고[건]']]
         
    
-        st.write('체크박스를 클릭해 주세요 ✔️')
-        st.write('분석결과를 확인하실수 있어요!')
-        if st.checkbox("교통사고 빈도가 낮은 지역 Top 5🛡️"):
-            st.dataframe(bottom_5)
-            fig_bottom = px.bar(bottom_5, 
+            st.write('체크박스를 클릭해 주세요 ✔️')
+            st.write('분석결과를 확인하실수 있어요!')
+            if st.checkbox("교통사고 빈도가 낮은 지역 Top 5🛡️"):
+                st.dataframe(bottom_5)
+                fig_bottom = px.bar(bottom_5, 
                      x='사고[건]', 
                      y='시군구',
                      title='TOP5 지역',
@@ -354,24 +350,24 @@ elif page == "Page 2":
                      labels={'사고[건]': '사고[건]', '시군구': '지역'},
                      hover_data=['시도','시군구', '사고[건]'])# Hover시 시도와 사고[건]을 표시
                    
-            fig_bottom.update_layout(coloraxis_colorbar=dict(title="사고[건]"),width=1000,height=500)
-            st.plotly_chart(fig_bottom)  # Plotly 차트를 Streamlit에 출력
-            st.header('지역적 특징')
-            st.write("""교통사고 빈도가 낮은 지역은 주로 다음과 같은 특징을 가짐
+                fig_bottom.update_layout(coloraxis_colorbar=dict(title="사고[건]"),width=1000,height=500)
+                st.plotly_chart(fig_bottom)  # Plotly 차트를 Streamlit에 출력
+                st.header('지역적 특징')
+                st.write("""교통사고 빈도가 낮은 지역은 주로 다음과 같은 특징을 가짐
 - **인구 밀도가 낮은 지역**: 인구가 적고 차량의 통행량이 적은 지역에서 사고 발생이 적음.
 - **교통량이 적은 시골 지역**: 차량의 통행량이 적고, 도로가 상대적으로 넓고 직선적인 시골 지역에서 사고 발생이 적음.
 """)
 
         
-    with col2:
-        st.write('체크박스를 클릭해 주세요 ✔️')
-        st.write('분석결과를 확인하실수 있어요!')
-        if st.checkbox("교통사고 빈도가 높은 지역 Top 5🚨🔺"):
-            st.dataframe(top_5)
+        with col2:
+            st.write('체크박스를 클릭해 주세요 ✔️')
+            st.write('분석결과를 확인하실수 있어요!')
+            if st.checkbox("교통사고 빈도가 높은 지역 Top 5🚨🔺"):
+                st.dataframe(top_5)
 
          # 상위 5개 지역 막대그래프 시각화 (Plotly 사용)
 
-            fig_top = px.bar(top_5, 
+                fig_top = px.bar(top_5, 
                      x='사고[건]',
                      y='시군구', 
                      title='TOP5 지역',
@@ -380,11 +376,11 @@ elif page == "Page 2":
                      hover_data=['시도','시군구', '사고[건]'],
                     color_continuous_scale=px.colors.sequential.Reds)# Hover시 시도와 사고[건]을 표시
                 
-            fig_top.update_layout(coloraxis_colorbar=dict(title="사고[건]"),width=1000,height=500)
-            st.plotly_chart(fig_top)  # Plotly 차트를 Streamlit에 출력
+                fig_top.update_layout(coloraxis_colorbar=dict(title="사고[건]"),width=1000,height=500)
+                st.plotly_chart(fig_top)  # Plotly 차트를 Streamlit에 출력
 
-            st.header('지역적 특징')
-            st.write("""교통사고 빈도가 높은 지역은 일반적으로 다음과 같은 특징을 가짐
+                st.header('지역적 특징')
+                st.write("""교통사고 빈도가 높은 지역은 일반적으로 다음과 같은 특징을 가짐
 - **상업적 중심지**: 상업 활동이 활발한 도심 지역에서 교통사고가 많이 발생함.
 - **교차로 밀집**: 많은 교차로와 신호등이 있는 지역은 사고가 자주 발생하는 경향이 있음.
 - **교통량이 많은 지역**: 많은 차량이 오가는 곳에서 사고 발생률이 높음.
