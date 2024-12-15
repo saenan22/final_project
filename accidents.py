@@ -289,7 +289,6 @@ elif page == "Page 2":
    
 
         if st.checkbox('교통사고 빈도가 낮은 지역 Top 5🛡️'):
-            st.write("##### 사고빈도가 가장 낮은 5개 지역")
             st.dataframe(bottom_5)
             with col2:
                 fig_bottom = px.bar(bottom_5, 
@@ -311,7 +310,6 @@ elif page == "Page 2":
         
 
         if st.checkbox('교통사고 빈도가 높은 지역 Top 5🚨🔺'):
-            st.write("##### 사고빈도가 가장 높은 5개 지역")
             st.dataframe(top_5)# "교통사고 빈도가 낮은 지역 Top 5" 체크박스 추가
             with col2:
 
