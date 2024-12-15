@@ -270,9 +270,9 @@ elif page == "Page 2":
     # 각 컬럼에 다른 콘텐츠 추가
 
     
-    st.title("지역별 교통사고 빈도")
+    
     with col1:
-        st.write("교통사고 빈도가 낮은/높은 지역 분석")
+        st.title("지역별 교통사고 빈도")
         
         top_5 = df.nlargest(5, '사고[건]')  # 사고[건]이 가장 높은 5개 지역
         top_5['순위'] = range(1, len(top_5) + 1)
@@ -282,11 +282,14 @@ elif page == "Page 2":
         top_5 = top_5.reset_index(drop=True)
         bottom_5 = bottom_5.reset_index(drop=True)
         top_5 = top_5[['순위', '시도', '시군구', '사고[건]']]
-        bottom_5 = bottom_5[['순위', '시도', '시군구', '사고[건]']]   
+        bottom_5 = bottom_5[['순위', '시도', '시군구', '사고[건]']]
+        
+    with col2:
+        st.title("지역별 교통사고 빈도 시각화")
+   
 
-
-        if st.checkbox('교통사고 빈도가 낮은 지역 Top 5'):
-            st.write("### 사고빈도가 가장 낮은 5개 지역🛡️")
+        if st.checkbox('교통사고 빈도가 낮은 지역 Top 5🛡️'):
+            st.write("##### 사고빈도가 가장 낮은 5개 지역")
             st.dataframe(bottom_5)
             with col2:
                 fig_bottom = px.bar(bottom_5, 
@@ -301,8 +304,8 @@ elif page == "Page 2":
                 st.plotly_chart(fig_bottom)  # Plotly 차트를 Streamlit에 출력
         
 
-        if st.checkbox('교통사고 빈도가 높은 지역 Top 5'):
-            st.write("### 사고빈도가 가장 높은 5개 지역🚨🔺")
+        if st.checkbox('교통사고 빈도가 높은 지역 Top 5🚨🔺'):
+            st.write("##### 사고빈도가 가장 높은 5개 지역")
             st.dataframe(top_5)# "교통사고 빈도가 낮은 지역 Top 5" 체크박스 추가
             with col2:
 
@@ -321,7 +324,13 @@ elif page == "Page 2":
 
             
 
-                
+                st.header('교통사고 빈도가 높은 지역 특징')
+                st.write("""
+교통사고 빈도가 높은 지역은 일반적으로 다음과 같은 특징을 가지고 있습니다:
+- **상업적 중심지**: 상업 활동이 활발한 도심 지역에서 교통사고가 많이 발생합니다.
+- **교차로 밀집**: 많은 교차로와 신호등이 있는 지역은 사고가 자주 발생하는 경향이 있습니다.
+- **교통량이 많은 지역**: 많은 차량이 오가는 곳에서 사고 발생률이 높습니다.
+""")
 
 
 
