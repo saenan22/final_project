@@ -111,7 +111,7 @@ if page == "Page 1":
         top10_df = top10_df.sort_values(by='자동차1만대당 사망(명)', ascending=False)
         
     with col2:
-        st.write("""우선 가장 높은 국가  """")
+        st.write("""우선 가장 높은 국가 """)
 
     # Streamlit 앱 설정
     st.subheader("자동차 1만대당 사망(명) TOP10 국가")
