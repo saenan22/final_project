@@ -100,7 +100,7 @@ if page == "Page 1":
     st.title('OECD 국가🌍 교통사고 현황🚨')
 
     # Plotly를 이용한 수평 막대그래프 그리기
-    fig = px.bar(selected_country, 
+    fig = px.bar( df0_cleaned, 
                  x='자동차1만대당 사망(명)',  # x축을 '자동차1만대당 사망(명)'으로 설정
                  y='국가',  # y축을 국가로 설정
                  hover_data={'국가': True, '자동차1만대당 사망(명)': True},
