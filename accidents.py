@@ -125,9 +125,13 @@ if page == "Page 1":
 
     # 제목
     st.subheader("OECD국가별 자동차1만대당 사망수 분석")
+    choice = st.radio("선택하세요:", ["자동차1만대당 사망수가 높은 국가 Top 10", "자동차1만대당 사망수가 낮은 국가 Top 10"])
+    st.write(f"당신이 선택한 분석은 : {choice}")
+
+    
 
    # 사고 빈도가 높은 국가 Top 10 버튼
-    if st.button("자동차1만대당 사망수가 높은 국가 Top 10"):
+    if st.radio("자동차1만대당 사망수가 높은 국가 Top 10"):
         top_high_freq = df0_cleaned.nlargest(10, "자동차1만대당 사망(명)")
         top_high_freq['순위'] = range(1, len(top_high_freq) + 1)
         top_high_freq = top_high_freq.reset_index(drop=True)
@@ -148,7 +152,7 @@ if page == "Page 1":
         st.write("2021년기준 OECD국가중 자동차1만대당 사망수가 가장 높은국가는 콜롬비아로 확인핤우있다. ")
 
     # 사고 빈도가 낮은 국가 Top 10 버튼
-    if st.button("자동차1만대당 사망수가 낮은 국가 Top 10"):
+    if st.radio("자동차1만대당 사망수가 낮은 국가 Top 10"):
         top_low_freq = df0_cleaned.nsmallest(10, "자동차1만대당 사망(명)")
         top_low_freq['순위'] = range(1, len(top_low_freq) + 1)
         top_low_freq = top_low_freq.reset_index(drop=True)
