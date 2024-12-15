@@ -197,9 +197,6 @@ elif page == "Page 2":
     else:
         df_filtered = df  # 선택된 지역이 없으면 전체 데이터 출력
 
-    # 필터링된 데이터 출력
-    st.write("선택된 지역에 대한 교통사고 데이터:")
-    st.write(df_filtered)
 
     # 필터링된 데이터에 대한 차트 출력
     st.subheader("선택된 지역에 따른 사고 통계")
@@ -211,6 +208,10 @@ elif page == "Page 2":
 
     # 그래프 표시
     st.plotly_chart(fig, key="unique_plot_key")
+
+    # 필터링된 데이터 출력
+    st.write("선택된 지역에 대한 교통사고 데이터:")
+    st.write(df_filtered)
 
 
 
