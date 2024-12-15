@@ -227,6 +227,10 @@ elif page == "Page 2":
         bottom_5['순위'] = range(1, len(bottom_5) + 1) 
         bottom_5 = bottom_5[['순위', '시도', '시군구', '사고[건]']]   
 
+        #index 삭제 
+        top_5 = top_5.reset_index(drop=True)
+        bottom_5 = bottom_5.reset_index(drop=True)
+
         if st.checkbox('교통사고 빈도가 높은 지역 Top 5'):
             st.write("### 사고[건]이 가장 높은 5개 지역")
             st.dataframe(top_5)
