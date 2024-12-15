@@ -226,13 +226,13 @@ elif page == "Page 2":
         if st.checkbox('교통사고 빈도가 높은 지역 Top 5'):
             st.write("### 사고[건]이 가장 높은 5개 지역")
             for i, row in top_5.iterrows():
-                st.write(f"{i}.{row['시도']} : 건: {row['사고[건]']}")
+                st.write(f"{row['시도']} : 건: {row['사고[건]']}")
 
                         # "교통사고 빈도가 낮은 지역 Top 5" 체크박스 추가
         if st.checkbox('교통사고 빈도가 낮은 지역 Top 5'):
             st.write("### 사고[건]이 가장 낮은 5개 지역")
             for i, row in bottom_5.iterrows():
-                st.write(f"{i}.{row['시도']} : 건: {row['사고[건]']}")
+                st.write(f"{row['시도']} : 건: {row['사고[건]']}")
         
 
     with col2:
