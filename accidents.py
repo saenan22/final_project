@@ -91,6 +91,15 @@ if page == "Page 1":
     st.sidebar.subheader("국가 선택")
     selected_country = st.sidebar.multiselect("국가를 선택하세요:", countries,default=[])
 
+    # 선택된 지역에 맞춰 데이터 필터링
+    if selected_country:
+        df0_cleaned = df0_cleaned[df0_cleaned["국가"].isin(selected_country)]
+    else:
+        df0_cleaned = df0_cleaned  # 선택된 국가가 없으면 전체 데이터 출력
+
+
+
+    
     st.subheader("선택된 국가에 따른 사고 통계")
     st.write("k=1000단위로 해석하시면 됩니다.")
     st.write("ex) 10k명=10000명")
