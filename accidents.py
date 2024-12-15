@@ -294,7 +294,6 @@ elif page == "Page 2":
                 fig_bottom = px.bar(bottom_5, 
                      x='사고[건]', 
                      y='시군구', 
-                     title='교통사고 빈도가 낮은 TOP5 지역',
                      color='사고[건]',
                      labels={'사고[건]': '사고[건]', '시군구': '지역'},
                      hover_data=['시도','시군구', '사고[건]'])# Hover시 시도와 사고[건]을 표시
