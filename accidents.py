@@ -168,7 +168,7 @@ elif page == "Page 2":
         geojson_data,
         name="지역 정보",
         tooltip=folium.GeoJsonTooltip(
-            fields=['시군구_시단위','사고[건]'],
+            fields=['시군구_시단위'],
             aliases=["시군구:"],
             localize=True
         ),
