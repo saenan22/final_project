@@ -285,10 +285,27 @@ elif page == "Page 2":
     grouped_data = df_filtered.groupby("시도")["사망[명]"].sum().reset_index()
 
     # 막대그래프 생성
-    fig = px.bar(grouped_data, x="시도", y="사망[명]", title="2023년 기준 시도및 시군구별 사망 수", labels={"사망[명]": "명"},color_discrete_sequence=["#D32F2F"])
+    fig = px.bar(grouped_data, x="시도", y="사망[명]", title="2023년 기준 시도및 시군구별 사망 수", labels={"사망[명]": "명"},color_discrete_sequence=["#FFCDD2"])
 
     # 그래프 표시
     st.plotly_chart(fig, key="deaths_plot_key")
+
+
+    # 필터링된 데이터에 대한 차트 출력3
+    st.subheader("선택된 지역에 따른 부상 통계")
+
+    grouped_data = df_filtered.groupby("시도")["부상[명]"].sum().reset_index()
+
+    # 막대그래프 생성
+    fig = px.bar(grouped_data, x="시도", y="부상[명]", title="2023년 기준 시도및 시군구별 부상 수", labels={"부상[명]": "명"},color_discrete_sequence=["#81C784"])
+
+    # 그래프 표시
+    st.plotly_chart(fig, key="injuries_plot_key")
+
+
+
+
+    
 
 
     st.write("선택된 지역에 대한 교통사고 통계:")
