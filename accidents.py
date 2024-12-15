@@ -220,12 +220,14 @@ elif page == "Page 2":
     with col1:
         st.header('교통사고 빈도가 높은/낮은 지역 분석')
         st.write("This is the content of column 1.")
+        top_5 = df.nlargest(5, '사고[건]')  # 사고[건]이 가장 높은 5개 지역
+        bottom_5 = df.nsmallest(5, '사고[건]')  # 사고[건]이 가장 낮은 5개 지역
+        col1, col2 = st.columns([1, 1])
 
     with col2:
         st.header("교통사고 빈도가 높은/낮은 지역 시각화")
         st.write("This is the content of column 2.")
 
-    
 
 
 
