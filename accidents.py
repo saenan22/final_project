@@ -102,38 +102,6 @@ if page == "Page 1":
 
     # 그래프 보여주기
     st.plotly_chart(fig, use_container_width=False)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
 
     # '자동차1만대당 사망(명)' 기준으로 상위 10개 국가 추출
@@ -165,6 +133,12 @@ if page == "Page 1":
 
     # 그래프 보여주기
     st.plotly_chart(fig)
+
+
+
+
+
+
 
 # Page 2 내용
 elif page == "Page 2":
@@ -379,11 +353,6 @@ elif page == "Page 2":
 
 
 
-
-
-
-
-
     # 제목
     st.title("교통사고 데이터 분석")
 
@@ -413,6 +382,7 @@ elif page == "Page 2":
         "분석 항목 선택",
         ["시간대별 교통사고", "부문별 교통사고", "요일별 교통사고","연령층별 교통사고","기상상태별 교통사고"]
     )
+    
 
      # 선택된 필터 옵션과 관련된 다른 분석 추가 
     # 마지막 행 삭제 (시도 열의 마지막 행)
@@ -480,55 +450,6 @@ if uploaded_file:
 import streamlit as st
 
 
-
-
-
-import plotly.express as px
-import pandas as pd
-import streamlit as st
-
-# 국가 이름을 ISO 3166-1 alpha-3 코드로 변환하는 딕셔너리
-country_to_iso3 = {
-    '그리스': 'GRC','네덜란드': 'NLD','노르웨이': 'NOR','뉴질랜드': 'NZL','대한민국': 'KOR','덴마크': 'DNK','독일': 'DEU',
-    '라트비아': 'LVA','룩셈부르크': 'LUX','리투아니아': 'LTU','멕시코': 'MEX','미국': 'USA','벨기에': 'BEL','스웨덴': 'SWE',
-    '스위스': 'CHE','스페인': 'ESP','슬로바키아': 'SVK','슬로베니아': 'SVN','아이슬란드': 'ISL','아일랜드': 'IRL',
-    '에스토니아': 'EST','영국': 'GBR','오스트리아': 'AUT','이스라엘': 'ISR','이탈리아': 'ITA','일본': 'JPN','체코': 'CZE',
-    '칠레': 'CHL','캐나다': 'CAN','코스타리카': 'CRI','콜롬비아': 'COL','튀르키예': 'TUR','포르투갈': 'PRT','폴란드': 'POL',
-    '프랑스': 'FRA','핀란드': 'FIN','헝가리': 'HUN','호주': 'AUS'
-}
-
-# Streamlit 앱 제목
-st.title('OECD국가별 교통사고 현황')
-st.subheader("2021년도 기준 OECD국가별 자동차1만대당 사망 현황")
-
-# CSV 파일 불러오기
-url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
-df0 = pd.read_csv(url)
-
-# 국가 이름을 ISO3 코드로 변환한 새로운 열 'ISO3' 추가
-df0['ISO3'] = df0['국가'].map(country_to_iso3)
-
-# '-' 값은 NaN으로 변환하고 NaN 값 제거
-df0['자동차1만대당 사망(명)'] = pd.to_numeric(df0['자동차1만대당 사망(명)'], errors='coerce')
-df0_cleaned = df0.dropna(subset=['자동차1만대당 사망(명)'])
-
-# Plotly 지도 시각화 (Mapbox 스타일 사용)
-fig = px.choropleth(df0_cleaned,
-                    locations="ISO3",  # ISO3 코드 사용
-                    color="자동차1만대당 사망(명)",  # 색상은 '자동차1만대당 사망(명)'을 기준으로
-                    hover_name="국가",  # 툴팁에 국가 이름을 표시
-                    hover_data=["자동차1만대당 사망(명)"],  # 툴팁에 자동차 1만대당 사망자 수 추가
-                    color_continuous_scale=px.colors.sequential.Plasma,  # 색상 스케일
-                    labels={"자동차1만대당 사망(명)": "자동차 1만대당 사망(명)"},  # 레이블 설정
-                    title="2021년도 기준 OECD국가별 자동차1만대당 사망 현황",  # 제목 설정
-                    template="plotly_dark"  # 다크 테마
-)
-
-# 지도 출력
-fig.update_geos(showcoastlines=True, coastlinecolor="Black", projection_type="natural earth")
-
-# Streamlit으로 지도 시각화 출력
-st.plotly_chart(fig)
 
 
 
