@@ -218,7 +218,7 @@ elif page == "Page 2":
     # 각 컬럼에 다른 콘텐츠 추가
 
     with col1:
-        st.subtitle('교통사고 빈도가 높은/낮은 지역 분석')
+        st.header('교통사고 빈도가 높은/낮은 지역 분석')
         st.write("This is the content of column 1.")
         top_5 = df.nlargest(5, '사고[건]')  # 사고[건]이 가장 높은 5개 지역
         bottom_5 = df.nsmallest(5, '사고[건]')  # 사고[건]이 가장 낮은 5개 지역
