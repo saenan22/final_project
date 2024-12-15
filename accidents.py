@@ -137,7 +137,7 @@ if page == "Page 1":
                       title="자동차1만대당 사망수가 높은 국가 Top 10", 
                       labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"},
                          color='국가', color_discrete_map=color_map)
-        fig.update_layout(showlegend=False)
+        
         st.plotly_chart(fig_high)
 
     # 사고 빈도가 낮은 국가 Top 10 버튼
@@ -151,7 +151,7 @@ if page == "Page 1":
                      title="자동차1만대당 사망수가 낮은 국가 Top 10", 
                      labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"})
         # 범례 숨기기
-        fig.update_layout(showlegend=False)
+
         st.plotly_chart(fig_low)
 
 
