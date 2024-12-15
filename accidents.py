@@ -308,16 +308,19 @@ elif page == "Page 2":
         
     with col2:
         if st.checkbox('교통사고 빈도가 높은 지역 Top 5🚨🔺'):
+            top_5_sorted = top_5.sort_values(by='사고[건]', ascending=False)  # 사고[건] 내림차순 정렬
             st.dataframe(top_5)# "교통사고 빈도가 낮은 지역 Top 5" 체크박스 추가
 
          # 상위 5개 지역 막대그래프 시각화 (Plotly 사용)
+
             fig_top = px.bar(top_5, 
                      x='사고[건]',
                      y='시군구', 
                      title='TOP5 지역',
                      color='사고[건]',
                      labels={'사고[건]': '사고[건]', '시군구': '지역'},
-                     hover_data=['시도','시군구', '사고[건]'])# Hover시 시도와 사고[건]을 표시
+                     hover_data=['시도','시군구', '사고[건]'],
+                    color_continuous_scale=px.colors.sequential.Reds)# Hover시 시도와 사고[건]을 표시
                 
             fig_top.update_layout(coloraxis_colorbar=dict(title="사고[건]"),width=1000,height=500)
             st.plotly_chart(fig_top)  # Plotly 차트를 Streamlit에 출력
