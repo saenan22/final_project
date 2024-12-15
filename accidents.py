@@ -209,7 +209,7 @@ elif page == "Page 2":
     # 그래프 표시
     st.plotly_chart(fig, key="unique_plot_key")
 
-    # 세 개의 컬럼 생성
+    # 두 개의 컬럼 생성
     col1, col2 = st.columns(2)
     # 각 컬럼에 다른 콘텐츠 추가
 
