@@ -268,6 +268,8 @@ elif page == "Page 2":
 
     # 필터링된 데이터에 대한 차트 출력
     st.subheader("선택된 지역에 따른 사고 통계")
+    st.write("k=1000단위로 해석하시면 됩니다.")
+    st.write("ex) 10k명=10000명")
 
     grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
 
