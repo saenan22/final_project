@@ -239,12 +239,21 @@ elif page == "Page 2":
             for i, row in bottom_5.iterrows():
                 st.write(f"{row['시도']} - 사고[건]: {row['사고[건]']}")
 
-        with col2:
-            st.header("Column 2")
-            st.write("This is the content of column 2.")
+     with col2:
+         st.header("Column 2")
+         st.write("This is the content of column 2.")
 
 
 
+
+
+
+
+
+
+
+
+    
 
 
 
