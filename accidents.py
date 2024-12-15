@@ -127,6 +127,8 @@ if page == "Page 1":
    # 사고 빈도가 높은 국가 Top 10 버튼
     if st.button("자동차1만대당 사망수가 높은 국가 Top 10"):
         top_high_freq = df0_cleaned.nlargest(10, "자동차1만대당 사망(명)")
+        top_high_freq['순위'] = range(1, len(top_high_freq) + 1)
+        top_high_freq = top_high_freqq.reset_index(drop=True)
         st.subheader("자동차1만대당 사망수가 높은 국가 Top 10")
         st.write(top_high_freq)
         color_map = {국가: '#FF5733' if 국가 == '대한민국' else '#1f77b4' for 국가 in top_high_freq['국가']}
@@ -143,6 +145,8 @@ if page == "Page 1":
     # 사고 빈도가 낮은 국가 Top 10 버튼
     if st.button("자동차1만대당 사망수가 낮은 국가 Top 10"):
         top_low_freq = df0_cleaned.nsmallest(10, "자동차1만대당 사망(명)")
+        top_low_freq['순위'] = range(1, len(top_low_freq) + 1)
+        top_low_freq = top_low_freq.reset_index(drop=True)
         st.subheader("사고 빈도가 낮은 국가 Top 10")
         st.write(top_low_freq)
 
