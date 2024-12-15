@@ -137,11 +137,11 @@ if page == "Page 1":
                 color = "#FF5733"  # 다른 국가 막대 색상
 
         # 그래프 생성
-        fig_high = px.bar(top_high_freq, x="국가", y="자동차1만대당 사망(명)", 
+            fig_high = px.bar(top_high_freq, x="국가", y="자동차1만대당 사망(명)", 
                       title="자동차1만대당 사망수가 높은 국가 Top 10", 
                       labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"})
-        fig.update_layout(showlegend=False)
-        st.plotly_chart(fig_high)
+            fig.update_layout(showlegend=False)
+            st.plotly_chart(fig_high)
 
     # 사고 빈도가 낮은 국가 Top 10 버튼
     if st.button("자동차1만대당 사망수가 낮은 국가 Top 10"):
