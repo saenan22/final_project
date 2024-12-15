@@ -308,7 +308,6 @@ elif page == "Page 2":
         
     with col2:
         if st.checkbox('교통사고 빈도가 높은 지역 Top 5🚨🔺'):
-            top_5_sorted = top_5.sort_values(by='사고[건]', ascending=True)  # 사고[건] 내림차순 정렬
             st.dataframe(top_5)# "교통사고 빈도가 낮은 지역 Top 5" 체크박스 추가
 
          # 상위 5개 지역 막대그래프 시각화 (Plotly 사용)
