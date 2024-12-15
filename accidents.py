@@ -134,18 +134,6 @@ if page == "Page 1":
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     
 
     # '자동차1만대당 사망(명)' 기준으로 상위 10개 국가 추출
@@ -290,7 +278,7 @@ elif page == "Page 2":
 
 
         # 사이드바에 지역 선택 추가
-    st.sidebar.subheader("지역 선택")
+    st.subheader("지역 선택")
     selected_regions = st.sidebar.multiselect(
         "원하는 지역들을 선택하실 수 있습니다.",
         df['시도'].unique(),
