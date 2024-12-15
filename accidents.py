@@ -313,20 +313,6 @@ elif page == "Page 2":
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
     
     st.title("지역별 교통사고 빈도")
 
@@ -347,8 +333,8 @@ elif page == "Page 2":
         bottom_5 = bottom_5[['순위', '시도', '시군구', '사고[건]']]
         
    
-        st.write("체크박스를 클릭해 주세요!")
-        if st.checkbox('교통사고 빈도가 낮은 지역 Top 5🛡️'):
+        st.write("교통사고 빈도가 낮은 지역 Top 5🛡️")
+        if st.checkbox('체크박스를 클릭해 주세요!'):
             st.dataframe(bottom_5)
             fig_bottom = px.bar(bottom_5, 
                      x='사고[건]', 
@@ -368,8 +354,8 @@ elif page == "Page 2":
 
         
     with col2:
-        st.write("체크박스를 클릭해 주세요!")
-        if st.checkbox('교통사고 빈도가 높은 지역 Top 5🚨🔺'):
+        st.write("교통사고 빈도가 높은 지역 Top 5🚨🔺")
+        if st.checkbox('체크박스를 클릭해 주세요!'):
             st.dataframe(top_5)# "교통사고 빈도가 낮은 지역 Top 5" 체크박스 추가
 
          # 상위 5개 지역 막대그래프 시각화 (Plotly 사용)
