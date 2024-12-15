@@ -77,7 +77,7 @@ if page == "Page 1":
     st.write("ex) 10k명=10000명")
 
 
-    st.subheader("선택된 국가에 따른 사고 통계")
+    
     # OECD국가별 교통사고관련데이터 가져오기
     url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
     df0 = pd.read_csv(url)
@@ -107,6 +107,8 @@ if page == "Page 1":
 
     # Streamlit 앱 설정
     st.title('OECD 국가🌍 교통사고 현황🚨')
+
+    st.subheader("선택된 국가에 따른 사고 통계")
 
     # Plotly를 이용한 수평 막대그래프 그리기
     fig = px.bar( df0_cleaned, 
