@@ -204,7 +204,7 @@ elif page == "Page 2":
     grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
 
     # 막대그래프 생성
-    fig = px.bar(grouped_data, x="시도", y="사고[건]", title="시도별 사고 건수", labels={"사고[건]": "사고 건수"})
+    fig = px.bar(grouped_data, x="시도", y="사고[건]", title="2023년 기준 시도및 시군구별 사고 건수", labels={"사고[건]": "사고 건수"})
 
     # 그래프 표시
     st.plotly_chart(fig, key="unique_plot_key")
