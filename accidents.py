@@ -122,7 +122,7 @@ if page == "Page 1":
     st.plotly_chart(fig, use_container_width=False,key="oecd_plot_key")
 
     # 제목
-    st.title("OECD국가별 자동차1만대당 사망수 분석")
+    st.subheader("OECD국가별 자동차1만대당 사망수 분석")
 
    # 사고 빈도가 높은 국가 Top 10 버튼
     if st.button("자동차1만대당 사망수가 높은 국가 Top 10"):
