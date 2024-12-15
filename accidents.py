@@ -208,12 +208,26 @@ elif page == "Page 2":
 
     # 그래프 표시
     st.plotly_chart(fig, key="unique_plot_key")
+    # 세 개의 컬럼 생성
+    col1, col2 = st.columns(2)
+    # 각 컬럼에 다른 콘텐츠 추가
+
+    with col1:
+        st.header("Column 1")
+        st.write("This is the content of column 1.")
 
     # 필터링된 데이터 출력
     st.write("선택된 지역에 대한 교통사고 데이터:")
     st.write(df_filtered)
 
 
+
+
+    with col2:
+    st.header("Column 2")
+    st.write("This is the content of column 2.")
+
+    
 
 
 
@@ -318,7 +332,7 @@ if uploaded_file:
 import streamlit as st
 
 # 세 개의 컬럼 생성
-col1, col2, col3 = st.columns(3)
+col1, col2 = st.columns(2)
 
 # 각 컬럼에 다른 콘텐츠 추가
 with col1:
@@ -329,9 +343,6 @@ with col2:
     st.header("Column 2")
     st.write("This is the content of column 2.")
 
-with col3:
-    st.header("Column 3")
-    st.write("This is the content of column 3.")
 
 
 
