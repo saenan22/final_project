@@ -312,7 +312,7 @@ elif page == "Page 2":
 
          # 상위 5개 지역 막대그래프 시각화 (Plotly 사용)
             fig_top = px.bar(top_5, 
-                     x='사고[건]',, 
+                     x='사고[건]',
                      y='시군구', 
                      title='TOP5 지역',
                      color='사고[건]',
