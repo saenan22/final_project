@@ -583,7 +583,7 @@ elif page == "Page 2":
             url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%9B%94%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
             df_m = pd.read_csv(url, encoding="utf-8")
             return df_m
-        df_c = load_data()
+        df_m = load_data()
 
         st.title("📊 월별 교통사고 데이터 시각화")
         st.subheader("📅 월별 교통사고 데이터")
