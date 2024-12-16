@@ -480,7 +480,30 @@ elif page == "Page 2":
             fig3.update_traces(marker_color='green')
             st.plotly_chart(fig3)
 
+        # 데이터를 Tidy format으로 변환
+        tidy_df = pd.melt(df_recent, id_vars=["구분", "유형"], var_name="연도", value_name="건수")
 
+        # 구분별 사고, 사망, 부상 합계 계산
+        accident_summary = tidy_df.groupby(['구분', '유형'])['건수'].sum().reset_index()
+
+        # 사고, 사망, 부상 구분별로 색상 지정
+        color_map = {
+    '사고': 'rgb(54, 162, 235)',  # 사고는 파란색
+    '사망': 'rgb(255, 99, 132)',  # 사망은 빨간색
+    '부상': 'rgb(75, 192, 192)'   # 부상은 초록색
+}
+
+        # 사고, 사망, 부상 유형을 그룹으로 묶어서 각 구분별로 도넛 차트 그리기
+        fig = px.pie(accident_summary, 
+             names='유형', 
+             values='건수', 
+             color='유형', 
+             color_discrete_map=color_map,
+             hole=0.4,  # 도넛 차트 형식으로 만듦
+             title="각 구분별 사고, 사망, 부상 건수 비교")
+
+        # Streamlit에 Plotly 그래프 출력
+        st.plotly_chart(fig)
 
 
     
