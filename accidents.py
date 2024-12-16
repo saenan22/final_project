@@ -480,9 +480,6 @@ elif page == "Page 2":
             fig3.update_traces(marker_color='green')
             st.plotly_chart(fig3)
 
-        # 데이터를 Tidy format으로 변환
-        tidy_df = pd.melt(df_recent, id_vars=["구분", "유형"], var_name="연도", value_name="건수")
-
         # 구분별 사고, 사망, 부상 합계 계산
         accident_summary = tidy_df.groupby(['구분', '유형'])['건수'].sum().reset_index()
 
