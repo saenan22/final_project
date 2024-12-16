@@ -558,11 +558,6 @@ elif page == "Page 2":
         st.dataframe(df_y)
 
         # 막대그래프 및 추세선 표시
-        st.subheader("🚗 사고(건), 사망(명), 부상(명) 요일별 분석")
-        df_y['사고(건)'] = pd.to_numeric(df_y['사고(건)'], errors='coerce')
-        df_y['사망(명)'] = pd.to_numeric(df_y['사망(명)'], errors='coerce')
-        df_y['부상(명)'] = pd.to_numeric(df_y['부상(명)'], errors='coerce')
-        st.dataframe(df_y)
 
         # 막대그래프 생성
         def create_bar_chart(df, column, title):
