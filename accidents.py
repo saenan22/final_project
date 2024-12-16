@@ -439,11 +439,6 @@ elif page == "Page 2":
         tidy_df = tidy_df[tidy_df['유형'].isin(accident_types)]
 
 
-    # 데이터 확인
-        if st.button("📋 데이터 미리보기"):
-            st.dataframe(filtered_data)
-
-
         # Streamlit UI 구성
         st.title("📊 부문별 교통사고(최근 5년) 분석 대시보드")
 
@@ -451,9 +446,15 @@ elif page == "Page 2":
         st.subheader("⚙️ 필터 설정") 
         selected_year = st.selectbox("📅 연도 선택", tidy_df['연도'].unique(), index=0)
         accident_category = st.selectbox("💥 사고 구분 선택", tidy_df['구분'].unique(), index=0)
+        filtered_data = tidy_df[
+        (tidy_df['연도'] == selected_year) & 
+        (tidy_df['구분'] == accident_category)
+    ]
         
         # Streamlit에서 열을 3개로 나누기
         col1, col2, col3 = st.columns(3)
+
+        
 
         # 첫 번째 열 (사고(건) 그래프)
         with col1:
@@ -482,7 +483,9 @@ elif page == "Page 2":
 
 
 
-
+            # 데이터 확인
+            if st.button("📋 데이터 미리보기"):
+                st.dataframe(filtered_data)
     
     
             
