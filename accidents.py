@@ -6,6 +6,7 @@ import json
 from streamlit_folium import st_folium
 import plotly.express as px
 import numpy as np
+import requests
 # Sidebar 메뉴 생성
 st.sidebar.title("교통사고 대시보드🚗💥")
 
@@ -187,14 +188,21 @@ elif page == "Page 2":
         ["시도및 시군구별 교통사고","부문별 교통사고(최근5년)","시간대별 교통사고", "요일별 교통사고","월별 교통사고","사고유형별 교통사고"]
     )
     if option == "시도및 시군구별 교통사고":
-        # 시도및 시군구별 교통사고 관련 데이터 불러오기
-        file_path = r"https://raw.githubusercontent.com/saenan22/final_project/main/Report.csv"
-        df = pd.read_csv(file_path, header=3)
-        # GeoJSON 파일 URL
+        # GeoJSON URL
         geojson_url = "https://raw.githubusercontent.com/saenan22/final_project/main/BND_SIGUNGU_PG.json"
+# URL에서 GeoJSON 파일을 다운로드
+        response = requests.get(geojson_url)
 
-        # GeoJSON 읽기
-        geojson_data = gpd.read_file(geojson_url)
+# 다운로드한 파일을 로컬에 저장
+        with open("BND_SIGUNGU_PG.json", "wb") as f:
+            f.write(response.content)
+
+# 로컬 파일 읽기
+        geojson_data = gpd.read_file("BND_SIGUNGU_PG.json")
+
+
+
+        
 
         # 데이터 처리
     # 1. NaN 값 제거 (시군구 열에서 NaN이 있는 행 삭제)
