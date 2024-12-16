@@ -447,7 +447,7 @@ elif page == "Page 2":
 
         # 필터링 섹션  
         st.subheader("⚙️ 필터 설정") 
-        selected_year = st.selectbox("📅 연도 선택",tidy_df['연도'].unique())
+        selected_year = st.selectbox("📅 연도 선택",["모든 연도"] + list(tidy_df['연도'].unique())
         accident_category = st.selectbox("💥 사고 구분 선택", tidy_df['구분'].unique(), index=0)
 
         # 필터링된 데이터
@@ -480,28 +480,7 @@ elif page == "Page 2":
             fig3.update_traces(marker_color='green')
             st.plotly_chart(fig3)
 
-        # 구분별 사고, 사망, 부상 합계 계산
-        accident_summary = tidy_df.groupby(['구분', '유형'])['건수'].sum().reset_index()
-        st.write(accident_summary)
 
-        # 사고, 사망, 부상 구분별로 색상 지정
-        color_map = {
-    '사고': 'rgb(54, 162, 235)',  # 사고는 파란색
-    '사망': 'rgb(255, 99, 132)',  # 사망은 빨간색
-    '부상': 'rgb(75, 192, 192)'   # 부상은 초록색
-}
-
-        # 사고, 사망, 부상 유형을 그룹으로 묶어서 각 구분별로 도넛 차트 그리기
-        fig = px.pie(accident_summary, 
-             names='유형', 
-             values='건수', 
-             color='유형', 
-             color_discrete_map=color_map,
-             hole=0.4,  # 도넛 차트 형식으로 만듦
-             title="각 구분별 사고, 사망, 부상 건수 비교")
-
-        # Streamlit에 Plotly 그래프 출력
-        st.plotly_chart(fig)
 
 
     
