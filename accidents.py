@@ -446,8 +446,8 @@ elif page == "Page 2":
         st.title("📊 부문별 교통사고(최근 5년) 분석 대시보드")
 
         # 필터링 섹션  
-        st.subheader("⚙️ 필터 설정")
-        selected_year = st.multiselect("📅 연도 선택",  tidy_df['연도'].unique())
+        st.subheader("⚙️ 필터 설정") 
+        selected_year = st.multiselect("📅 연도 선택",tidy_df['연도'].unique(), index=0)
         accident_category = st.selectbox("💥 사고 구분 선택", tidy_df['구분'].unique(), index=0)
 
         # 필터링된 데이터
