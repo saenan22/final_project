@@ -623,6 +623,41 @@ elif page == "Page 2":
         st.subheader("📅 사고 유형별 교통사고 데이터")
         st.dataframe(df_k)
 
+         # 도넛 차트 생성 함수
+        def create_donut_chart(df, column, title):
+        fig = px.pie(
+        df,
+        names='사고유형',
+        values=column,
+        title=title,
+        hole=0.4  # 도넛 형태를 위한 파라미터
+    )
+        fig.update_traces(textinfo='percent+label')  # 비율과 라벨 표시
+        return fig
+
+# 사고(건) 도넛 차트
+        st.subheader("🛠 사고(건) 유형별 비중")
+        fig1_donut = create_donut_chart(df, '사고(건)', '사고(건) 유형별 비중')
+        st.plotly_chart(fig1_donut)
+
+# 사망(명) 도넛 차트
+        st.subheader("☠️ 사망(명) 유형별 비중")
+        fig2_donut = create_donut_chart(df, '사망(명)', '사망(명) 유형별 비중')
+        st.plotly_chart(fig2_donut)
+
+# 부상(명) 도넛 차트
+        st.subheader("🤕 부상(명) 유형별 비중")
+        fig3_donut = create_donut_chart(df, '부상(명)', '부상(명) 유형별 비중')
+        st.plotly_chart(fig3_donut)
+
+
+
+
+
+
+
+
+
 
 
 
