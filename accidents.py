@@ -632,11 +632,11 @@ elif page == "Page 2":
         title=title,
         hole=0.4  # 도넛 형태를 위한 파라미터
     )
-            fig.update_traces(textinfo='percent+label')  # 비율과 라벨 표시
-            return fig
+        fig.update_traces(textinfo='percent+label')  # 비율과 라벨 표시
+        return fig
 
 # 사고(건) 도넛 차트
-        st.subheader("🛠 사고(건) 유형별 비중")
+        st.subheader("사고(건) 유형별 비중")
         fig1_donut = create_donut_chart(df_k, '사고(건)', '사고(건) 유형별 비중')
         st.plotly_chart(fig1_donut)
 
