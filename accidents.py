@@ -481,63 +481,6 @@ elif page == "Page 2":
         st.dataframe(filtered_data)
 
 
-      # Streamlit UI 구성
-    st.title("📊 부문별 교통사고(최근 5년) 도넛차트")
-
-    # 필터링 섹션  
-    st.subheader("⚙️ 필터 설정")
-    selected_year = st.selectbox("📅 연도 선택", tidy_df['연도'].unique(), index=0, key="year_selector")
-    accident_category = st.selectbox("💥 사고 구분 선택", tidy_df['구분'].unique(), index=0, key="category_selector")
-
-    # 필터링된 데이터
-    filtered_data = tidy_df[
-    (tidy_df['연도'] == selected_year) & 
-    (tidy_df['구분'] == accident_category)
-]
-
-    # Streamlit에서 열을 3개로 나누기
-    col1, col2, col3 = st.columns(3)
-
-    # 도넛 차트 생성 함수
-    def create_donut_chart(data, category):
-        chart_data = data[data['유형'] == category].groupby('유형').sum().reset_index()
-        fig = px.pie(chart_data, names='유형', values='건수', hole=0.4, title=f"{category} 비중")
-        return fig
-
-    # 첫 번째 열 (사고(건) 도넛 차트)
-    with col1:
-        accident_data = filtered_data[filtered_data['유형'] == '사고(건)']
-        fig1 = create_donut_chart(accident_data, '사고(건)')
-        st.plotly_chart(fig1)
-
-    # 두 번째 열 (사망(건) 도넛 차트)
-    with col2:
-        death_data = filtered_data[filtered_data['유형'] == '사망(건)']
-        fig2 = create_donut_chart(death_data, '사망(건)')
-        st.plotly_chart(fig2)
-
-    # 세 번째 열 (부상(건) 도넛 차트)
-    with col3:
-        injury_data = filtered_data[filtered_data['유형'] == '부상(건)']
-        fig3 = create_donut_chart(injury_data, '부상(건)')
-        st.plotly_chart(fig3)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     
     # 시간대별 교통사고 관련 CSV 데이터 불러오기 (URL에서 데이터 읽기)
     def load_data():
