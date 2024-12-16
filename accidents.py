@@ -656,6 +656,7 @@ elif page == "Page 2":
 # 사망(건) 시각화
         st.subheader("☠️ 사망(건) 월별 분석")
         fig2_bar = create_bar_chart(df_m, '사망(명)', '사망(명) 월별 분포')
+        fig2_bar.update_traces(marker_color='lightcoral') 
         st.plotly_chart(fig2_bar)
 
 # 부상(건) 시각화
