@@ -35,7 +35,8 @@ if page == "Page 1":
 
     # Streamlit 앱 제목
     st.title('OECD 국가🌍 교통사고 현황🚨')
-    st.subheader("2021년도 기준 OECD국가별 자동차1만대당 사망 현황🗺️")
+    st.subheader("2021년도 기준 OECD국가별 자동차1만대당 사망 현황")
+    st.write('''특정 지역에서 운행 중인 자동차 1만 대당 발생하는 교통사고 사망자의 수''')
 
     # CSV 파일 불러오기
     url = 'https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2021%EB%85%84%20OECD%EA%B5%AD%EA%B0%80%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0%20%ED%98%84%ED%99%A9.csv'
@@ -158,7 +159,7 @@ if page == "Page 1":
     st.title('자동차1만대당 사망수 빈도 분석')
    # 사고 빈도가 높은 국가 Top 10 버튼
     st.write("버튼을 눌러주세요👆")
-    if st.button("자동차1만대당 사망수가 높은 국가 Top 10"):
+    if st.button("자동차1만대당 사망수가 높은 국가 Top 10🔺"):
         top_high_freq = df0_cleaned.nlargest(10, "자동차1만대당 사망(명)")
         top_high_freq['순위'] = range(1, len(top_high_freq) + 1)
         top_high_freq = top_high_freq.reset_index(drop=True)
@@ -190,7 +191,7 @@ if page == "Page 1":
 
     # 사고 빈도가 낮은 국가 Top 10 버튼
     st.write("버튼을 눌러주세요👆")
-    if st.button("자동차1만대당 사망수가 낮은 국가 Top 10"):
+    if st.button("자동차1만대당 사망수가 낮은 국가 Top 10🛡️"):
         top_low_freq = df0_cleaned.nsmallest(10, "자동차1만대당 사망(명)")
         top_low_freq['순위'] = range(1, len(top_low_freq) + 1)
         top_low_freq = top_low_freq.reset_index(drop=True)
