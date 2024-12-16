@@ -8,3 +8,4 @@ streamlit
 requests
 gdown
 plotly
+matplotlib
