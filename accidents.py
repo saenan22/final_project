@@ -203,7 +203,6 @@ if page == "Page 1":
         fig_low = px.bar(top_low_freq, x="국가", y="자동차1만대당 사망(명)", 
                      title="자동차1만대당 사망수가 낮은 국가 Top 10", 
                      labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"})
-        fig_low.update_layout(showlegend=True,orientation='h')
 
         st.plotly_chart(fig_low)
         # 특징정리내용 
@@ -245,10 +244,7 @@ elif page == "Page 2":
 
 # 로컬 파일 읽기
         geojson_data = gpd.read_file("BND_SIGUNGU_PG.json")
-
-
-
-        
+       
 
         # 데이터 처리
     # 1. NaN 값 제거 (시군구 열에서 NaN이 있는 행 삭제)
