@@ -566,27 +566,28 @@ elif page == "Page 2":
             return fig
 
 
-# 사고(건) 막대그래프 및 추세선
+# 사고(건) 막대그래프 
         fig1 = create_bar_chart(df_y, '사고(건)', '사고(건) 요일별 분포')
         st.plotly_chart(fig1)
 
-       # 사망(명) 막대그래프 및 추세선
+       # 사망(명) 막대그래프 
         fig2 = create_bar_chart(df_y, '사망(명)', '사망(명) 요일별 분포')
         st.plotly_chart(fig2)
 
-       # 부상(명) 막대그래프 및 추세선
+       # 부상(명) 막대그래프
         fig3 = create_bar_chart(df_y, '부상(명)', '부상(명) 요일별 분포')
         st.plotly_chart(fig3)
 
+    if option == "월별 교통사고":
+        def load_data():
+            url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%9B%94%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
+            df_m = pd.read_csv(url, encoding="utf-8")
+            return df_m
+        df_c = load_data()
 
-
-
-
-
-
-
-
-
+        st.title("📊 월별 교통사고 데이터 시각화")
+        st.subheader("📅 월별 교통사고 데이터")
+        st.dataframe(df_m)
 
 
 
@@ -607,14 +608,6 @@ elif page == "Page 2":
 
 
     
-
-    if option == "월별 교통사고":
-        def load_data():
-            url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%9B%94%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
-            df_c = pd.read_csv(url, encoding="utf-8")
-            return df_c
-        df_c = load_data()
-
     if option == "사고유형별 교통사고":
         def load_data():
             url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%82%AC%EA%B3%A0%EC%9C%A0%ED%98%95%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
