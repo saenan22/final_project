@@ -569,15 +569,6 @@ elif page == "Page 2":
             fig.update_layout(xaxis_title='요일', yaxis_title=title, xaxis_tickmode='array', xaxis_tickvals=[0, 1, 2, 3, 4, 5, 6], xaxis_ticktext=['일', '월', '화', '수', '목', '금', '토'])
             return fig
 
-        # 추세선 추가
-        def add_trend_line(fig, df, column):
-            x = np.arange(len(df))
-            y = df[column].values
-         # 추세선 (선형 회귀)
-            p = np.polyfit(x, y, 1)  # 1차 다항식 (선형)
-            trendline = np.polyval(p, x)
-            fig.add_trace(go.Scatter(x=df['요일'], y=trendline, mode='lines', name='추세선', line=dict(color='red', dash='dash')))
-            return fig
 
 # 사고(건) 막대그래프 및 추세선
         fig1 = create_bar_chart(df_c, '사고(건)', '사고(건) 요일별 분포')
