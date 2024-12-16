@@ -626,11 +626,7 @@ elif page == "Page 2":
 
          # 도넛 차트 생성 함수
         def create_donut_chart(df, column, title):
-            fig = px.pie(df,
-        names='사고유형',
-        values=column,
-        title=title,
-        hole=0.4  # 도넛 형태를 위한 파라미터)
+            fig = px.pie(df, names='사고유형',values=column,title=title,hole=0.4)  # 도넛 형태를 위한 파라미터
             fig.update_traces(textinfo='percent+label')  # 비율과 라벨 표시
             return fig
 
