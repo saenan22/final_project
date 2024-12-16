@@ -491,7 +491,7 @@ elif page == "Page 2":
 
 
         # Streamlit UI 구성
-        st.subheader("📊 부문별 교통사고(최근 5년) 분석")
+        st.subheader("📊 부문별 교통사고(최근 5년) 추세분석")
 
         # 필터링 섹션  
         st.subheader("⚙️ 필터 설정") 
@@ -506,7 +506,7 @@ elif page == "Page 2":
     # 첫 번째 열 (사고(건) 그래프)
         with col1:
             accident_data = filtered_data[filtered_data['유형'] == '사고(건)']
-            fig1 = px.bar(accident_data, x="연도", y="건수", title="전체 교통사고(건)",
+            fig1 = px.line(accident_data, x="연도", y="건수", title="전체 교통사고(건)",
                       labels={"연도": "연도", "건수": "교통사고 건수"})
 
             st.plotly_chart(fig1)
@@ -583,7 +583,7 @@ elif page == "Page 2":
 
     # 부상(명) 그래프
         with col3:
-            st.subheader("🤕 부상자자")
+            st.subheader("🤕 부상자")
             fig_injuries = px.bar(
             selected_data,
             x="시간대",
