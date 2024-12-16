@@ -428,6 +428,45 @@ elif page == "Page 2":
         df_c = load_data()                
 
 
+    # 데이터 확인
+        st.write("📋 데이터 미리보기")
+        st.dataframe(df_c.head())
+    
+    # 필터링 섹션
+        st.subheader("⚙️ 필터 설정")
+        selected_year = st.selectbox("📅 연도 선택", df_c['연도'].unique(), index=0)
+        accident_type = st.selectbox("🚦 사고 유형 선택", df_c.columns[1:], index=0)
+    
+    # 버튼 클릭 시 그래프 표시
+        if st.button("📈 그래프 출력"):
+            st.subheader(f"🚘 {selected_year}년 {accident_type} 분석")
+        
+        # 연도별 필터링
+            filtered_df = df_c[df_c['연도'] == selected_year]
+        
+        # 그래프 출력 섹션
+            col1, col2, col3 = st.columns(3)
+        
+        # 사고(건) 그래프
+            with col1:
+                fig_accident = px.bar(filtered_df, x='연도', y='사고(건)', title='사고(건)', color_discrete_sequence=['#87CEFA'])
+                st.plotly_chart(fig_accident, use_container_width=True)
+            
+        
+        # 사망(명) 그래프
+            with col2:
+                fig_death = px.bar(filtered_df, x='연도', y='사망(명)', title='사망(명)', color_discrete_sequence=['#FFB6C1'])
+                st.plotly_chart(fig_death, use_container_width=True)
+        
+        # 부상(명) 그래프
+            with col3:
+                fig_injury = px.bar(filtered_df, x='연도', y='부상(명)', title='부상(명)', color_discrete_sequence=['#FFD700'])
+                st.plotly_chart(fig_injury, use_container_width=True)
+
+    # 기타 옵션 처리
+        else:
+            st.subheader("🛠 준비 중인 데이터입니다.")
+            st.info("다른 옵션은 현재 준비 중입니다. 곧 추가될 예정입니다!")
 
     
     # 시간대별 교통사고 관련 CSV 데이터 불러오기 (URL에서 데이터 읽기)
