@@ -462,12 +462,14 @@ elif page == "Page 2":
             accident_data = filtered_data[filtered_data['유형'] == '사고(건)']
             fig1 = px.bar(accident_data, x="연도", y="건수", title="사고(건)",
                   labels={"연도": "연도", "건수": "교통사고 건수"})
+            fig1.update_traces(marker_color='blue')
             st.plotly_chart(fig1)
             # 두 번째 열 (사망(건) 그래프)
         with col2:
             death_data = filtered_data[filtered_data['유형'] == '사망(건)']
             fig2 = px.bar(death_data, x="연도", y="건수", title="사망(건)",
                           labels={"연도": "연도", "건수": "교통사고 사망 건수"})
+            fig2.update_traces(marker_color='red')
             st.plotly_chart(fig2)
 
         # 세 번째 열 (부상(건) 그래프)
@@ -475,6 +477,7 @@ elif page == "Page 2":
             injury_data = filtered_data[filtered_data['유형'] == '부상(건)']
             fig3 = px.bar(injury_data, x="연도", y="건수", title="부상(건)",
                   labels={"연도": "연도", "건수": "교통사고 부상 건수"})
+            fig3.update_traces(marker_color='green')
             st.plotly_chart(fig3)
 
 
