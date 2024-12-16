@@ -631,7 +631,6 @@ elif page == "Page 2":
                  text=f'{column}_비중',  # 비중 텍스트 표시
                  labels={'사고유형': '사고 유형', column: title},
                  title=title)
-            fig.update_traces(texttemplate='%{text:.2f}%', textposition='inside')  # 비중 텍스트 내부 표시
             return fig
 # 사고(건) 도넛 차트
         st.subheader("사고(건) 유형별 비중")
