@@ -734,7 +734,7 @@ df_k = pd.DataFrame(data)
 # 각 사고유형에 대한 비중 계산 함수
 def calculate_percentage(df, column):
     total = df[column].sum()  # 전체 합계 구하기
-    df[f'{column}_비중'] = (df[column] / total) * 100  # 각 값의 비중 계산
+    df[f'{column:2f}_비중'] = (df[column] / total) * 100  # 각 값의 비중 계산
     return df
 
 # 사고(건) 비중 계산
