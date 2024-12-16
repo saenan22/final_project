@@ -618,6 +618,7 @@ elif page == "Page 2":
             df_k = pd.read_csv(url, encoding="utf-8")
             return df_k
         df_k = load_data()
+        df_k = df_k[df_k["사고유형"] != "계"]
 
         st.title("📊 사고 유형별 교통사고 데이터 시각화")
         st.subheader("📅 사고 유형별 교통사고 데이터")
