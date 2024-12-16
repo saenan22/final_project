@@ -9,3 +9,4 @@ requests
 gdown
 plotly
 matplotlib
+seaborn
