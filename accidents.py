@@ -166,7 +166,17 @@ if page == "Page 1":
         st.subheader("자동차1만대당 사망수가 높은 국가 Top 10")
         st.write(top_high_freq)
         color_map = {국가: '#FF5733' if 국가 == '대한민국' else '#1f77b4' for 국가 in top_high_freq['국가']}
-        # 특징정리내용 
+
+
+        # 그래프 생성
+        fig_high = px.bar(top_high_freq, x="국가", y="자동차1만대당 사망(명)", 
+                      title="자동차1만대당 사망수가 높은 국가 Top 10", 
+                      labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"},
+                         color='국가', color_discrete_map=color_map)
+        
+        st.plotly_chart(fig_high)
+
+         # 특징정리내용 
         st.subheader("교통사고 사망률이 높은 국가들의 공통 요인")
         st.write("""
 교통사고 사망률이 높은 국가들의 주요 원인은 다음 세 가지로 요약할 수 있습니다:
@@ -176,19 +186,7 @@ if page == "Page 1":
 3. **응급 구조 체계와 교육 부족**: 사고 후 빠른 응급 구조 체계가 미비하며, 교통안전 교육이 부족해 사고율 감소에 어려움을 겪고 있습니다.
 """)
 
-        # 그래프 생성
-        fig_high = px.bar(top_high_freq, x="국가", y="자동차1만대당 사망(명)", 
-                      title="자동차1만대당 사망수가 높은 국가 Top 10", 
-                      labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"},
-                         color='국가', color_discrete_map=color_map)
-        
-        st.plotly_chart(fig_high)
-        # 특징정리내용 
-        st.write("주로 도로교통망이 좋음")
 
-
-
-    
 
     # 사고 빈도가 낮은 국가 Top 10 버튼
     st.write("버튼을 눌러주세요👆")
@@ -205,14 +203,16 @@ if page == "Page 1":
                      title="자동차1만대당 사망수가 낮은 국가 Top 10", 
                      labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"})
 
-        # 범례 
-        fig_low.update_layout(
-        showlegend=True,  # 범례 표시
-        width=1600,       # 그래프 너비
-        height=600        # 그래프 높이
-    )
         st.plotly_chart(fig_low)
+        # 특징정리내용 
+        st.subheader("교통사고 사망률이 낮은 국가들의 공통 요인")
+        st.write("""
+교통사고 사망률이 낮은 국가들의 주요 공통점은 다음과 같습니다:
 
+1. **우수한 도로 인프라**: 잘 관리된 도로와 선진 교통 시스템으로 사고 위험을 낮춥니다.
+2. **엄격한 교통법규와 운전자 교육**: 법규 준수율이 높고 운전자들이 충분한 교육을 받습니다.
+3. **신속한 응급 구조 시스템**: 사고 발생 시 빠르고 효율적인 응급 구조와 의료 지원이 가능합니다.
+""")
 
 
 
