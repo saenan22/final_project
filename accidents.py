@@ -470,13 +470,12 @@ elif page == "Page 2":
                           labels={"연도": "연도", "건수": "교통사고 사망 건수"})
             st.plotly_chart(fig2)
 
-
-               # 세 번째 열 (부상(건) 그래프)
+        # 세 번째 열 (부상(건) 그래프)
         with col3:
             injury_data = filtered_data[filtered_data['유형'] == '부상(건)']
             fig3 = px.bar(injury_data, x="연도", y="건수", title="부상(건)",
                   labels={"연도": "연도", "건수": "교통사고 부상 건수"})
-        st.plotly_chart(fig3)
+            st.plotly_chart(fig3)
 
 
 
