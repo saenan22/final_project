@@ -439,7 +439,7 @@ elif page == "Page 2":
 
     # 데이터 확인
         if st.button("📋 데이터 미리보기"):
-            st.dataframe(df_c)
+            st.dataframe(filtered_data)
 
 
         # Streamlit UI 구성
@@ -447,36 +447,9 @@ elif page == "Page 2":
 
         # 필터링 섹션  
         st.subheader("⚙️ 필터 설정") 
-        selected_year = st.selectbox("📅 연도 선택",["모든 연도"] + list(tidy_df['연도'].unique()))
+        selected_year = st.selectbox("📅 연도 선택",tidy_df['연도'].unique(),index=0)
         accident_category = st.selectbox("💥 사고 구분 선택", tidy_df['구분'].unique(), index=0)
-
-        # 필터링된 데이터
-        if selected_year == "모든 연도":
-            filtered_data = tidy_df[tidy_df['구분'] == accident_category]
-        else:
-            filtered_data = tidy_df[
-            (tidy_df['연도'] == selected_year) & 
-            (tidy_df['구분'] == accident_category)
-        ]
-
-
-        
-
-        # 필터링된 데이터
-        filtered_data = tidy_df[(tidy_df['연도'] == selected_year) & 
-                        (tidy_df['구분'] == accident_category)]
-
-
-        fig = px.bar(
-        filtered_data, 
-        x="연도", 
-        y="건수", 
-        color="유형", 
-        title=f"{accident_category} 사고 유형별 건수 ({selected_year})",
-        labels={"연도": "연도", "건수": "교통사고 건수", "유형": "사고 유형"}
-    )
-    
-        st.plotly_chart(fig)
+)
         
         # Streamlit에서 열을 3개로 나누기
         col1, col2, col3 = st.columns(3)
