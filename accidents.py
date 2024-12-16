@@ -451,6 +451,19 @@ elif page == "Page 2":
         accident_category = st.selectbox("💥 사고 구분 선택", tidy_df['구분'].unique(), index=0)
 
         # 필터링된 데이터
+        if selected_year == "모든 연도":
+            filtered_data = tidy_df[tidy_df['구분'] == accident_category]
+        else:
+            filtered_data = tidy_df[
+            (tidy_df['연도'] == selected_year) & 
+            (tidy_df['구분'] == accident_category)
+        ]
+
+
+
+        
+
+        # 필터링된 데이터
         filtered_data = tidy_df[(tidy_df['연도'] == selected_year) & 
                         (tidy_df['구분'] == accident_category)]
         
