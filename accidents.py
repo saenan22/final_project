@@ -121,10 +121,11 @@ if page == "Page 1":
     # 그래프 보여주기
     st.plotly_chart(fig, use_container_width=False,key="oecd_plot_key")
 
-    st.write("2021년기준 OECD국가중 자동차1만대당 사망수가 가장 높은국가는 콜롬비아로 확인할 수있다.")
-    st.write("그이유는 다음과 같다.")
+
 
     st.title("콜롬비아 자동차 사망률 분석🔍")
+    st.write("2021년기준 OECD국가중 자동차1만대당 사망수가 가장 높은국가는 콜롬비아로 확인할 수있다.")
+    st.write("그이유는 다음과 같습니다.")
 
     st.header("교통사고 사망률의 주요 원인")
     st.write("1. 도로 인프라와 상태 부족")
