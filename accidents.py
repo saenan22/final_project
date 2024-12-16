@@ -483,9 +483,9 @@ elif page == "Page 2":
 
 
 
-            # 데이터 확인
-            if st.button("📋 데이터 미리보기"):
-                st.dataframe(filtered_data)
+        # 데이터 확인
+        if st.button("📋 데이터 미리보기"):
+            st.dataframe(filtered_data)
     
     
             
