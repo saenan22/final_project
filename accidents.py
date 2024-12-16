@@ -5,8 +5,7 @@ import pandas as pd
 import json
 from streamlit_folium import st_folium
 import plotly.express as px
-import matplotlib.pyplot as plt
-import seaborn as sns
+import numpy as np
 # Sidebar 메뉴 생성
 st.sidebar.title("교통사고 대시보드🚗💥")
 
