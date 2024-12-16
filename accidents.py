@@ -458,15 +458,13 @@ elif page == "Page 2":
 
             # 데이터 시각화
         st.subheader(f"🚗 {selected_year}년 {accident_category} - {accident_type} 시각화")
-        fig, ax = plt.subplots(figsize=(8, 5))
-        sns.barplot(x="연도", y="건수", data=filtered_data)
-        ax.set_title(f"{selected_year}년 {accident_category} - {accident_type} 건수")
-        ax.set_ylabel("건수")
-        ax.set_xlabel("연도")
-        st.pyplot(fig)
+        st.subheader(f"🚗 {selected_year}년 {accident_category} - {accident_type} 시각화")
+        fig = px.bar(filtered_data, x="연도", y="건수", 
+             title=f"{selected_year}년 {accident_category} - {accident_type} 건수",
+             labels={"연도": "연도", "건수": "교통사고 건수"})
 
-
-
+        # Streamlit에 Plotly 그래프 출력
+        st.plotly_chart(fig)
 
 
 
