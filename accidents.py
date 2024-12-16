@@ -1,3 +1,7 @@
+#C119180_김새난
+#사이트 url
+#https://finalproject-kepgmfers6jvwdtelxf9k4.streamlit.app/
+
 import streamlit as st
 import folium
 import geopandas as gpd
