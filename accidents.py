@@ -630,10 +630,9 @@ elif page == "Page 2":
         names='사고유형',
         values=column,
         title=title,
-        hole=0.4  # 도넛 형태를 위한 파라미터
-    )
-        fig.update_traces(textinfo='percent+label')  # 비율과 라벨 표시
-        return fig
+        hole=0.4  # 도넛 형태를 위한 파라미터)
+            fig.update_traces(textinfo='percent+label')  # 비율과 라벨 표시
+            return fig
 
 # 사고(건) 도넛 차트
         st.subheader("사고(건) 유형별 비중")
