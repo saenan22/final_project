@@ -572,7 +572,8 @@ elif page == "Page 2":
 
         # 추세선 추가
         def add_trend_line(fig, df, column):
-            x = np.arange(len(df))y = df[column].values
+            x = np.arange(len(df))
+            y = df[column].values
          # 추세선 (선형 회귀)
         p = np.polyfit(x, y, 1)  # 1차 다항식 (선형)
         trendline = np.polyval(p, x)
