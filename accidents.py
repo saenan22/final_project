@@ -546,19 +546,16 @@ elif page == "Page 2":
     if option == "요일별 교통사고":
         def load_data():
             url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%9A%94%EC%9D%BC%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
-            df_c = pd.read_csv(url, encoding="utf-8")
+            df_y = pd.read_csv(url, encoding="utf-8")
             return df_c
-        df_c = load_data()
+        df_y = load_data()
         # 요일별 교통사고 데이터
-        df_c['요일'] = df_c['요일'].map({
-    '일': 0, '월': 1, '화': 2, '수': 3, '목': 4, '금': 5, '토': 6})
-
         # Streamlit UI 구성
         st.title("📊 요일별 교통사고 데이터 시각화")
 
         # 데이터 확인
         st.subheader("📅 요일별 교통사고 데이터")
-        st.dataframe(df_c)
+        st.dataframe(df_y)
 
         # 막대그래프 및 추세선 표시
         st.subheader("🚗 사고(건), 사망(명), 부상(명) 요일별 분석")
