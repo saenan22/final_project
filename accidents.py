@@ -482,6 +482,7 @@ elif page == "Page 2":
 
         # 구분별 사고, 사망, 부상 합계 계산
         accident_summary = tidy_df.groupby(['구분', '유형'])['건수'].sum().reset_index()
+        st.write(accident_summary)
 
         # 사고, 사망, 부상 구분별로 색상 지정
         color_map = {
