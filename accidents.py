@@ -203,7 +203,7 @@ if page == "Page 1":
         fig_low = px.bar(top_low_freq, x="국가", y="자동차1만대당 사망(명)", 
                      title="자동차1만대당 사망수가 낮은 국가 Top 10", 
                      labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"})
-        fig.update_layout(showlegend=True,orientation='h')
+        fig_low.update_layout(showlegend=True,orientation='h')
 
         st.plotly_chart(fig_low)
         # 특징정리내용 
