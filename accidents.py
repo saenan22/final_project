@@ -597,17 +597,17 @@ elif page == "Page 2":
 
 # 사고(건) 시각화
     st.subheader("🚗 사고(건) 월별 분석")
-    fig1_bar = create_bar_chart(df_m, '사고(건)', '사건(건) 월별 분포')
+    fig1_bar = create_bar_chart(df_m, '사고(건)', '사고(건) 월별 분포')
     st.plotly_chart(fig1_bar)
 
 # 사망(건) 시각화
     st.subheader("☠️ 사망(건) 월별 분석")
-    fig2_bar = create_bar_chart(df_m, '사망(건)', '사망(건) 월별 분포')
+    fig2_bar = create_bar_chart(df_m, '사망(명)', '사망(명) 월별 분포')
     st.plotly_chart(fig2_bar)
 
 # 부상(건) 시각화
     st.subheader("🤕 부상(건) 월별 분석")
-    fig3_bar = create_bar_chart(df_m, '부상(건)', '부상(건) 월별 분포')
+    fig3_bar = create_bar_chart(df_m, '부상(명)', '부상(명) 월별 분포')
     st.plotly_chart(fig3_bar)
 
 
