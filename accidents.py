@@ -749,8 +749,8 @@ def create_bar_chart(df, column, title):
 
 # 도넛차트 생성 함수
 def create_donut_chart(df, column, title):
-    fig = px.pie(df, names='사고유형', values=column, title=title, hole=0.4)
-    fig.update_traces(textinfo='label+percent', pull=[0.1, 0.1, 0.1, 0.1])  # 텍스트 및 퍼센트 표시
+    fig = px.pie(df, names='사고유형', values=column, title=title, hole=0.5)
+    fig.update_traces(textinfo='label+percent',textposition='inside', pull=[0.1, 0.1, 0.1, 0.1])  # 텍스트 및 퍼센트 표시
     return fig
 
 # 사고(건) 막대그래프 및 도넛차트
