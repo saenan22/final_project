@@ -34,7 +34,7 @@ if page == "Page 1":
 
 
     # Streamlit 앱 제목
-    st.title('OECD국가별 교통사고 현황')
+    st.title('OECD 국가🌍 교통사고 현황🚨')
     st.subheader("2021년도 기준 OECD국가별 자동차1만대당 사망 현황🗺️")
 
     # CSV 파일 불러오기
@@ -105,10 +105,8 @@ if page == "Page 1":
 
     
 
-    # Streamlit 앱 설정
-    st.title('OECD 국가🌍 교통사고 현황🚨')
-
-    st.subheader("선택된 국가에 따른 교통사고 통계")
+    #막대그래프 
+    st.subheader("선택된 국가에 따른 교통사고 통계📊 ")
 
     # Plotly를 이용한 수평 막대그래프 그리기
     fig = px.bar( df0_cleaned, 
@@ -156,7 +154,7 @@ if page == "Page 1":
     
 
     
-
+   st.title('자동차1만대당 사망수 빈도 분석')
    # 사고 빈도가 높은 국가 Top 10 버튼
     st.write("버튼을 눌러주세요👆")
     if st.button("자동차1만대당 사망수가 높은 국가 Top 10"):
