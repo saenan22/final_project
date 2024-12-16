@@ -453,25 +453,30 @@ elif page == "Page 2":
         # 필터링된 데이터
         filtered_data = tidy_df[(tidy_df['연도'] == selected_year) & 
                         (tidy_df['구분'] == accident_category)]
-
-
         
-            # 데이터 시각화
-        st.subheader(f"🚗 {selected_year}년 {accident_category}  시각화")
-        fig = px.bar(filtered_data, x="연도", y="건수", color="유형",
-             title=f"{selected_year}년 {accident_category} 사고유형별 건수",
-             labels={"연도": "연도", "건수": "교통사고 건수","유형": "사고 유형"})
+        # Streamlit에서 열을 3개로 나누기
+        col1, col2, col3 = st.columns(3)
+
+        # 첫 번째 열 (사고(건) 그래프)
+        with col1:
+            accident_data = filtered_data[filtered_data['유형'] == '사고(건)']
+            fig1 = px.bar(accident_data, x="연도", y="건수", title="사고(건)",
+                  labels={"연도": "연도", "건수": "교통사고 건수"})
+            st.plotly_chart(fig1)
+            # 두 번째 열 (사망(건) 그래프)
+        with col2:
+            death_data = filtered_data[filtered_data['유형'] == '사망(건)']
+            fig2 = px.bar(death_data, x="연도", y="건수", title="사망(건)",
+                          labels={"연도": "연도", "건수": "교통사고 사망 건수"})
+            st.plotly_chart(fig2)
 
 
-        
-        # Streamlit에 Plotly 그래프 출력
-        st.plotly_chart(fig)
-
-
-
-
-
-
+               # 세 번째 열 (부상(건) 그래프)
+        with col3:
+            injury_data = filtered_data[filtered_data['유형'] == '부상(건)']
+            fig3 = px.bar(injury_data, x="연도", y="건수", title="부상(건)",
+                  labels={"연도": "연도", "건수": "교통사고 부상 건수"})
+        st.plotly_chart(fig3)
 
 
 
