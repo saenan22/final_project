@@ -439,7 +439,7 @@ elif page == "Page 2":
 
     # 데이터 확인
         if st.button("📋 데이터 미리보기"):
-            st.dataframe(df_c.head())
+            st.dataframe(df_c)
 
 
         # Streamlit UI 구성
@@ -448,21 +448,22 @@ elif page == "Page 2":
         # 필터링 섹션
         st.subheader("⚙️ 필터 설정")
         selected_year = st.selectbox("📅 연도 선택", tidy_df['연도'].unique(), index=0)
-        accident_category = st.selectbox("🚦 사고 구분 선택", tidy_df['구분'].unique(), index=0)
-        accident_type = st.selectbox("💥 사고 유형 선택", tidy_df['유형'].unique(), index=0)
+        accident_category = st.selectbox("🚦💥 사고 구분 선택", tidy_df['구분'].unique(), index=0)
 
         # 필터링된 데이터
         filtered_data = tidy_df[(tidy_df['연도'] == selected_year) & 
-                        (tidy_df['구분'] == accident_category) & 
-                        (tidy_df['유형'] == accident_type)]
+                        (tidy_df['구분'] == accident_category)]
 
+
+        
             # 데이터 시각화
         st.subheader(f"🚗 {selected_year}년 {accident_category} - {accident_type} 시각화")
-        st.subheader(f"🚗 {selected_year}년 {accident_category} - {accident_type} 시각화")
-        fig = px.bar(filtered_data, x="연도", y="건수", 
-             title=f"{selected_year}년 {accident_category} - {accident_type} 건수",
-             labels={"연도": "연도", "건수": "교통사고 건수"})
+        fig = px.bar(filtered_data, x="연도", y="건수", color="유형",
+             title=f"{selected_year}년 {accident_category} 사고유형별 건수",
+             labels={"연도": "연도", "건수": "교통사고 건수","유형": "사고 유형"})
 
+
+        
         # Streamlit에 Plotly 그래프 출력
         st.plotly_chart(fig)
 
