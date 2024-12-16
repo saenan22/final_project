@@ -717,7 +717,11 @@ elif page == "Page 3":
 
 
 
-# 데이터 준비 (주어진 데이터)
+import pandas as pd
+import plotly.express as px
+import streamlit as st
+
+# 정제후 데이터 준비함함
 data = {
     '사고유형': ['차대사람', '차대차', '차량단독', '철길건널목'],
     '사고(건)': [36996, 152935, 8363, 2],
@@ -749,22 +753,47 @@ def create_bar_chart(df, column, title):
     fig.update_traces(texttemplate='%{text:.2f}%', textposition='inside')  # 비중 텍스트 내부 표시
     return fig
 
-# 사고(건) 막대그래프
+# 도넛차트 생성 함수
+def create_donut_chart(df, column, title):
+    fig = px.pie(df, names='사고유형', values=column, title=title, hole=0.4)
+    fig.update_traces(textinfo='label+percent', pull=[0.1, 0.1, 0.1, 0.1])  # 텍스트 및 퍼센트 표시
+    return fig
+
+# 사고(건) 막대그래프 및 도넛차트
 st.subheader("🚗 사고(건) 유형별 비중")
-fig1_bar = create_bar_chart(df_k, '사고(건)', '사고(건) 유형별 비중')
-st.plotly_chart(fig1_bar)
+col1, col2, col3 = st.columns(3)
 
-# 사망(명) 막대그래프
+with col1:
+    fig1_bar = create_bar_chart(df_k, '사고(건)', '사고(건) 유형별 비중')
+    st.plotly_chart(fig1_bar)
+
+with col2:
+    fig1_donut = create_donut_chart(df_k, '사고(건)', '사고(건) 유형별 비중 도넛차트')
+    st.plotly_chart(fig1_donut)
+
+# 사망(명) 막대그래프 및 도넛차트
 st.subheader("☠️ 사망(명) 유형별 비중")
-fig2_bar = create_bar_chart(df_k, '사망(명)', '사망(명) 유형별 비중')
-st.plotly_chart(fig2_bar)
+col4, col5, col6 = st.columns(3)
 
-# 부상(명) 막대그래프
+with col4:
+    fig2_bar = create_bar_chart(df_k, '사망(명)', '사망(명) 유형별 비중')
+    st.plotly_chart(fig2_bar)
+
+with col5:
+    fig2_donut = create_donut_chart(df_k, '사망(명)', '사망(명) 유형별 비중 도넛차트')
+    st.plotly_chart(fig2_donut)
+
+# 부상(명) 막대그래프 및 도넛차트
 st.subheader("🤕 부상(명) 유형별 비중")
-fig3_bar = create_bar_chart(df_k, '부상(명)', '부상(명) 유형별 비중')
-st.plotly_chart(fig3_bar)
+col7, col8, col9 = st.columns(3)
 
+with col7:
+    fig3_bar = create_bar_chart(df_k, '부상(명)', '부상(명) 유형별 비중')
+    st.plotly_chart(fig3_bar)
 
+with col8:
+    fig3_donut = create_donut_chart(df_k, '부상(명)', '부상(명) 유형별 비중 도넛차트')
+    st.plotly_chart(fig3_donut)
 
 
 
