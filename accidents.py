@@ -749,7 +749,7 @@ def create_bar_chart(df, column, title):
 
 # 도넛차트 생성 함수
 def create_donut_chart(df, column, title):
-    fig = px.pie(df, names='사고유형', values=column, title=title, hole=0.5)
+    fig = px.pie(df, names='사고유형', values=column, title=title, hole=0.4)
     fig.update_traces(textinfo='label+percent', pull=[0.1, 0.1, 0.1, 0.1])  # 텍스트 및 퍼센트 표시
     return fig
 
@@ -759,11 +759,11 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     fig1_bar = create_bar_chart(df_k, '사고(건)', '사고(건) 유형별 비중')
-    st.plotly_chart(fig1_bar)
+    st.plotly_chart(fig1_bar, use_container_width=True)
 
 with col2:
     fig1_donut = create_donut_chart(df_k, '사고(건)', '사고(건) 유형별 비중 도넛차트')
-    st.plotly_chart(fig1_donut)
+    st.plotly_chart(fig1_donut, use_container_width=True)
 
 # 사망(명) 막대그래프 및 도넛차트
 st.subheader("☠️ 사망(명) 유형별 비중")
@@ -771,11 +771,11 @@ col4, col5, col6 = st.columns(3)
 
 with col4:
     fig2_bar = create_bar_chart(df_k, '사망(명)', '사망(명) 유형별 비중')
-    st.plotly_chart(fig2_bar)
+    st.plotly_chart(fig2_bar, use_container_width=True)
 
 with col5:
     fig2_donut = create_donut_chart(df_k, '사망(명)', '사망(명) 유형별 비중 도넛차트')
-    st.plotly_chart(fig2_donut)
+    st.plotly_chart(fig2_donut, use_container_width=True)
 
 # 부상(명) 막대그래프 및 도넛차트
 st.subheader("🤕 부상(명) 유형별 비중")
@@ -783,11 +783,11 @@ col7, col8, col9 = st.columns(3)
 
 with col7:
     fig3_bar = create_bar_chart(df_k, '부상(명)', '부상(명) 유형별 비중')
-    st.plotly_chart(fig3_bar)
+    st.plotly_chart(fig3_bar, use_container_width=True)
 
 with col8:
     fig3_donut = create_donut_chart(df_k, '부상(명)', '부상(명) 유형별 비중 도넛차트')
-    st.plotly_chart(fig3_donut)
+    st.plotly_chart(fig3_donut, use_container_width=True)
 
 
 
