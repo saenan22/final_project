@@ -600,10 +600,10 @@ elif page == "Page 2":
 
 
     # 막대그래프 생성 함수
-    def create_bar_chart(df, column, title):
-        fig = px.bar(df, x='월', y=column, labels={'월': '월', column: title}, title=title)
-        fig.update_layout(xaxis_title='월', yaxis_title=title, xaxis_tickmode='array', xaxis_tickvals=list(range(1, 13)))
-        return fig
+        def create_bar_chart(df, column, title):
+            fig = px.bar(df, x='월', y=column, labels={'월': '월', column: title}, title=title)
+            fig.update_layout(xaxis_title='월', yaxis_title=title, xaxis_tickmode='array', xaxis_tickvals=list(range(1, 13)))
+            return fig
 
     # 사고(건) 시각화
         st.subheader("🚗 사고(건) 월별 분석")
