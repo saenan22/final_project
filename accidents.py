@@ -435,6 +435,8 @@ elif page == "Page 2":
 
         # 데이터를 Tidy format으로 변환
         tidy_df = pd.melt(df_c_recent, id_vars=["구분", "유형"], var_name="연도", value_name="건수")
+        accident_types = ['사고(건)', '사망(건)', '부상(건)']
+        tidy_df = tidy_df[tidy_df['유형'].isin(accident_types)]
 
 
     # 데이터 확인
