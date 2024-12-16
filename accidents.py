@@ -9,7 +9,7 @@ import numpy as np
 import requests
 # Sidebar 메뉴 생성
 st.sidebar.title("교통사고 대시보드🚗💥")
-
+st.sidebar.markdown("[My Streamlit Dashboard](https://finalproject-kepgmfers6jvwdtelxf9k4.streamlit.app/)", unsafe_allow_html=True)
 
 st.sidebar.markdown("하단의 화살표를 눌러 해당 Page의 내용을 확인해보세요.😊")
 
@@ -659,8 +659,8 @@ elif page == "Page 2":
         st.subheader("분석결과🔍")
         st.write("""
 요일별 교통사고 분석 결과, 모든 부문에서 금요일이 가장 높은 사고 비율을 보였습니다. 
-이는 주말을 앞두고 사람들이 외출과 이동이 증가하는 경향과 관련이 있을 수 있습니다. 
-특히, 금요일의 '불금' 문화가 사회적 활동 및 음주를 촉진시켜 교통사고 발생률을 높이는 주요 요인으로 작용할 가능성이 큽니다.
+이는 주말을 앞두고 사람들이 외출과 이동이 증가하는 경향과 관련이 있을 수 있습니다. """)
+        st.write("""특히, 금요일의 '불금' 문화가 사회적 활동 및 음주를 촉진시켜 교통사고 발생률을 높이는 주요 요인으로 작용할 가능성이 큽니다.
 따라서, 금요일에 대한 사고 예방을 위한 강화된 교통 안전 대책이 필요합니다.
 """)
 
