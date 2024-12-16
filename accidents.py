@@ -595,35 +595,21 @@ elif page == "Page 2":
         fig.update_layout(xaxis_title='월', yaxis_title=title, xaxis_tickmode='array', xaxis_tickvals=list(range(1, 13)))
         return fig
 
-# 도넛 차트 생성 함수
-    def create_doughnut_chart(df, column, title):
-        fig = px.pie(df, names='월', values=column, 
-                 title=title, 
-                 hole=0.3,  # 도넛 형태 설정
-                 labels={'월': '월', column: title})
-        fig.update_layout(xaxis_title='월', yaxis_title=title)
-        return fig
-
 # 사고(건) 시각화
     st.subheader("🚗 사고(건) 월별 분석")
     fig1_bar = create_bar_chart(df_m, '사건(건)', '사건(건) 월별 분포')
     st.plotly_chart(fig1_bar)
-    fig1_donut = create_doughnut_chart(df_m, '사건(건)', '사건(건) 월별 분포')
-    st.plotly_chart(fig1_donut)
 
 # 사망(건) 시각화
     st.subheader("☠️ 사망(건) 월별 분석")
     fig2_bar = create_bar_chart(df_m, '사망(건)', '사망(건) 월별 분포')
     st.plotly_chart(fig2_bar)
-    fig2_donut = create_doughnut_chart(df_m, '사망(건)', '사망(건) 월별 분포')
-    st.plotly_chart(fig2_donut)
 
 # 부상(건) 시각화
     st.subheader("🤕 부상(건) 월별 분석")
     fig3_bar = create_bar_chart(df_m, '부상(건)', '부상(건) 월별 분포')
     st.plotly_chart(fig3_bar)
-    fig3_donut = create_doughnut_chart(df_m, '부상(건)', '부상(건) 월별 분포')
-    st.plotly_chart(fig3_donut)
+
 
 
 
