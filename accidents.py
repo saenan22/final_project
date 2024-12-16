@@ -565,6 +565,7 @@ elif page == "Page 2":
         df_c['사고(건)'] = pd.to_numeric(df_c['사고(건)'], errors='coerce')
         df_c['사망(명)'] = pd.to_numeric(df_c['사망(명)'], errors='coerce')
         df_c['부상(명)'] = pd.to_numeric(df_c['부상(명)'], errors='coerce')
+        st.dataframe(df_c)
 
         # 막대그래프 생성
         def create_bar_chart(df, column, title):
