@@ -578,7 +578,7 @@ elif page == "Page 2":
         p = np.polyfit(x, y, 1)  # 1차 다항식 (선형)
         trendline = np.polyval(p, x)
         fig.add_trace(go.Scatter(x=df['요일'], y=trendline, mode='lines', name='추세선', line=dict(color='red', dash='dash')))
-        return fig
+            return fig
 
 # 사고(건) 막대그래프 및 추세선
         fig1 = create_bar_chart(df_c, '사고(건)', '사고(건) 요일별 분포')
