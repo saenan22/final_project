@@ -550,6 +550,80 @@ elif page == "Page 2":
             df_c = pd.read_csv(url, encoding="utf-8")
             return df_c
         df_c = load_data()
+        # 요일별 교통사고 데이터
+        df_c['요일'] = df_c['요일'].map({
+    '일': 0, '월': 1, '화': 2, '수': 3, '목': 4, '금': 5, '토': 6})
+
+        # Streamlit UI 구성
+        st.title("📊 요일별 교통사고 데이터 시각화")
+
+        # 데이터 확인
+        st.subheader("📅 요일별 교통사고 데이터")
+        st.dataframe(df_c)
+
+        # 막대그래프 및 추세선 표시
+        st.subheader("🚗 사고(건), 사망(명), 부상(명) 요일별 분석")
+
+        # 막대그래프 생성
+        def create_bar_chart(df, column, title):
+            fig = px.bar(df, x='요일', y=column, labels={'요일': '요일', column: title}, title=title)
+            fig.update_layout(xaxis_title='요일', yaxis_title=title, xaxis_tickmode='array', xaxis_tickvals=[0, 1, 2, 3, 4, 5, 6], xaxis_ticktext=['일', '월', '화', '수', '목', '금', '토'])
+            return fig
+
+        # 추세선 추가
+        def add_trend_line(fig, df, column):
+            x = np.arange(len(df))y = df[column].values
+         # 추세선 (선형 회귀)
+        p = np.polyfit(x, y, 1)  # 1차 다항식 (선형)
+        trendline = np.polyval(p, x)
+        fig.add_trace(go.Scatter(x=df['요일'], y=trendline, mode='lines', name='추세선', line=dict(color='red', dash='dash')))
+        return fig
+
+# 사고(건) 막대그래프 및 추세선
+        fig1 = create_bar_chart(df_c, '사고(건)', '사고(건) 요일별 분포')
+        fig1 = add_trend_line(fig1, df_c, '사고(건)')
+        st.plotly_chart(fig1)
+
+       # 사망(명) 막대그래프 및 추세선
+        fig2 = create_bar_chart(df_c, '사망(명)', '사망(명) 요일별 분포')
+        fig2 = add_trend_line(fig2, df_c, '사망(명)')
+        st.plotly_chart(fig2)
+
+       # 부상(명) 막대그래프 및 추세선
+        fig3 = create_bar_chart(df_c, '부상(명)', '부상(명) 요일별 분포')
+        fig3 = add_trend_line(fig3, df_c, '부상(명)')
+        st.plotly_chart(fig3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     if option == "월별 교통사고":
         def load_data():
