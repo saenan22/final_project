@@ -457,7 +457,7 @@ elif page == "Page 2":
 
         
             # 데이터 시각화
-        st.subheader(f"🚗 {selected_year}년 {accident_category} - {accident_type} 시각화")
+        st.subheader(f"🚗 {selected_year}년 {accident_category}  시각화")
         fig = px.bar(filtered_data, x="연도", y="건수", color="유형",
              title=f"{selected_year}년 {accident_category} 사고유형별 건수",
              labels={"연도": "연도", "건수": "교통사고 건수","유형": "사고 유형"})
