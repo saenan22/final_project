@@ -425,49 +425,61 @@ elif page == "Page 2":
             url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/%EB%B6%80%EB%AC%B8%EB%B3%84%EC%82%AC%EA%B3%A0%EC%9C%A0%ED%98%95.csv"
             df_c = pd.read_csv(url, encoding="utf-8")
             return df_c
-        df_c = load_data()                
+            
+        df_c = load_data()
+
+        # 최근 5년 데이터만 필터링
+        recent_years = ['2019년', '2020년', '2021년', '2022년', '2023년']
+        df_c_recent = df_c[['구분', '유형'] + recent_years]
+
+
+        # 데이터를 Tidy format으로 변환
+        tidy_df = pd.melt(df_c_recent, id_vars=["구분", "유형"], var_name="연도", value_name="건수")
 
 
     # 데이터 확인
-        st.write("📋 데이터 미리보기")
-        st.dataframe(df_c.head())
-    
-    # 필터링 섹션
+        if st.button("📋 데이터 미리보기"):
+            st.dataframe(df_c.head())
+
+
+        # Streamlit UI 구성
+        st.title("📊 부문별 교통사고(최근 5년) 분석 대시보드")
+
+        # 필터링 섹션
         st.subheader("⚙️ 필터 설정")
-        selected_year = st.selectbox("📅 연도 선택", df_c['연도'].unique(), index=0)
-        accident_type = st.selectbox("🚦 사고 유형 선택", df_c.columns[1:], index=0)
+        selected_year = st.selectbox("📅 연도 선택", tidy_df['연도'].unique(), index=0)
+        accident_category = st.selectbox("🚦 사고 구분 선택", tidy_df['구분'].unique(), index=0)
+        accident_type = st.selectbox("💥 사고 유형 선택", tidy_df['유형'].unique(), index=0)
+
+        # 필터링된 데이터
+        filtered_data = tidy_df[(tidy_df['연도'] == selected_year) & 
+                        (tidy_df['구분'] == accident_category) & 
+                        (tidy_df['유형'] == accident_type)]
+
+            # 데이터 시각화
+        st.subheader(f"🚗 {selected_year}년 {accident_category} - {accident_type} 시각화")
+        fig, ax = plt.subplots(figsize=(8, 5))
+        sns.barplot(x="연도", y="건수", data=filtered_data)
+        ax.set_title(f"{selected_year}년 {accident_category} - {accident_type} 건수")
+        ax.set_ylabel("건수")
+        ax.set_xlabel("연도")
+        st.pyplot(fig)
+
+
+
+
+
+
+
+
+
+
+
+
+
     
-    # 버튼 클릭 시 그래프 표시
-        if st.button("📈 그래프 출력"):
-            st.subheader(f"🚘 {selected_year}년 {accident_type} 분석")
-        
-        # 연도별 필터링
-            filtered_df = df_c[df_c['연도'] == selected_year]
-        
-        # 그래프 출력 섹션
-            col1, col2, col3 = st.columns(3)
-        
-        # 사고(건) 그래프
-            with col1:
-                fig_accident = px.bar(filtered_df, x='연도', y='사고(건)', title='사고(건)', color_discrete_sequence=['#87CEFA'])
-                st.plotly_chart(fig_accident, use_container_width=True)
+    
             
-        
-        # 사망(명) 그래프
-            with col2:
-                fig_death = px.bar(filtered_df, x='연도', y='사망(명)', title='사망(명)', color_discrete_sequence=['#FFB6C1'])
-                st.plotly_chart(fig_death, use_container_width=True)
-        
-        # 부상(명) 그래프
-            with col3:
-                fig_injury = px.bar(filtered_df, x='연도', y='부상(명)', title='부상(명)', color_discrete_sequence=['#FFD700'])
-                st.plotly_chart(fig_injury, use_container_width=True)
-
-    # 기타 옵션 처리
-        else:
-            st.subheader("🛠 준비 중인 데이터입니다.")
-            st.info("다른 옵션은 현재 준비 중입니다. 곧 추가될 예정입니다!")
-
     
     # 시간대별 교통사고 관련 CSV 데이터 불러오기 (URL에서 데이터 읽기)
     def load_data():
