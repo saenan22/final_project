@@ -560,7 +560,7 @@ elif page == "Page 2":
 
         # 사고(건) 그래프
         with col1:
-            st.subheader("사고(건)")
+            st.subheader("🚗사고 건수")
             fig_accidents = px.bar(
             selected_data,
             x="시간대",
@@ -571,7 +571,7 @@ elif page == "Page 2":
 
     # 사망(명) 그래프
         with col2:
-            st.subheader("사망(명)")
+            st.subheader("☠️사망자")
             fig_deaths = px.bar(
             selected_data,
             x="시간대",
@@ -579,11 +579,12 @@ elif page == "Page 2":
             title="선택된 시간대 사망(명)",
             labels={"사망(명)": "사망자 수"}
         )
+            fig_injuries.update_traces(marker_color='lightcoral')  # 연한 그린 색상으로 설정
             st.plotly_chart(fig_deaths, use_container_width=True)
 
     # 부상(명) 그래프
         with col3:
-            st.subheader("부상(명)")
+            st.subheader("🤕 부상자자")
             fig_injuries = px.bar(
             selected_data,
             x="시간대",
@@ -591,6 +592,7 @@ elif page == "Page 2":
             title="선택된 시간대 부상(명)",
             labels={"부상(명)": "부상자 수"}
         )
+            fig_injuries.update_traces(marker_color='lightgreen')  # 연한 그린 색상으로 설정
             st.plotly_chart(fig_injuries, use_container_width=True)
 
 
@@ -619,15 +621,17 @@ elif page == "Page 2":
 
 
 # 사고(건) 막대그래프 
-        fig1 = create_bar_chart(df_y, '사고(건)', '사고(건) 요일별 분포')
+        fig1 = create_bar_chart(df_y, '사고(건)', '🚗 사고(건) 요일별 분포')
         st.plotly_chart(fig1)
 
        # 사망(명) 막대그래프 
-        fig2 = create_bar_chart(df_y, '사망(명)', '사망(명) 요일별 분포')
+        fig2 = create_bar_chart(df_y, '사망(명)', '☠️ 사망(명) 요일별 분포')
+        fig2.update_traces(marker_color='lightcoral')
         st.plotly_chart(fig2)
 
        # 부상(명) 막대그래프
-        fig3 = create_bar_chart(df_y, '부상(명)', '부상(명) 요일별 분포')
+        fig3 = create_bar_chart(df_y, '부상(명)', '🤕 부상(명) 요일별 분포')
+        fig3.update_traces(marker_color='lightgreen')
         st.plotly_chart(fig3)
 
     if option == "월별 교통사고":
@@ -662,6 +666,7 @@ elif page == "Page 2":
 # 부상(건) 시각화
         st.subheader("🤕 부상(건) 월별 분석")
         fig3_bar = create_bar_chart(df_m, '부상(명)', '부상(명) 월별 분포')
+        fig3_bar.update_traces(marker_color='lightgreen') 
         st.plotly_chart(fig3_bar)
 
 
