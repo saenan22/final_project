@@ -364,6 +364,8 @@ elif page == "Page 2":
     #reset_index()를 통해 데이터프레임화시키기기
         grouped_data = df_filtered.groupby("시도")["사고[건]"].sum().reset_index()
 
+        st.subheader("선택된 지역에 따른 시도별 사고 통계")
+
     # 막대그래프 생성
         fig = px.bar(grouped_data, x="시도", y="사고[건]", title="2023년 기준 시도및 시군구별 사고 건수", labels={"사고[건]": "사고 건수"})
 
@@ -373,7 +375,7 @@ elif page == "Page 2":
 
 
     # 필터링된 데이터에 대한 차트 출력2
-        st.subheader("선택된 지역에 따른 사망 통계")
+        st.subheader("선택된 지역에 따른 시도별 사망 통계")
 
         grouped_data = df_filtered.groupby("시도")["사망[명]"].sum().reset_index()
 
@@ -385,7 +387,7 @@ elif page == "Page 2":
 
 
     # 필터링된 데이터에 대한 차트 출력3
-        st.subheader("선택된 지역에 따른 부상 통계")
+        st.subheader("선택된 지역에 따른 시도별 부상 통계")
 
         grouped_data = df_filtered.groupby("시도")["부상[명]"].sum().reset_index()
 
@@ -395,15 +397,17 @@ elif page == "Page 2":
     # 그래프 표시
         st.plotly_chart(fig, key="injuries_plot_key")
 
+    #인사이트 도출
+        st.write("2023년도 기준 대한민국의 교통사고수,사망수,부상자수가 서울,경기도 쪽에서 현저히 높음을 확인할수있다.")
+
     #데이터프레임형태로 나타냄 
         st.subheader("선택된 지역에 대한 교통사고 통계")
         st.write(df_filtered)
         
-    #인사이트 도출
-        st.write("2023년도 기준 대한민국의 교통사고수,사망수,부상자수가 서울,경기도 쪽에서 현저히 높음을 확인할수있다.")
 
     # 다음 새로운 제목선정
-        st.title("지역별 교통사고 빈도")
+        st.title("시군구별 교통사고 빈도")
+        st.title("""2023년 기준,좀 더 세분화된 지역의 교통사고건 현황을 파악하실 수 있습니다.""")
 
     # 두 개의 컬럼 생성
         col1, col2 = st.columns(2)
@@ -437,6 +441,7 @@ elif page == "Page 2":
                 fig_bottom.update_layout(coloraxis_colorbar=dict(title="사고[건]"),width=1000,height=500)
                 st.plotly_chart(fig_bottom)  # Plotly 차트를 Streamlit에 출력
                 st.header('지역적 특징🔍')
+                st.write("""가장 교통사고건수가 낮은 지역으로는 경북-울릉군이 선정되었었다. 그다음으로는 인천-옹진군,전북-장수군순으로 지역이 선정되었다. """)
                 st.write("""교통사고 빈도가 낮은 지역은 주로 다음과 같은 특징을 가짐
 - **인구 밀도가 낮은 지역**: 인구가 적고 차량의 통행량이 적은 지역에서 사고 발생이 적음.
 - **교통량이 적은 시골 지역**: 차량의 통행량이 적고, 도로가 상대적으로 넓고 직선적인 시골 지역에서 사고 발생이 적음.
@@ -464,6 +469,7 @@ elif page == "Page 2":
                 st.plotly_chart(fig_top)  # Plotly 차트를 Streamlit에 출력
 
                 st.header('지역적 특징🔍')
+                st.write("""가장 교통사고건수가 높은 지역으로는 경기-수원시 선정되었었다. 그다음으로는 충북-청주,서울-강남구순으로 지역이 선정되었다. """)
                 st.write("""교통사고 빈도가 높은 지역은 일반적으로 다음과 같은 특징을 가짐
 - **상업적 중심지**: 상업 활동이 활발한 도심 지역에서 교통사고가 많이 발생함.
 - **교차로 밀집**: 많은 교차로와 신호등이 있는 지역은 사고가 자주 발생하는 경향이 있음.
