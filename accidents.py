@@ -576,7 +576,7 @@ elif page == "Page 2":
             title="선택된 시간대 사망(명)",
             labels={"사망(명)": "사망자 수"}
         )
-            fig_injuries.update_traces(marker_color='lightcoral')  # 연한 그린 색상으로 설정
+            fig_deaths.update_traces(marker_color='lightcoral')  # 연한 그린 색상으로 설정
             st.plotly_chart(fig_deaths, use_container_width=True)
 
     # 부상(명) 그래프
