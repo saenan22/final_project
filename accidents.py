@@ -455,7 +455,6 @@ elif page == "Page 2":
 
         # 첫 번째 열 (사고(건) 그래프)
         with col1:
-            accident_data = filtered_data[filtered_data['유형'] == '사고(건)']
             fig1 = px.bar(accident_data, x="연도", y="건수", title="사고(건)",
                   labels={"연도": "연도", "건수": "교통사고 건수"})
             fig1.update_traces(marker_color='blue')
