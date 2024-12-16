@@ -123,36 +123,13 @@ if page == "Page 1":
     # 그래프 보여주기
     st.plotly_chart(fig, use_container_width=False,key="oecd_plot_key")
 
-
-    
-
-   # 사고 빈도가 높은 국가 Top 10 버튼
-    st.write("버튼을 눌러주세요👆")
-    if st.button("자동차1만대당 사망수가 높은 국가 Top 10"):
-        top_high_freq = df0_cleaned.nlargest(10, "자동차1만대당 사망(명)")
-        top_high_freq['순위'] = range(1, len(top_high_freq) + 1)
-        top_high_freq = top_high_freq.reset_index(drop=True)
-        top_high_freq = top_high_freq[['국가', '사고(건)', '사망(명)', '자동차1만대당 사망(명)']]
-        st.subheader("자동차1만대당 사망수가 높은 국가 Top 10")
-        st.write(top_high_freq)
-        color_map = {국가: '#FF5733' if 국가 == '대한민국' else '#1f77b4' for 국가 in top_high_freq['국가']}
-
-
-        # 그래프 생성
-        fig_high = px.bar(top_high_freq, x="국가", y="자동차1만대당 사망(명)", 
-                      title="자동차1만대당 사망수가 높은 국가 Top 10", 
-                      labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"},
-                         color='국가', color_discrete_map=color_map)
-        
-        st.plotly_chart(fig_high)
-        # 특징정리내용 
     st.write("2021년기준 OECD국가중 자동차1만대당 사망수가 가장 높은국가는 콜롬비아로 확인할 수있다.")
     st.write("그이유는 다음과 같다.")
 
-    st.title("콜롬비아 자동차 사망률 분석")
+    st.title("콜롬비아 자동차 사망률 분석🔍")
 
     st.header("교통사고 사망률의 주요 원인")
-    st.writer("1. 도로 인프라와 상태 부족")
+    st.write("1. 도로 인프라와 상태 부족")
     st.write("""
 콜롬비아의 도로는 많은 부분이 좁고 울퉁불퉁하며, 일부 지역은 아스팔트가 아닌 비포장 도로가 많습니다. 특히 교외 지역에서는 도로 품질이 낮아 사고 위험이 증가합니다.
 """)
@@ -176,6 +153,30 @@ if page == "Page 1":
     st.write("""
 도시 지역에서는 차량 수가 급증하고, 이에 맞춘 도로 확장이나 교통 관리 시스템이 부족해 사고 위험이 증가합니다.
 """)
+    
+
+    
+
+   # 사고 빈도가 높은 국가 Top 10 버튼
+    st.write("버튼을 눌러주세요👆")
+    if st.button("자동차1만대당 사망수가 높은 국가 Top 10"):
+        top_high_freq = df0_cleaned.nlargest(10, "자동차1만대당 사망(명)")
+        top_high_freq['순위'] = range(1, len(top_high_freq) + 1)
+        top_high_freq = top_high_freq.reset_index(drop=True)
+        top_high_freq = top_high_freq[['국가', '사고(건)', '사망(명)', '자동차1만대당 사망(명)']]
+        st.subheader("자동차1만대당 사망수가 높은 국가 Top 10")
+        st.write(top_high_freq)
+        color_map = {국가: '#FF5733' if 국가 == '대한민국' else '#1f77b4' for 국가 in top_high_freq['국가']}
+
+
+        # 그래프 생성
+        fig_high = px.bar(top_high_freq, x="국가", y="자동차1만대당 사망(명)", 
+                      title="자동차1만대당 사망수가 높은 국가 Top 10", 
+                      labels={"자동차1만대당 사망(명)": "자동차1만대당 사망(명)"},
+                         color='국가', color_discrete_map=color_map)
+        
+        st.plotly_chart(fig_high)
+        # 특징정리내용 
         
 
 
