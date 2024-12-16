@@ -146,7 +146,7 @@ if page == "Page 1":
         
         st.plotly_chart(fig_high)
         # 특징정리내용 
-        st.write("2021년기준 OECD국가중 자동차1만대당 사망수가 가장 높은국가는 콜롬비아로 확인핤우있다. ")
+        st.write("2021년기준 OECD국가중 자동차1만대당 사망수가 가장 높은국가는 콜롬비아로 확인할 수있다. ")
 
     # 사고 빈도가 낮은 국가 Top 10 버튼
     st.write("버튼을 눌러주세요👆")
@@ -155,7 +155,7 @@ if page == "Page 1":
         top_low_freq['순위'] = range(1, len(top_low_freq) + 1)
         top_low_freq = top_low_freq.reset_index(drop=True)
         top_low_freq = top_low_freq[['국가', '사고(건)', '사망(명)', '자동차1만대당 사망(명)']]
-        st.subheader("사고 빈도가 낮은 국가 Top 10")
+        st.subheader("자동차1만대당 사망수가 낮은 국가 Top 10")
         st.write(top_low_freq)
 
         # 그래프 생성
@@ -575,40 +575,6 @@ elif page == "Page 3":
         """)
 
 
-import streamlit as st
-
-# 1. 버튼
-if st.button("Click Me"):
-    st.write("Button Clicked!")
-
-# 2. 체크박스
-checked = st.checkbox("I agree")
-if checked:
-    st.write("Checkbox is checked!")
-
-# 3. 라디오 버튼
-choice = st.radio("Choose an option:", ["Option 1", "Option 2", "Option 3"])
-st.write(f"You selected: {choice}")
-
-# 4. 슬라이더
-value = st.slider("Pick a number:", 0, 100, 50)
-st.write(f"Slider value is: {value}")
-
-# 5. 드롭다운 (selectbox)
-dropdown = st.selectbox("Select an item:", ["Item 1", "Item 2", "Item 3"])
-st.write(f"You selected: {dropdown}")
-
-# 6. 텍스트 입력
-text_input = st.text_input("Enter some text:")
-st.write(f"You entered: {text_input}")
-
-# 7. 파일 업로드
-uploaded_file = st.file_uploader("Upload a file")
-if uploaded_file:
-    st.write("File uploaded successfully!")
-
-
-import streamlit as st
 
 
 
