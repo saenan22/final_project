@@ -575,9 +575,9 @@ elif page == "Page 2":
             x = np.arange(len(df))
             y = df[column].values
          # 추세선 (선형 회귀)
-        p = np.polyfit(x, y, 1)  # 1차 다항식 (선형)
-        trendline = np.polyval(p, x)
-        fig.add_trace(go.Scatter(x=df['요일'], y=trendline, mode='lines', name='추세선', line=dict(color='red', dash='dash')))
+            p = np.polyfit(x, y, 1)  # 1차 다항식 (선형)
+            trendline = np.polyval(p, x)
+            fig.add_trace(go.Scatter(x=df['요일'], y=trendline, mode='lines', name='추세선', line=dict(color='red', dash='dash')))
             return fig
 
 # 사고(건) 막대그래프 및 추세선
