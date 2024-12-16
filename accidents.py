@@ -165,6 +165,8 @@ if page == "Page 1":
         st.subheader("자동차1만대당 사망수가 높은 국가 Top 10")
         st.write(top_high_freq)
         color_map = {국가: '#FF5733' if 국가 == '대한민국' else '#1f77b4' for 국가 in top_high_freq['국가']}
+        # 특징정리내용 
+        st.write("주로 도로교통망이 어지러움 ")
 
 
         # 그래프 생성
@@ -175,7 +177,7 @@ if page == "Page 1":
         
         st.plotly_chart(fig_high)
         # 특징정리내용 
-        
+        st.write("주로 도로교통망이 좋음")
 
 
 
