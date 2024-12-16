@@ -715,12 +715,6 @@ elif page == "Page 3":
         """)
 
 
-
-
-import pandas as pd
-import plotly.express as px
-import streamlit as st
-
 # 정제후 데이터 준비함함
 data = {
     '사고유형': ['차대사람', '차대차', '차량단독', '철길건널목'],
@@ -734,7 +728,7 @@ df_k = pd.DataFrame(data)
 # 각 사고유형에 대한 비중 계산 함수
 def calculate_percentage(df, column):
     total = df[column].sum()  # 전체 합계 구하기
-    df[f'{column:2f}_비중'] = (df[column] / total) * 100  # 각 값의 비중 계산
+    df[f'{column}_비중'] = (df[column] / total) * 100  # 각 값의 비중 계산
     return df
 
 # 사고(건) 비중 계산
@@ -755,7 +749,7 @@ def create_bar_chart(df, column, title):
 
 # 도넛차트 생성 함수
 def create_donut_chart(df, column, title):
-    fig = px.pie(df, names='사고유형', values=column, title=title, hole=0.4)
+    fig = px.pie(df, names='사고유형', values=column, title=title, hole=0.6)
     fig.update_traces(textinfo='label+percent', pull=[0.1, 0.1, 0.1, 0.1])  # 텍스트 및 퍼센트 표시
     return fig
 
