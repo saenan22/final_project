@@ -475,9 +475,9 @@ elif page == "Page 2":
             fig3.update_traces(marker_color='green')
             st.plotly_chart(fig3)
 
-    # 데이터 확인
-    if st.button("📋 데이터 미리보기"):
-        st.dataframe(filtered_data)
+        # 데이터 확인
+        if st.button("📋 데이터 미리보기"):
+            st.dataframe(filtered_data)
 
 
     
