@@ -449,7 +449,6 @@ elif page == "Page 2":
         st.subheader("⚙️ 필터 설정") 
         selected_year = st.selectbox("📅 연도 선택",tidy_df['연도'].unique(),index=0)
         accident_category = st.selectbox("💥 사고 구분 선택", tidy_df['구분'].unique(), index=0)
-)
         
         # Streamlit에서 열을 3개로 나누기
         col1, col2, col3 = st.columns(3)
