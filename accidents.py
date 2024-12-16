@@ -624,26 +624,29 @@ elif page == "Page 2":
         st.subheader("📅 사고 유형별 교통사고 데이터")
         st.dataframe(df_k)
 
-         # 도넛 차트 생성 함수
-        def create_donut_chart(df, column, title):
-            fig = px.pie(df, names='사고유형',values=column,title=title,hole=0.4)  # 도넛 형태를 위한 파라미터
-            fig.update_traces(textinfo='label')  # 비율과 라벨 표시
-            return fig
 
+        # 막대그래프 생성 함수
+        def create_bar_chart(df, column, title):
+            fig = px.bar(df, x='사고유형', y=column, 
+                 text=f'{column}_비중',  # 비중 텍스트 표시
+                 labels={'사고유형': '사고 유형', column: title},
+                 title=title)
+            fig.update_traces(texttemplate='%{text:.2f}%', textposition='inside')  # 비중 텍스트 내부 표시
+            return fig
 # 사고(건) 도넛 차트
         st.subheader("사고(건) 유형별 비중")
-        fig1_donut = create_donut_chart(df_k, '사고(건)', '사고(건) 유형별 비중')
-        st.plotly_chart(fig1_donut)
+        fig1_bar = create_bar_chart(df_k, '사고(건)', '사고(건) 유형별 비중')
+        st.plotly_chart(fig1_bar)
 
 # 사망(명) 도넛 차트
         st.subheader("☠️ 사망(명) 유형별 비중")
-        fig2_donut = create_donut_chart(df_k, '사망(명)', '사망(명) 유형별 비중')
-        st.plotly_chart(fig2_donut)
+        fig2_bar = create_bar_chart(df_k, '사망(명)', '사망(명) 유형별 비중')
+        st.plotly_chart(fig2_bar)
 
 # 부상(명) 도넛 차트
         st.subheader("🤕 부상(명) 유형별 비중")
-        fig3_donut = create_donut_chart(df_k, '부상(명)', '부상(명) 유형별 비중')
-        st.plotly_chart(fig3_donut)
+        fig3_bar = create_bar_chart(df_k, '부상(명)', '부상(명) 유형별 비중')
+        st.plotly_chart(fig3_bar)
 
 
 
@@ -716,53 +719,6 @@ elif page == "Page 3":
 
 
 
-    def load_data():
-        url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%82%AC%EA%B3%A0%EC%9C%A0%ED%98%95%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
-        df_k = pd.read_csv(url, encoding="utf-8")
-        return df_k
-    
-    # 데이터 로드 및 전처리
-    df_k = load_data()
-    df_k = df_k[df_k["사고유형"] != "계"]  # '계' 행 제거
-
-    st.title("📊 사고 유형별 교통사고 데이터 시각화")
-    st.subheader("📅 사고 유형별 교통사고 데이터")
-    st.dataframe(df_k)
-
-    # 비중 계산 함수
-    def calculate_percentage(df, column):
-        total = df[column].sum()
-        df[f'{column}_비중'] = df[column] / total * 100
-        return df
-
-    # 사고(건), 사망(명), 부상(명)에 대해 비중 계산
-    df_k = calculate_percentage(df_k, '사고(건)')
-    df_k = calculate_percentage(df_k, '사망(명)')
-    df_k = calculate_percentage(df_k, '부상(명)')
-
-    # 막대 그래프 생성 함수
-    def create_bar_chart_with_percentage(df, column, title):
-        fig = px.bar(df, x='사고유형', y=column, 
-                     text=f'{column}_비중', # 비중 텍스트 표시
-                     labels={'사고유형': '사고 유형', column: title},
-                     title=title)
-        fig.update_traces(texttemplate='%{text:.2f}%', textposition='inside')  # 비중 텍스트 내부 표시
-        return fig
-
-    # 사고(건) 막대그래프
-    st.subheader("🚗 사고(건) 유형별 비중")
-    fig1_bar = create_bar_chart_with_percentage(df_k, '사고(건)', '사고(건) 유형별 비중')
-    st.plotly_chart(fig1_bar)
-
-    # 사망(명) 막대그래프
-    st.subheader("☠️ 사망(명) 유형별 비중")
-    fig2_bar = create_bar_chart_with_percentage(df_k, '사망(명)', '사망(명) 유형별 비중')
-    st.plotly_chart(fig2_bar)
-
-    # 부상(명) 막대그래프
-    st.subheader("🤕 부상(명) 유형별 비중")
-    fig3_bar = create_bar_chart_with_percentage(df_k, '부상(명)', '부상(명) 유형별 비중')
-    st.plotly_chart(fig3_bar)
 
 
 
