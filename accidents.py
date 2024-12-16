@@ -547,7 +547,7 @@ elif page == "Page 2":
         def load_data():
             url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%9A%94%EC%9D%BC%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
             df_y = pd.read_csv(url, encoding="utf-8")
-            return df_c
+            return df_y
         df_y = load_data()
         # 요일별 교통사고 데이터
         # Streamlit UI 구성
