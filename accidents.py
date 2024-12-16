@@ -717,7 +717,52 @@ elif page == "Page 3":
 
 
 
+# 데이터 준비 (주어진 데이터)
+data = {
+    '사고유형': ['차대사람', '차대차', '차량단독', '철길건널목'],
+    '사고(건)': [36996, 152935, 8363, 2],
+    '사망(명)': [859, 1041, 650, 1],
+    '부상(명)': [38263, 236287, 9248, 1]
+}
 
+df_k = pd.DataFrame(data)
+
+# 각 사고유형에 대한 비중 계산 함수
+def calculate_percentage(df, column):
+    total = df[column].sum()  # 전체 합계 구하기
+    df[f'{column}_비중'] = (df[column] / total) * 100  # 각 값의 비중 계산
+    return df
+
+# 사고(건) 비중 계산
+df_k = calculate_percentage(df_k, '사고(건)')
+# 사망(명) 비중 계산
+df_k = calculate_percentage(df_k, '사망(명)')
+# 부상(명) 비중 계산
+df_k = calculate_percentage(df_k, '부상(명)')
+
+# 막대그래프 생성 함수
+def create_bar_chart(df, column, title):
+    fig = px.bar(df, x='사고유형', y=f'{column}_비중', 
+                 text=f'{column}_비중',  # 비중 텍스트 표시
+                 labels={'사고유형': '사고 유형', f'{column}_비중': title},
+                 title=title)
+    fig.update_traces(texttemplate='%{text:.2f}%', textposition='inside')  # 비중 텍스트 내부 표시
+    return fig
+
+# 사고(건) 막대그래프
+st.subheader("🚗 사고(건) 유형별 비중")
+fig1_bar = create_bar_chart(df_k, '사고(건)', '사고(건) 유형별 비중')
+st.plotly_chart(fig1_bar)
+
+# 사망(명) 막대그래프
+st.subheader("☠️ 사망(명) 유형별 비중")
+fig2_bar = create_bar_chart(df_k, '사망(명)', '사망(명) 유형별 비중')
+st.plotly_chart(fig2_bar)
+
+# 부상(명) 막대그래프
+st.subheader("🤕 부상(명) 유형별 비중")
+fig3_bar = create_bar_chart(df_k, '부상(명)', '부상(명) 유형별 비중')
+st.plotly_chart(fig3_bar)
 
 
 
