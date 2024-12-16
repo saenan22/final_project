@@ -188,6 +188,8 @@ elif page == "Page 2":
         ["시도및 시군구별 교통사고","부문별 교통사고(최근5년)","시간대별 교통사고", "요일별 교통사고","월별 교통사고","사고유형별 교통사고"]
     )
     if option == "시도및 시군구별 교통사고":
+        file_path = r"https://raw.githubusercontent.com/saenan22/final_project/main/Report.csv"
+        df = pd.read_csv(file_path, header=3)
         # GeoJSON URL
         geojson_url = "https://raw.githubusercontent.com/saenan22/final_project/main/BND_SIGUNGU_PG.json"
 # URL에서 GeoJSON 파일을 다운로드
