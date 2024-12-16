@@ -522,11 +522,6 @@ elif page == "Page 2":
         fig3 = create_donut_chart(injury_data, '부상(건)')
         st.plotly_chart(fig3)
 
-# 데이터 미리보기 버튼
-if st.button("📋 데이터 미리보기"):
-    st.dataframe(filtered_data)
-
-
 
 
 
