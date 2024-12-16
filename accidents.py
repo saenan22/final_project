@@ -448,7 +448,7 @@ elif page == "Page 2":
         # 필터링 섹션
         st.subheader("⚙️ 필터 설정")
         selected_year = st.selectbox("📅 연도 선택", tidy_df['연도'].unique(), index=0)
-        accident_category = st.selectbox("🚦💥 사고 구분 선택", tidy_df['구분'].unique(), index=0)
+        accident_category = st.selectbox("💥 사고 구분 선택", tidy_df['구분'].unique(), index=0)
 
         # 필터링된 데이터
         filtered_data = tidy_df[(tidy_df['연도'] == selected_year) & 
