@@ -572,17 +572,16 @@ elif page == "Page 2":
 
 
 # 사고(건) 막대그래프 및 추세선
-        fig1 = create_bar_chart(df_c, '사고(건)', '사고(건) 요일별 분포')
+        fig1 = create_bar_chart(df_y, '사고(건)', '사고(건) 요일별 분포')
         st.plotly_chart(fig1)
 
        # 사망(명) 막대그래프 및 추세선
-        fig2 = create_bar_chart(df_c, '사망(명)', '사망(명) 요일별 분포')
+        fig2 = create_bar_chart(df_y, '사망(명)', '사망(명) 요일별 분포')
         st.plotly_chart(fig2)
 
        # 부상(명) 막대그래프 및 추세선
-        fig3 = create_bar_chart(df_c, '부상(명)', '부상(명) 요일별 분포')
+        fig3 = create_bar_chart(df_y, '부상(명)', '부상(명) 요일별 분포')
         st.plotly_chart(fig3)
-
 
 
 
