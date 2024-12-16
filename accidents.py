@@ -444,44 +444,59 @@ elif page == "Page 2":
 
         # 필터링 섹션  
         st.subheader("⚙️ 필터 설정") 
-        selected_year = st.selectbox("📅 연도 선택", tidy_df['연도'].unique(), index=0)
         accident_category = st.selectbox("💥 사고 구분 선택", tidy_df['구분'].unique(), index=0)
-        filtered_data = tidy_df[
-        (tidy_df['연도'] == selected_year) & 
-        (tidy_df['구분'] == accident_category)
-    ]
+
+        # 선택한 사고 구분에 맞는 데이터 필터링
+        filtered_data = tidy_df[tidy_df['구분'] == accident_category]
         
         # Streamlit에서 열을 3개로 나누기
         col1, col2, col3 = st.columns(3)
 
-        
-
-        # 첫 번째 열 (사고(건) 그래프)
+    # 첫 번째 열 (사고(건) 그래프)
         with col1:
             accident_data = filtered_data[filtered_data['유형'] == '사고(건)']
-            fig1 = px.bar(accident_data, x="연도", y="건수", title="사고(건)",
-                  labels={"연도": "연도", "건수": "교통사고 건수"})
-            fig1.update_traces(marker_color='blue')
+            fig1 = px.bar(accident_data, x="연도", y="건수", title="전체 교통사고(건)",
+                      labels={"연도": "연도", "건수": "교통사고 건수"})
+
             st.plotly_chart(fig1)
 
-        
-            # 두 번째 열 (사망(건) 그래프)
+    # 두 번째 열 (사망(건) 그래프)
         with col2:
             death_data = filtered_data[filtered_data['유형'] == '사망(건)']
-            fig2 = px.bar(death_data, x="연도", y="건수", title="사망(건)",
-                          labels={"연도": "연도", "건수": "교통사고 사망 건수"})
+            fig2 = px.bar(death_data, x="연도", y="건수", title="사망 교통사고(건)",
+                      labels={"연도": "연도", "건수": "교통사고 사망 건수"})
             fig2.update_traces(marker_color='red')
             st.plotly_chart(fig2)
 
-        # 세 번째 열 (부상(건) 그래프)
+    # 세 번째 열 (부상(건) 그래프)
         with col3:
             injury_data = filtered_data[filtered_data['유형'] == '부상(건)']
-            fig3 = px.bar(injury_data, x="연도", y="건수", title="부상(건)",
-                  labels={"연도": "연도", "건수": "교통사고 부상 건수"})
+            fig3 = px.bar(injury_data, x="연도", y="건수", title="부상 교통사고(건)",
+                      labels={"연도": "연도", "건수": "교통사고 부상 건수"})
             fig3.update_traces(marker_color='green')
             st.plotly_chart(fig3)
 
+    # 데이터 확인
+    if st.button("📋 데이터 미리보기"):
+        st.dataframe(filtered_data)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
 
         # 데이터 확인
         if st.button("📋 데이터 미리보기"):
