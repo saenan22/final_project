@@ -9,6 +9,7 @@ import numpy as np
 import requests
 # Sidebar 메뉴 생성
 st.sidebar.title("교통사고 대시보드🚗💥")
+#저의 스트림릿 사이트를 사이드바에 적어놓았습니다.
 st.sidebar.markdown("[My Streamlit Dashboard](https://finalproject-kepgmfers6jvwdtelxf9k4.streamlit.app/)", unsafe_allow_html=True)
 
 st.sidebar.markdown("하단의 화살표를 눌러 해당 Page의 내용을 확인해보세요.😊")
