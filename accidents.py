@@ -460,12 +460,23 @@ elif page == "Page 2":
         ]
 
 
-
         
 
         # 필터링된 데이터
         filtered_data = tidy_df[(tidy_df['연도'] == selected_year) & 
                         (tidy_df['구분'] == accident_category)]
+
+
+        fig = px.bar(
+        filtered_data, 
+        x="연도", 
+        y="건수", 
+        color="유형", 
+        title=f"{accident_category} 사고 유형별 건수 ({selected_year})",
+        labels={"연도": "연도", "건수": "교통사고 건수", "유형": "사고 유형"}
+    )
+    
+        st.plotly_chart(fig)
         
         # Streamlit에서 열을 3개로 나누기
         col1, col2, col3 = st.columns(3)
@@ -477,6 +488,8 @@ elif page == "Page 2":
                   labels={"연도": "연도", "건수": "교통사고 건수"})
             fig1.update_traces(marker_color='blue')
             st.plotly_chart(fig1)
+
+        
             # 두 번째 열 (사망(건) 그래프)
         with col2:
             death_data = filtered_data[filtered_data['유형'] == '사망(건)']
