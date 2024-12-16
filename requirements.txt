@@ -10,3 +10,4 @@ gdown
 plotly
 matplotlib
 seaborn
+numpy
