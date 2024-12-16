@@ -611,30 +611,17 @@ elif page == "Page 2":
         st.plotly_chart(fig3_bar)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
     if option == "사고유형별 교통사고":
         def load_data():
             url = "https://raw.githubusercontent.com/saenan22/final_project/refs/heads/main/2023%EB%85%84%20%EC%82%AC%EA%B3%A0%EC%9C%A0%ED%98%95%EB%B3%84%20%EA%B5%90%ED%86%B5%EC%82%AC%EA%B3%A0.csv"
-            df_c = pd.read_csv(url, encoding="utf-8")
-            return df_c
-        df_c = load_data()
+            df_k = pd.read_csv(url, encoding="utf-8")
+            return df_k
+        df_k = load_data()
 
+        st.title("📊 사고 유형별 교통사고 데이터 시각화")
+        st.subheader("📅 사고 유형별 교통사고 데이터")
+        st.dataframe(df_k)
 
 
 
